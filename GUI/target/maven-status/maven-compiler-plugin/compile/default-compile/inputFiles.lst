@@ -1,0 +1,17 @@
+C:\Users\Personal\Documents\SoftwareII\RepoMicroservicios\Gestion-Conferencias-MicroServicios\GUI\src\main\java\com\conference\gui\article\Article.java
+C:\Users\Personal\Documents\SoftwareII\RepoMicroservicios\Gestion-Conferencias-MicroServicios\GUI\src\main\java\com\conference\gui\article\IArticleRest.java
+C:\Users\Personal\Documents\SoftwareII\RepoMicroservicios\Gestion-Conferencias-MicroServicios\GUI\src\main\java\com\conference\gui\clients\IUserRestClient.java
+C:\Users\Personal\Documents\SoftwareII\RepoMicroservicios\Gestion-Conferencias-MicroServicios\GUI\src\main\java\com\conference\gui\clients\UserClient.java
+C:\Users\Personal\Documents\SoftwareII\RepoMicroservicios\Gestion-Conferencias-MicroServicios\GUI\src\main\java\com\conference\gui\conference\IUserRestConference.java
+C:\Users\Personal\Documents\SoftwareII\RepoMicroservicios\Gestion-Conferencias-MicroServicios\GUI\src\main\java\com\conference\gui\conference\UserConference.java
+C:\Users\Personal\Documents\SoftwareII\RepoMicroservicios\Gestion-Conferencias-MicroServicios\GUI\src\main\java\com\conference\gui\entities\Articulo.java
+C:\Users\Personal\Documents\SoftwareII\RepoMicroservicios\Gestion-Conferencias-MicroServicios\GUI\src\main\java\com\conference\gui\entities\Conference.java
+C:\Users\Personal\Documents\SoftwareII\RepoMicroservicios\Gestion-Conferencias-MicroServicios\GUI\src\main\java\com\conference\gui\entities\Login.java
+C:\Users\Personal\Documents\SoftwareII\RepoMicroservicios\Gestion-Conferencias-MicroServicios\GUI\src\main\java\com\conference\gui\entities\Usuario.java
+C:\Users\Personal\Documents\SoftwareII\RepoMicroservicios\Gestion-Conferencias-MicroServicios\GUI\src\main\java\com\conference\gui\GUI.java
+C:\Users\Personal\Documents\SoftwareII\RepoMicroservicios\Gestion-Conferencias-MicroServicios\GUI\src\main\java\com\conference\gui\presentation\GUIcontainer.java
+C:\Users\Personal\Documents\SoftwareII\RepoMicroservicios\Gestion-Conferencias-MicroServicios\GUI\src\main\java\com\conference\gui\presentation\GUIcreateArticle.java
+C:\Users\Personal\Documents\SoftwareII\RepoMicroservicios\Gestion-Conferencias-MicroServicios\GUI\src\main\java\com\conference\gui\presentation\GUIcreateConference.java
+C:\Users\Personal\Documents\SoftwareII\RepoMicroservicios\Gestion-Conferencias-MicroServicios\GUI\src\main\java\com\conference\gui\presentation\GUIlogin.java
+C:\Users\Personal\Documents\SoftwareII\RepoMicroservicios\Gestion-Conferencias-MicroServicios\GUI\src\main\java\com\conference\gui\presentation\GUIregister.java
+C:\Users\Personal\Documents\SoftwareII\RepoMicroservicios\Gestion-Conferencias-MicroServicios\GUI\src\main\java\com\conference\gui\presentation\pnlAutor.java
