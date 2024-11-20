@@ -218,21 +218,22 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         pnlFondo = new javax.swing.JPanel();
         dskpaneContenedor = new javax.swing.JDesktopPane();
         intfInicio = new javax.swing.JInternalFrame();
         lbBienvenido = new javax.swing.JLabel();
         txtfBusqueda = new javax.swing.JTextField();
+        lbBtnBuscar = new javax.swing.JLabel();
+        pnlPrincipal = new javax.swing.JPanel();
+        btnRefrescar = new javax.swing.JButton();
         pnlListadoCon = new javax.swing.JPanel();
         lbListadoCon = new javax.swing.JLabel();
         pnlListadoAr = new javax.swing.JPanel();
         lbListadoAr = new javax.swing.JLabel();
         pnlBotonCrearCon = new javax.swing.JPanel();
         lbCrearCon = new javax.swing.JLabel();
-        lbCrearCon1 = new javax.swing.JLabel();
-        lbBtnBuscar = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         pnlSuperior = new javax.swing.JPanel();
         lbeasyConference = new javax.swing.JLabel();
         lbCerrarSesion = new javax.swing.JLabel();
@@ -246,7 +247,6 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
         pnlFondo.setLayout(new java.awt.BorderLayout());
 
         dskpaneContenedor.setSelectedFrame(intfInicio);
-        dskpaneContenedor.setLayout(new java.awt.BorderLayout());
 
         intfInicio.setBackground(new java.awt.Color(255, 255, 255));
         intfInicio.setBorder(null);
@@ -259,12 +259,51 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
         } catch (PropertyVetoException ex) {
             Logger.getLogger(GUIcontainer.class.getName()).log(Level.SEVERE, null, ex);
         }
+        intfInicio.getContentPane().setLayout(new java.awt.GridBagLayout());
 
         lbBienvenido.setFont(new java.awt.Font("Segoe UI Semilight", 1, 24)); // NOI18N
         lbBienvenido.setText("Bienvenido! ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 479;
+        gridBagConstraints.ipady = -1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(60, 43, 0, 0);
+        intfInicio.getContentPane().add(lbBienvenido, gridBagConstraints);
 
         txtfBusqueda.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
         txtfBusqueda.setText("Buscar conferencia");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 314;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(51, 254, 0, 0);
+        intfInicio.getContentPane().add(txtfBusqueda, gridBagConstraints);
+
+        lbBtnBuscar.setText("buscar");
+        lbBtnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbBtnBuscarMouseClicked(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(57, 6, 0, 0);
+        intfInicio.getContentPane().add(lbBtnBuscar, gridBagConstraints);
+
+        btnRefrescar.setText("REFRESCAR");
+        btnRefrescar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefrescarActionPerformed(evt);
+            }
+        });
 
         pnlListadoCon.setBackground(new java.awt.Color(236, 236, 236));
         pnlListadoCon.setPreferredSize(new java.awt.Dimension(136, 204));
@@ -308,86 +347,65 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
         });
         pnlBotonCrearCon.add(lbCrearCon, java.awt.BorderLayout.CENTER);
 
-        lbCrearCon1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        lbCrearCon1.setForeground(new java.awt.Color(255, 255, 255));
-        lbCrearCon1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbCrearCon1.setText("Crear conferencia");
-        lbCrearCon1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lbCrearCon1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbCrearCon1MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lbCrearCon1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lbCrearCon1MouseExited(evt);
-            }
-        });
-        pnlBotonCrearCon.add(lbCrearCon1, java.awt.BorderLayout.CENTER);
-
-        lbBtnBuscar.setText("buscar");
-        lbBtnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbBtnBuscarMouseClicked(evt);
-            }
-        });
-
-        jButton1.setText("REFRESCAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout intfInicioLayout = new javax.swing.GroupLayout(intfInicio.getContentPane());
-        intfInicio.getContentPane().setLayout(intfInicioLayout);
-        intfInicioLayout.setHorizontalGroup(
-            intfInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(intfInicioLayout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(lbBienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(intfInicioLayout.createSequentialGroup()
-                .addGap(254, 254, 254)
-                .addComponent(txtfBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(lbBtnBuscar))
-            .addGroup(intfInicioLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(pnlListadoCon, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
-                .addComponent(pnlListadoAr, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(intfInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(intfInicioLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jButton1))
-                    .addComponent(pnlBotonCrearCon, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
+        pnlPrincipal.setLayout(pnlPrincipalLayout);
+        pnlPrincipalLayout.setHorizontalGroup(
+            pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
+                .addContainerGap(638, Short.MAX_VALUE)
+                .addComponent(btnRefrescar)
+                .addGap(111, 111, 111))
+            .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                    .addGap(11, 11, 11)
+                    .addComponent(pnlListadoCon, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(22, 22, 22)
+                    .addComponent(pnlListadoAr, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addComponent(pnlBotonCrearCon, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(36, Short.MAX_VALUE)))
         );
-        intfInicioLayout.setVerticalGroup(
-            intfInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(intfInicioLayout.createSequentialGroup()
-                .addGap(144, 144, 144)
-                .addComponent(lbBienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
-                .addGroup(intfInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtfBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(intfInicioLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(lbBtnBuscar)))
-                .addGap(24, 24, 24)
-                .addGroup(intfInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlListadoCon, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnlListadoAr, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(intfInicioLayout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(pnlBotonCrearCon, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(jButton1)))
-                .addContainerGap(148, Short.MAX_VALUE))
+        pnlPrincipalLayout.setVerticalGroup(
+            pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
+                .addContainerGap(180, Short.MAX_VALUE)
+                .addComponent(btnRefrescar)
+                .addGap(124, 124, 124))
+            .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                    .addGap(64, 64, 64)
+                    .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(pnlListadoCon, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnlListadoAr, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                            .addGap(3, 3, 3)
+                            .addComponent(pnlBotonCrearCon, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap(37, Short.MAX_VALUE)))
         );
 
-        dskpaneContenedor.add(intfInicio, java.awt.BorderLayout.CENTER);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.ipadx = 30;
+        gridBagConstraints.ipady = 31;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 107, 119, 81);
+        intfInicio.getContentPane().add(pnlPrincipal, gridBagConstraints);
+
+        dskpaneContenedor.setLayer(intfInicio, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout dskpaneContenedorLayout = new javax.swing.GroupLayout(dskpaneContenedor);
+        dskpaneContenedor.setLayout(dskpaneContenedorLayout);
+        dskpaneContenedorLayout.setHorizontalGroup(
+            dskpaneContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(intfInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 1028, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        dskpaneContenedorLayout.setVerticalGroup(
+            dskpaneContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(intfInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
         //getContentPane().add(intfInicio, java.awt.BorderLayout.CENTER);
 
         pnlFondo.add(dskpaneContenedor, java.awt.BorderLayout.CENTER);
@@ -429,30 +447,6 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lbCrearConMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCrearConMouseEntered
-        // TODO add your handling code here:
-        lbCrearCon.setFont(new java.awt.Font("Segoe UI Semibold", 1, 15));
-    }//GEN-LAST:event_lbCrearConMouseEntered
-
-    private void lbCrearConMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCrearConMouseExited
-        // TODO add your handling code here:
-        lbCrearCon.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14));
-    }//GEN-LAST:event_lbCrearConMouseExited
-
-    private void lbCrearConMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCrearConMouseClicked
-       
-       
-        GUIcreateConference crearConferencia = new GUIcreateConference(objConference);
-        try {
-            crearConferencia.setMaximum(true);
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(GUIcontainer.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        dskpaneContenedor.add(crearConferencia, java.awt.BorderLayout.CENTER);
-        crearConferencia.setVisible(true);
-    }//GEN-LAST:event_lbCrearConMouseClicked
-
     private void lbBtnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbBtnBuscarMouseClicked
                                           
     String searchText = txtfBusqueda.getText().trim();  // Obtener texto de búsqueda sin modificar el caso
@@ -478,7 +472,7 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
         login.setVisible(true);
     }//GEN-LAST:event_lbCerrarSesionMouseClicked
 
-    private void lbCrearCon1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCrearCon1MouseClicked
+    private void lbCrearConMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCrearConMouseClicked
         UserConference conference = new UserConference();
        
         GUIcreateConference crearConferencia = new GUIcreateConference(objConference);
@@ -490,21 +484,21 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
 
         dskpaneContenedor.add(crearConferencia, java.awt.BorderLayout.CENTER);
         crearConferencia.setVisible(true);
-    }//GEN-LAST:event_lbCrearCon1MouseClicked
+    }//GEN-LAST:event_lbCrearConMouseClicked
 
-    private void lbCrearCon1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCrearCon1MouseEntered
+    private void lbCrearConMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCrearConMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_lbCrearCon1MouseEntered
+    }//GEN-LAST:event_lbCrearConMouseEntered
 
-    private void lbCrearCon1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCrearCon1MouseExited
+    private void lbCrearConMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCrearConMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_lbCrearCon1MouseExited
+    }//GEN-LAST:event_lbCrearConMouseExited
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarActionPerformed
        listConferences("");//muestra todas las listas
         listArticles();
     
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnRefrescarActionPerformed
     
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
@@ -513,14 +507,13 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRefrescar;
     private javax.swing.JDesktopPane dskpaneContenedor;
     private javax.swing.JInternalFrame intfInicio;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lbBienvenido;
     private javax.swing.JLabel lbBtnBuscar;
     private javax.swing.JLabel lbCerrarSesion;
     private javax.swing.JLabel lbCrearCon;
-    private javax.swing.JLabel lbCrearCon1;
     private javax.swing.JLabel lbListadoAr;
     private javax.swing.JLabel lbListadoCon;
     private javax.swing.JLabel lbeasyConference;
@@ -528,6 +521,7 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
     private javax.swing.JPanel pnlFondo;
     private javax.swing.JPanel pnlListadoAr;
     private javax.swing.JPanel pnlListadoCon;
+    private javax.swing.JPanel pnlPrincipal;
     private javax.swing.JPanel pnlSuperior;
     private javax.swing.JTextField txtfBusqueda;
     // End of variables declaration//GEN-END:variables
