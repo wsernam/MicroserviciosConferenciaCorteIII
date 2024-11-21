@@ -4,6 +4,12 @@
  */
 package com.conference.gui.presentation;
 
+import com.conference.gui.entities.Conference;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import javax.swing.JDesktopPane;
+
 /**
  *
  * @author Ashlee Campaz
@@ -13,8 +19,11 @@ public class pnlConferenceInfo extends javax.swing.JPanel {
     /**
      * Creates new form pnlConferenceInfo
      */
-    public pnlConferenceInfo() {
+    private Conference conference;
+    public pnlConferenceInfo(Conference c) {
+        this.conference = c;
         initComponents();
+        lbInfoConferencia.setText(conference.toStringBasic());
     }
 
     /**
@@ -38,8 +47,21 @@ public class pnlConferenceInfo extends javax.swing.JPanel {
         pnlBtnVerMas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pnlBtnVerMas.setLayout(new java.awt.BorderLayout());
 
+        lbVerMas.setFont(new java.awt.Font("Segoe UI Historic", 0, 12)); // NOI18N
+        lbVerMas.setForeground(new java.awt.Color(0, 51, 204));
         lbVerMas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbVerMas.setText("Ver más");
+        lbVerMas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbVerMasMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbVerMasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbVerMasMouseExited(evt);
+            }
+        });
         pnlBtnVerMas.add(lbVerMas, java.awt.BorderLayout.CENTER);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -53,6 +75,7 @@ public class pnlConferenceInfo extends javax.swing.JPanel {
 
         pnlInfoConferencia.setLayout(new java.awt.BorderLayout());
 
+        lbInfoConferencia.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         lbInfoConferencia.setText("INFO CONFERENCIA");
         pnlInfoConferencia.add(lbInfoConferencia, java.awt.BorderLayout.CENTER);
 
@@ -65,6 +88,31 @@ public class pnlConferenceInfo extends javax.swing.JPanel {
         add(pnlInfoConferencia, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void lbVerMasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbVerMasMouseEntered
+        lbVerMas.setFont(new java.awt.Font("Segoe UI Historic", 1, 12));
+    }//GEN-LAST:event_lbVerMasMouseEntered
+
+    private void lbVerMasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbVerMasMouseExited
+       lbVerMas.setFont(new java.awt.Font("Segoe UI Historic", 0, 12));
+    }//GEN-LAST:event_lbVerMasMouseExited
+
+    private void lbVerMasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbVerMasMouseClicked
+        JDesktopPane dktpParent = getDesktopPaneParent(this);
+        if(dktpParent!=null){
+            
+        }
+    }//GEN-LAST:event_lbVerMasMouseClicked
+
+    private JDesktopPane getDesktopPaneParent(pnlConferenceInfo pc){
+        Container parent = pc.getParent(); 
+        while (parent != null) {
+            if (parent instanceof JDesktopPane) {
+                return (JDesktopPane) parent;
+            }
+            parent = parent.getParent();
+        }
+        return null; 
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lbInfoConferencia;

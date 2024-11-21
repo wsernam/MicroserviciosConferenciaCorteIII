@@ -209,7 +209,18 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
     pnlListadoAr.repaint();
 }
 
-
+   public List<Conference> serchConferences(String searchText){
+        List<Conference> conferences = objConference.getConferencias();
+        // Filtramos la lista de conferencias si se proporciona un texto de búsqueda
+        if (searchText != null && !searchText.isEmpty()) {
+            conferences = conferences.stream()
+                .filter(conference -> conference.getNombre().toLowerCase().contains(searchText.toLowerCase()))
+                .collect(Collectors.toList());
+        }
+        return conferences;
+   }
+   
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -223,9 +234,7 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
         pnlFondo = new javax.swing.JPanel();
         dskpaneContenedor = new javax.swing.JDesktopPane();
         intfInicio = new javax.swing.JInternalFrame();
-        lbBienvenido = new javax.swing.JLabel();
-        txtfBusqueda = new javax.swing.JTextField();
-        lbBtnBuscar = new javax.swing.JLabel();
+        dskpaneSubContenedorPrincipal = new javax.swing.JDesktopPane();
         pnlPrincipal = new javax.swing.JPanel();
         btnRefrescar = new javax.swing.JButton();
         pnlListadoCon = new javax.swing.JPanel();
@@ -234,6 +243,9 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
         lbListadoAr = new javax.swing.JLabel();
         pnlBotonCrearCon = new javax.swing.JPanel();
         lbCrearCon = new javax.swing.JLabel();
+        lbBienvenido = new javax.swing.JLabel();
+        txtfBusqueda = new javax.swing.JTextField();
+        lbBtnBuscar = new javax.swing.JLabel();
         pnlSuperior = new javax.swing.JPanel();
         lbeasyConference = new javax.swing.JLabel();
         lbCerrarSesion = new javax.swing.JLabel();
@@ -247,6 +259,7 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
         pnlFondo.setLayout(new java.awt.BorderLayout());
 
         dskpaneContenedor.setSelectedFrame(intfInicio);
+        dskpaneContenedor.setLayout(new java.awt.BorderLayout());
 
         intfInicio.setBackground(new java.awt.Color(255, 255, 255));
         intfInicio.setBorder(null);
@@ -261,42 +274,10 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
         }
         intfInicio.getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        lbBienvenido.setFont(new java.awt.Font("Segoe UI Semilight", 1, 24)); // NOI18N
-        lbBienvenido.setText("Bienvenido! ");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 479;
-        gridBagConstraints.ipady = -1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(60, 43, 0, 0);
-        intfInicio.getContentPane().add(lbBienvenido, gridBagConstraints);
+        dskpaneSubContenedorPrincipal.setPreferredSize(new java.awt.Dimension(1000, 365));
+        dskpaneSubContenedorPrincipal.setLayout(new java.awt.BorderLayout());
 
-        txtfBusqueda.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        txtfBusqueda.setText("Buscar conferencia");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 314;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(51, 254, 0, 0);
-        intfInicio.getContentPane().add(txtfBusqueda, gridBagConstraints);
-
-        lbBtnBuscar.setText("buscar");
-        lbBtnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbBtnBuscarMouseClicked(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(57, 6, 0, 0);
-        intfInicio.getContentPane().add(lbBtnBuscar, gridBagConstraints);
+        pnlPrincipal.setPreferredSize(new java.awt.Dimension(900, 327));
 
         btnRefrescar.setText("REFRESCAR");
         btnRefrescar.addActionListener(new java.awt.event.ActionListener() {
@@ -352,7 +333,7 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
         pnlPrincipalLayout.setHorizontalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
-                .addContainerGap(638, Short.MAX_VALUE)
+                .addContainerGap(798, Short.MAX_VALUE)
                 .addComponent(btnRefrescar)
                 .addGap(111, 111, 111))
             .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -363,12 +344,12 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
                     .addComponent(pnlListadoAr, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(18, 18, 18)
                     .addComponent(pnlBotonCrearCon, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(36, Short.MAX_VALUE)))
+                    .addContainerGap(196, Short.MAX_VALUE)))
         );
         pnlPrincipalLayout.setVerticalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
-                .addContainerGap(180, Short.MAX_VALUE)
+                .addContainerGap(218, Short.MAX_VALUE)
                 .addComponent(btnRefrescar)
                 .addGap(124, 124, 124))
             .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -380,32 +361,60 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
                         .addGroup(pnlPrincipalLayout.createSequentialGroup()
                             .addGap(3, 3, 3)
                             .addComponent(pnlBotonCrearCon, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap(37, Short.MAX_VALUE)))
+                    .addContainerGap(75, Short.MAX_VALUE)))
         );
+
+        dskpaneSubContenedorPrincipal.add(pnlPrincipal, java.awt.BorderLayout.CENTER);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.ipadx = 30;
-        gridBagConstraints.ipady = 31;
+        gridBagConstraints.ipadx = 1000;
+        gridBagConstraints.ipady = 365;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 107, 119, 81);
-        intfInicio.getContentPane().add(pnlPrincipal, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(18, 6, 75, 22);
+        intfInicio.getContentPane().add(dskpaneSubContenedorPrincipal, gridBagConstraints);
 
-        dskpaneContenedor.setLayer(intfInicio, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        lbBienvenido.setFont(new java.awt.Font("Segoe UI Semilight", 1, 24)); // NOI18N
+        lbBienvenido.setText("Bienvenido! ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 479;
+        gridBagConstraints.ipady = -1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(60, 43, 0, 0);
+        intfInicio.getContentPane().add(lbBienvenido, gridBagConstraints);
 
-        javax.swing.GroupLayout dskpaneContenedorLayout = new javax.swing.GroupLayout(dskpaneContenedor);
-        dskpaneContenedor.setLayout(dskpaneContenedorLayout);
-        dskpaneContenedorLayout.setHorizontalGroup(
-            dskpaneContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(intfInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 1028, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        dskpaneContenedorLayout.setVerticalGroup(
-            dskpaneContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(intfInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        txtfBusqueda.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        txtfBusqueda.setText("Buscar conferencia");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 314;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(51, 254, 0, 0);
+        intfInicio.getContentPane().add(txtfBusqueda, gridBagConstraints);
 
+        lbBtnBuscar.setText("Buscar");
+        lbBtnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbBtnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbBtnBuscarMouseClicked(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(57, 6, 0, 0);
+        intfInicio.getContentPane().add(lbBtnBuscar, gridBagConstraints);
+
+        dskpaneContenedor.add(intfInicio, java.awt.BorderLayout.CENTER);
         //getContentPane().add(intfInicio, java.awt.BorderLayout.CENTER);
 
         pnlFondo.add(dskpaneContenedor, java.awt.BorderLayout.CENTER);
@@ -449,9 +458,20 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
 
     private void lbBtnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbBtnBuscarMouseClicked
                                           
-    String searchText = txtfBusqueda.getText().trim();  // Obtener texto de búsqueda sin modificar el caso
-    listConferences(searchText);  // Llamar a la función para listar conferencias con el texto de búsqueda
-
+        String searchText = txtfBusqueda.getText().trim();  // Obtener texto de búsqueda sin modificar el caso
+        //listConferences(searchText);  // Llamar a la función para listar conferencias con el texto de búsqueda
+        List<Conference> conferences = serchConferences(searchText); 
+        
+        if(conferences.isEmpty()){
+            pnlNoConferences panelNoConferencias = new pnlNoConferences(); 
+            dskpaneSubContenedorPrincipal.add(panelNoConferencias, java.awt.BorderLayout.CENTER);
+            panelNoConferencias.setVisible(true);
+        }
+        else{
+            GUIconferenceResearch searchResults = new GUIconferenceResearch(conferences); 
+            dskpaneSubContenedorPrincipal.add(searchResults,java.awt.BorderLayout.CENTER);
+            searchResults.setVisible(true);
+        }
 
 
     }//GEN-LAST:event_lbBtnBuscarMouseClicked
@@ -509,6 +529,7 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRefrescar;
     private javax.swing.JDesktopPane dskpaneContenedor;
+    private javax.swing.JDesktopPane dskpaneSubContenedorPrincipal;
     private javax.swing.JInternalFrame intfInicio;
     private javax.swing.JLabel lbBienvenido;
     private javax.swing.JLabel lbBtnBuscar;

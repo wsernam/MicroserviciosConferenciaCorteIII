@@ -4,6 +4,9 @@
  */
 package com.conference.gui.presentation;
 
+import com.conference.gui.entities.Conference;
+import java.util.List;
+
 /**
  *
  * @author Ashlee Campaz
@@ -13,10 +16,24 @@ public class GUIconferenceResearch extends javax.swing.JInternalFrame {
     /**
      * Creates new form GUIconferenceResearch
      */
-    public GUIconferenceResearch() {
+    
+    private List<Conference> searchResults;
+    private List<pnlConferenceInfo> searchResultsPanels; 
+    public GUIconferenceResearch(List<Conference> searchResults) {
+        this.searchResults = searchResults;
         initComponents();
     }
 
+    public void buildResultPanels(){
+        
+        for(Conference c: searchResults){
+            pnlConferenceInfo infoConference = new pnlConferenceInfo(c); 
+            searchResultsPanels.add(infoConference);
+            pnlResultados.add(infoConference);
+        }
+        pnlResultados.revalidate();
+        pnlResultados.repaint();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -85,18 +102,7 @@ public class GUIconferenceResearch extends javax.swing.JInternalFrame {
         scpConBusqueda.setBackground(new java.awt.Color(255, 255, 255));
 
         pnlResultados.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout pnlResultadosLayout = new javax.swing.GroupLayout(pnlResultados);
-        pnlResultados.setLayout(pnlResultadosLayout);
-        pnlResultadosLayout.setHorizontalGroup(
-            pnlResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 737, Short.MAX_VALUE)
-        );
-        pnlResultadosLayout.setVerticalGroup(
-            pnlResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
+        pnlResultados.setLayout(new javax.swing.BoxLayout(pnlResultados, javax.swing.BoxLayout.LINE_AXIS));
         scpConBusqueda.setViewportView(pnlResultados);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

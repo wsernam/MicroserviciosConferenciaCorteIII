@@ -4,6 +4,8 @@
  */
 package com.conference.gui.presentation;
 
+import com.conference.gui.entities.Conference;
+
 /**
  *
  * @author Ashlee Campaz
@@ -13,10 +15,17 @@ public class GUIconferenceInfo extends javax.swing.JInternalFrame {
     /**
      * Creates new form GUIconferenceInfo
      */
-    public GUIconferenceInfo() {
+    private Conference conference;
+    public GUIconferenceInfo(Conference c) {
+        this.conference = c;
         initComponents();
+        setLabels();
     }
-
+    
+    private void setLabels(){
+    
+        //TODO implementation 
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

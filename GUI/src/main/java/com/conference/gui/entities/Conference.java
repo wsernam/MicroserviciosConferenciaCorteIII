@@ -33,6 +33,13 @@ public class Conference {
         this.nombre = nombre;
         this.cantidadMaxArticulos = cantidadMaxArticulos;
     }
+
+    @Override
+    public String toString() {
+        return "Conference{" + "id=" + id + ", nombre=" + nombre + ", cantidadMaxArticulos=" + cantidadMaxArticulos + '}';
+    }
     
-    
+    public String toStringBasic(){
+        return "Conferencia"; 
+    }
 }
