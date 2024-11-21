@@ -26,26 +26,226 @@ public class GUIconferenceInfo extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lbGestionConferencia = new javax.swing.JLabel();
+        lbConferenceName = new javax.swing.JLabel();
+        pnlConferenceInfo = new javax.swing.JPanel();
+        lbFechaInicio = new javax.swing.JLabel();
+        lbFechaFin = new javax.swing.JLabel();
+        lbFechaRepArt = new javax.swing.JLabel();
+        lbFechaEvaluaciones = new javax.swing.JLabel();
+        lbPais = new javax.swing.JLabel();
+        lbEstado = new javax.swing.JLabel();
+        lbCiudad = new javax.swing.JLabel();
+        lbDireccion = new javax.swing.JLabel();
+        lbTemas = new javax.swing.JLabel();
+        lbEntidadOrganizadora = new javax.swing.JLabel();
+        pnlBtnSubirArticulo = new javax.swing.JPanel();
+        lbSubirArticulo = new javax.swing.JLabel();
+        pnlBtnPostulacionEvaluador = new javax.swing.JPanel();
+        lbPostulacionEvaluador = new javax.swing.JLabel();
+
         setBorder(null);
         setFrameIcon(null);
         setMinimumSize(new java.awt.Dimension(873, 650));
         setPreferredSize(new java.awt.Dimension(873, 650));
 
+        lbGestionConferencia.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
+        lbGestionConferencia.setForeground(new java.awt.Color(102, 102, 102));
+        lbGestionConferencia.setText("Gestion Conferencia");
+
+        lbConferenceName.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        lbConferenceName.setForeground(new java.awt.Color(102, 102, 102));
+        lbConferenceName.setText("conference_name");
+
+        pnlConferenceInfo.setBackground(new java.awt.Color(255, 255, 255));
+
+        lbFechaInicio.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        lbFechaInicio.setText("Inicio: DD/MM/AAAA");
+
+        lbFechaFin.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        lbFechaFin.setText("Fin: DD/MM/AAAA");
+
+        lbFechaRepArt.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        lbFechaRepArt.setText("Recepcion de articulos hasta: DD/MM/AAAA");
+
+        lbFechaEvaluaciones.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        lbFechaEvaluaciones.setText("Evaluaciones: DD/MM/AAAA");
+
+        lbPais.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        lbPais.setText("Pais: ####");
+
+        lbEstado.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        lbEstado.setText("Provincia/Estado: ####");
+
+        lbCiudad.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        lbCiudad.setText("Cuidad: ####");
+
+        lbDireccion.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        lbDireccion.setText("Direccion: ####");
+        lbDireccion.setToolTipText("");
+
+        lbTemas.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        lbTemas.setText("Temas: ####");
+
+        lbEntidadOrganizadora.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        lbEntidadOrganizadora.setText("Entidad organizadora: ####");
+
+        javax.swing.GroupLayout pnlConferenceInfoLayout = new javax.swing.GroupLayout(pnlConferenceInfo);
+        pnlConferenceInfo.setLayout(pnlConferenceInfoLayout);
+        pnlConferenceInfoLayout.setHorizontalGroup(
+            pnlConferenceInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlConferenceInfoLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(pnlConferenceInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbFechaInicio)
+                    .addComponent(lbFechaEvaluaciones)
+                    .addComponent(lbFechaRepArt)
+                    .addComponent(lbFechaFin)
+                    .addComponent(lbTemas))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addGroup(pnlConferenceInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbPais)
+                    .addComponent(lbEstado)
+                    .addComponent(lbCiudad)
+                    .addComponent(lbDireccion)
+                    .addComponent(lbEntidadOrganizadora))
+                .addGap(85, 85, 85))
+        );
+        pnlConferenceInfoLayout.setVerticalGroup(
+            pnlConferenceInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlConferenceInfoLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(pnlConferenceInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbFechaInicio)
+                    .addComponent(lbPais))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlConferenceInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbFechaFin)
+                    .addComponent(lbEstado))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlConferenceInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbFechaRepArt)
+                    .addComponent(lbCiudad))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlConferenceInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbDireccion)
+                    .addComponent(lbFechaEvaluaciones, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlConferenceInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbTemas)
+                    .addComponent(lbEntidadOrganizadora))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pnlBtnSubirArticulo.setBackground(new java.awt.Color(129, 218, 199));
+        pnlBtnSubirArticulo.setLayout(new java.awt.BorderLayout());
+
+        lbSubirArticulo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        lbSubirArticulo.setForeground(new java.awt.Color(255, 255, 255));
+        lbSubirArticulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbSubirArticulo.setText("Subir Articulo");
+        lbSubirArticulo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbSubirArticulo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbSubirArticuloMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbSubirArticuloMouseExited(evt);
+            }
+        });
+        pnlBtnSubirArticulo.add(lbSubirArticulo, java.awt.BorderLayout.CENTER);
+
+        pnlBtnPostulacionEvaluador.setBackground(new java.awt.Color(129, 218, 199));
+        pnlBtnPostulacionEvaluador.setLayout(new java.awt.BorderLayout());
+
+        lbPostulacionEvaluador.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        lbPostulacionEvaluador.setForeground(new java.awt.Color(255, 255, 255));
+        lbPostulacionEvaluador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbPostulacionEvaluador.setText("Postularme como evaluador");
+        lbPostulacionEvaluador.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbPostulacionEvaluador.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbPostulacionEvaluadorMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbPostulacionEvaluadorMouseExited(evt);
+            }
+        });
+        pnlBtnPostulacionEvaluador.add(lbPostulacionEvaluador, java.awt.BorderLayout.CENTER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 912, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(pnlConferenceInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pnlBtnSubirArticulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(pnlBtnPostulacionEvaluador, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(lbGestionConferencia)
+                    .addComponent(lbConferenceName))
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 526, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(lbGestionConferencia)
+                .addGap(34, 34, 34)
+                .addComponent(lbConferenceName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(pnlBtnSubirArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(pnlBtnPostulacionEvaluador, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnlConferenceInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(280, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void lbSubirArticuloMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbSubirArticuloMouseEntered
+        lbSubirArticulo.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14));
+    }//GEN-LAST:event_lbSubirArticuloMouseEntered
+
+    private void lbSubirArticuloMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbSubirArticuloMouseExited
+        lbSubirArticulo.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14));
+    }//GEN-LAST:event_lbSubirArticuloMouseExited
+
+    private void lbPostulacionEvaluadorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPostulacionEvaluadorMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lbPostulacionEvaluadorMouseEntered
+
+    private void lbPostulacionEvaluadorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPostulacionEvaluadorMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lbPostulacionEvaluadorMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel lbCiudad;
+    private javax.swing.JLabel lbConferenceName;
+    private javax.swing.JLabel lbDireccion;
+    private javax.swing.JLabel lbEntidadOrganizadora;
+    private javax.swing.JLabel lbEstado;
+    private javax.swing.JLabel lbFechaEvaluaciones;
+    private javax.swing.JLabel lbFechaFin;
+    private javax.swing.JLabel lbFechaInicio;
+    private javax.swing.JLabel lbFechaRepArt;
+    private javax.swing.JLabel lbGestionConferencia;
+    private javax.swing.JLabel lbPais;
+    private javax.swing.JLabel lbPostulacionEvaluador;
+    private javax.swing.JLabel lbSubirArticulo;
+    private javax.swing.JLabel lbTemas;
+    private javax.swing.JPanel pnlBtnPostulacionEvaluador;
+    private javax.swing.JPanel pnlBtnSubirArticulo;
+    private javax.swing.JPanel pnlConferenceInfo;
     // End of variables declaration//GEN-END:variables
 }
