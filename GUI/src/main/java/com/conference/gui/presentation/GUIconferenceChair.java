@@ -28,9 +28,14 @@ public class GUIconferenceChair extends javax.swing.JInternalFrame {
 
         lbGestionConferencia = new javax.swing.JLabel();
         lbConferenceName = new javax.swing.JLabel();
+        pnlBtnMatchingManual = new javax.swing.JPanel();
+        lbMatchingManual = new javax.swing.JLabel();
         pnlInfoArticulos = new javax.swing.JPanel();
         lbNumArtEnviados = new javax.swing.JLabel();
         lbNumArtEvaluados = new javax.swing.JLabel();
+        lbNumArtAceptados = new javax.swing.JLabel();
+        lbNumArtRechazados = new javax.swing.JLabel();
+        lbCalMinima = new javax.swing.JLabel();
         pnlConferenceInfo = new javax.swing.JPanel();
         lbFechaInicio = new javax.swing.JLabel();
         lbFechaFin = new javax.swing.JLabel();
@@ -40,25 +45,43 @@ public class GUIconferenceChair extends javax.swing.JInternalFrame {
         lbEstado = new javax.swing.JLabel();
         lbCiudad = new javax.swing.JLabel();
         lbDireccion = new javax.swing.JLabel();
-        pnlBtnMatching = new javax.swing.JPanel();
-        lbMatching = new javax.swing.JLabel();
+        pnlBtnMatchingAuto = new javax.swing.JPanel();
+        lbMatchingAuto = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(229, 229, 229));
         setBorder(null);
         setFrameIcon(null);
         setMinimumSize(new java.awt.Dimension(873, 650));
         setPreferredSize(new java.awt.Dimension(873, 650));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbGestionConferencia.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
         lbGestionConferencia.setForeground(new java.awt.Color(102, 102, 102));
         lbGestionConferencia.setText("Gestion Conferencia");
-        getContentPane().add(lbGestionConferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 14, -1, -1));
 
         lbConferenceName.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         lbConferenceName.setForeground(new java.awt.Color(102, 102, 102));
         lbConferenceName.setText("conference_name");
-        getContentPane().add(lbConferenceName, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 80, -1, -1));
+
+        pnlBtnMatchingManual.setBackground(new java.awt.Color(129, 218, 199));
+        pnlBtnMatchingManual.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnlBtnMatchingManual.setMaximumSize(new java.awt.Dimension(32767, 32767));
+        pnlBtnMatchingManual.setMinimumSize(new java.awt.Dimension(0, 0));
+        pnlBtnMatchingManual.setPreferredSize(new java.awt.Dimension(226, 109));
+        pnlBtnMatchingManual.setLayout(new java.awt.BorderLayout());
+
+        lbMatchingManual.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        lbMatchingManual.setForeground(new java.awt.Color(255, 255, 255));
+        lbMatchingManual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbMatchingManual.setText("Proceso de Matching manual");
+        lbMatchingManual.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbMatchingManualMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbMatchingManualMouseExited(evt);
+            }
+        });
+        pnlBtnMatchingManual.add(lbMatchingManual, java.awt.BorderLayout.CENTER);
 
         pnlInfoArticulos.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -68,6 +91,15 @@ public class GUIconferenceChair extends javax.swing.JInternalFrame {
         lbNumArtEvaluados.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
         lbNumArtEvaluados.setText("Numero articulos evaluados: #/#");
 
+        lbNumArtAceptados.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        lbNumArtAceptados.setText("Numero de articulos aceptados: #/#");
+
+        lbNumArtRechazados.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        lbNumArtRechazados.setText("Numero de articulos rechazados: #/#");
+
+        lbCalMinima.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        lbCalMinima.setText("Calificacion minima aceptable: #/#");
+
         javax.swing.GroupLayout pnlInfoArticulosLayout = new javax.swing.GroupLayout(pnlInfoArticulos);
         pnlInfoArticulos.setLayout(pnlInfoArticulosLayout);
         pnlInfoArticulosLayout.setHorizontalGroup(
@@ -75,9 +107,12 @@ public class GUIconferenceChair extends javax.swing.JInternalFrame {
             .addGroup(pnlInfoArticulosLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(pnlInfoArticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbCalMinima)
+                    .addComponent(lbNumArtRechazados)
+                    .addComponent(lbNumArtAceptados)
                     .addComponent(lbNumArtEvaluados)
                     .addComponent(lbNumArtEnviados))
-                .addContainerGap(132, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         pnlInfoArticulosLayout.setVerticalGroup(
             pnlInfoArticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,10 +121,14 @@ public class GUIconferenceChair extends javax.swing.JInternalFrame {
                 .addComponent(lbNumArtEnviados)
                 .addGap(27, 27, 27)
                 .addComponent(lbNumArtEvaluados)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(lbNumArtAceptados)
+                .addGap(18, 18, 18)
+                .addComponent(lbNumArtRechazados)
+                .addGap(18, 18, 18)
+                .addComponent(lbCalMinima)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        getContentPane().add(pnlInfoArticulos, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 111, 345, -1));
 
         pnlConferenceInfo.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -159,23 +198,83 @@ public class GUIconferenceChair extends javax.swing.JInternalFrame {
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        getContentPane().add(pnlConferenceInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 580, -1));
+        pnlBtnMatchingAuto.setBackground(new java.awt.Color(129, 218, 199));
+        pnlBtnMatchingAuto.setLayout(new java.awt.BorderLayout());
 
-        pnlBtnMatching.setBackground(new java.awt.Color(129, 218, 199));
-        pnlBtnMatching.setLayout(new java.awt.BorderLayout());
+        lbMatchingAuto.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        lbMatchingAuto.setForeground(new java.awt.Color(255, 255, 255));
+        lbMatchingAuto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbMatchingAuto.setText("Proceso de Matching automatico");
+        lbMatchingAuto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbMatchingAuto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbMatchingAutoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbMatchingAutoMouseExited(evt);
+            }
+        });
+        pnlBtnMatchingAuto.add(lbMatchingAuto, java.awt.BorderLayout.CENTER);
 
-        lbMatching.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        lbMatching.setForeground(new java.awt.Color(255, 255, 255));
-        lbMatching.setText("         Proceso de Matching             ");
-        pnlBtnMatching.add(lbMatching, java.awt.BorderLayout.CENTER);
-
-        getContentPane().add(pnlBtnMatching, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 111, -1, 120));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbGestionConferencia)
+                    .addComponent(lbConferenceName)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(pnlInfoArticulos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pnlBtnMatchingAuto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnlBtnMatchingManual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(pnlConferenceInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(256, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(lbGestionConferencia)
+                .addGap(34, 34, 34)
+                .addComponent(lbConferenceName)
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(pnlBtnMatchingAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(pnlBtnMatchingManual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnlInfoArticulos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(pnlConferenceInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(121, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void lbMatchingAutoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMatchingAutoMouseEntered
+        lbMatchingAuto.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14));
+    }//GEN-LAST:event_lbMatchingAutoMouseEntered
+
+    private void lbMatchingAutoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMatchingAutoMouseExited
+       lbMatchingAuto.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14));
+    }//GEN-LAST:event_lbMatchingAutoMouseExited
+
+    private void lbMatchingManualMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMatchingManualMouseEntered
+        lbMatchingManual.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14));
+    }//GEN-LAST:event_lbMatchingManualMouseEntered
+
+    private void lbMatchingManualMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMatchingManualMouseExited
+       lbMatchingManual.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14));
+    }//GEN-LAST:event_lbMatchingManualMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel lbCalMinima;
     private javax.swing.JLabel lbCiudad;
     private javax.swing.JLabel lbConferenceName;
     private javax.swing.JLabel lbDireccion;
@@ -185,11 +284,15 @@ public class GUIconferenceChair extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lbFechaInicio;
     private javax.swing.JLabel lbFechaRepArt;
     private javax.swing.JLabel lbGestionConferencia;
-    private javax.swing.JLabel lbMatching;
+    private javax.swing.JLabel lbMatchingAuto;
+    private javax.swing.JLabel lbMatchingManual;
+    private javax.swing.JLabel lbNumArtAceptados;
     private javax.swing.JLabel lbNumArtEnviados;
     private javax.swing.JLabel lbNumArtEvaluados;
+    private javax.swing.JLabel lbNumArtRechazados;
     private javax.swing.JLabel lbPais;
-    private javax.swing.JPanel pnlBtnMatching;
+    private javax.swing.JPanel pnlBtnMatchingAuto;
+    private javax.swing.JPanel pnlBtnMatchingManual;
     private javax.swing.JPanel pnlConferenceInfo;
     private javax.swing.JPanel pnlInfoArticulos;
     // End of variables declaration//GEN-END:variables

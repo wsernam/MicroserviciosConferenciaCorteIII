@@ -487,11 +487,11 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
     }//GEN-LAST:event_lbCrearConMouseClicked
 
     private void lbCrearConMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCrearConMouseEntered
-        // TODO add your handling code here:
+        pnlBotonCrearCon.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14));
     }//GEN-LAST:event_lbCrearConMouseEntered
 
     private void lbCrearConMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCrearConMouseExited
-        // TODO add your handling code here:
+        pnlBotonCrearCon.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14));
     }//GEN-LAST:event_lbCrearConMouseExited
 
     private void btnRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarActionPerformed
