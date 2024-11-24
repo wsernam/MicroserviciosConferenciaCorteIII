@@ -5,11 +5,19 @@
 package com.mycompany.notify.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 /**
  *
  * @author William Andres
  */
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Notify {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,39 +26,5 @@ public class Notify {
     private String subject;
     @Column(name = "emailUsuario")
     private String emailUsuario;  // El correo electrónico del usuario que recibirá la notificación
-    // Getters y Setters
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-    
-    public String getEmailUsuario() {
-        return emailUsuario;
-    }
-    
-    public void setEmailUsuario(String emailUsuario) {
-        this.emailUsuario = emailUsuario;
-    }
-
-    public long getId() {
-        return id;
-    }
-    
-    public void setId(long id) {    
-        this.id = id;
-    }
-    
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-    
 }
 

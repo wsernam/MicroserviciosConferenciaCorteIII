@@ -33,28 +33,47 @@ public class ConfigRabbitMQ {
         rabbitTemplate.setMessageConverter(jsonMessageConverter());
         return rabbitTemplate;
     }
-    
+
+    // Colas existentes
     @Bean
     public Queue conferenciaCreadaQueue() {
         return new Queue("conferencia-creada-queue", true);
     }
     
     @Bean
+    public Queue articuloAsignadoQueue() {
+        return new Queue("articulo-asignado-queue", true);
+    }
+
+    @Bean
     public Queue articuloCreadoQueue() {
         return new Queue("articulo-creado-queue", true);
     }
-    
+
+    // Nueva cola para evaluadores registrados
+    @Bean
+    public Queue evaluadorRegistradoQueue() {
+        return new Queue("evaluador-registrado-queue", true);
+    }
+
+    // Exchanges existentes
     @Bean
     public DirectExchange articuloExchange() {
         return new DirectExchange("articulo-exchange");
     }
-    // Intercambio para conferencias
+
     @Bean
     public DirectExchange conferenciaExchange() {
         return new DirectExchange("conferencia-exchange");
-    }   
+    }
 
-    // Enlace para artículos
+    // Nuevo exchange para eventos relacionados con usuarios (opcional)
+    @Bean
+    public DirectExchange usuarioExchange() {
+        return new DirectExchange("usuario-exchange");
+    }
+
+    // Enlaces existentes
     @Bean
     public Binding articuloBinding(@Qualifier("articuloCreadoQueue") Queue articuloCreadoQueue, 
                                    DirectExchange articuloExchange) {
@@ -63,7 +82,6 @@ public class ConfigRabbitMQ {
                              .with("articulo.creado");
     }
 
-    // Enlace para conferencias
     @Bean
     public Binding conferenciaBinding(@Qualifier("conferenciaCreadaQueue") Queue conferenciaCreadaQueue, 
                                       DirectExchange conferenciaExchange) {
@@ -71,4 +89,22 @@ public class ConfigRabbitMQ {
                              .to(conferenciaExchange)
                              .with("conferencia.creada");
     }
+
+    // Nuevo binding para evaluadores registrados
+    @Bean
+    public Binding evaluadorBinding(@Qualifier("evaluadorRegistradoQueue") Queue evaluadorRegistradoQueue,
+                                    @Qualifier("usuarioExchange") DirectExchange usuarioExchange) {
+        return BindingBuilder.bind(evaluadorRegistradoQueue)
+                             .to(usuarioExchange)
+                             .with("evaluador.registrado");
+    }
+    
+    @Bean
+    public Binding articuloAsignadoBinding(@Qualifier("articuloAsignadoQueue") Queue articuloAsignadoQueue, 
+                                           @Qualifier("usuarioExchange") DirectExchange usuarioExchange) {
+        return BindingBuilder.bind(articuloAsignadoQueue)
+                             .to(usuarioExchange)
+                             .with("articulo.asignado");
+    }
 }
+

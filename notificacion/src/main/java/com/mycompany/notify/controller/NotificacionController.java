@@ -46,7 +46,6 @@ public class NotificacionController {
         notify.setSubject(asunto);
         notify.setEmailUsuario(emailUsuario);    
         // Procesar la notificación (guardarla, enviarla, etc.)
-        notifyServices.procesarNotificacion(notify);
         notifyServices.saveNotify(notify);
         // Devolver una respuesta de éxito
         return ResponseEntity.ok("Notificación enviada exitosamente");
