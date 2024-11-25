@@ -34,31 +34,56 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-gateway</artifactId>
-                        <version>4.1.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-                        <version>3.3.5</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.projectreactor</groupId>
 			<artifactId>reactor-test</artifactId>
-                        <version>3.3.6</version>
 			<scope>test</scope>
 		</dependency>
+                <dependency>
+                    <groupId>com.auth0</groupId>
+                    <artifactId>java-jwt</artifactId>
+                    <version>4.4.0</version> <!-- Usa la última versión -->
+                </dependency>
+                <dependency>
+                    <groupId>io.jsonwebtoken</groupId>
+                    <artifactId>jjwt-api</artifactId>
+                    <version>0.11.5</version> <!-- Usa la última versión -->
+                </dependency>
+                <dependency>
+                    <groupId>io.jsonwebtoken</groupId>
+                    <artifactId>jjwt-impl</artifactId>
+                    <version>0.11.5</version>
+                    <scope>runtime</scope>
+                </dependency>
+                <dependency>
+                    <groupId>io.jsonwebtoken</groupId>
+                    <artifactId>jjwt-jackson</artifactId>
+                    <version>0.11.5</version>
+                    <scope>runtime</scope>
+                </dependency>
 	 <dependency>
-	  <groupId>org.springframework.boot</groupId>
-	  <artifactId>spring-boot</artifactId>
-	  <version>3.3.6</version>
-	  <type>jar</type>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId>
+            <version>3.3.6</version>
+            <type>jar</type>
 	 </dependency>
 	 <dependency>
 	  <groupId>org.springframework.boot</groupId>
 	  <artifactId>spring-boot-autoconfigure</artifactId>
 	  <version>3.3.4</version>
+	  <type>jar</type>
+	 </dependency>
+	 <dependency>
+	  <groupId>org.springframework</groupId>
+	  <artifactId>spring-web</artifactId>
+	  <version>6.1.14</version>
 	  <type>jar</type>
 	 </dependency>
 	</dependencies>

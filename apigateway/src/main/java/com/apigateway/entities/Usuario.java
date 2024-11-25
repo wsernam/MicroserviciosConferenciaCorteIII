@@ -97,6 +97,11 @@ public class Usuario implements Serializable{
                                                  ",\"temporary\": " + false+ "}]}";
     }
 
+    @Override
+    public String toString() {
+        return "Usuario{" + "name=" + name + ", lastName=" + lastName + ", country=" + country + ", email=" + email + ", organization=" + organization + ", id=" + id + '}';
+    }
+
     
     
     
