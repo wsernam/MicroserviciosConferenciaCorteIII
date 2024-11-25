@@ -5,6 +5,7 @@
 package com.conference.gui.clients;
 
 import com.conference.gui.entities.Usuario;
+import com.conference.gui.entities.Usuario_Autorizado;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,14 +26,14 @@ import java.net.http.HttpResponse;
 public class UserClient implements IUserRestClient {
      private static final String USER_AGENT = "GUILogin";
      
-     private String urlUserService = "http://localhost:8097/user";
+     private String urlUserService = "http://localhost:8081/EasyConference";
      public UserClient (){
      
      }
      @Override
-     public  Usuario login(String email, String password) throws Exception{
+     public  Usuario_Autorizado login(String email, String password) throws Exception{
          
-        Usuario user = null; 
+        Usuario_Autorizado user = null; 
         String jsonInputString = String.format("{\"email\": \"%s\", \"password\": \"%s\"}",email,password);
         
          
@@ -58,7 +59,7 @@ public class UserClient implements IUserRestClient {
 
             // Convertir el JSON a un objeto Java
             if(response.statusCode()==200){
-                user = objectMapper.readValue(response.body(), Usuario.class);
+                user = objectMapper.readValue(response.body(), Usuario_Autorizado.class);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -67,8 +68,8 @@ public class UserClient implements IUserRestClient {
      }
 
     @Override
-    public Usuario register(Usuario us) {
-        Usuario user = null; 
+    public Boolean register(Usuario us) {
+        Boolean bandera = false; 
         String jsonInputString = us.toString();
         
          
@@ -78,7 +79,7 @@ public class UserClient implements IUserRestClient {
 
             // Crear la solicitud
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(urlUserService))
+                    .uri(URI.create(urlUserService + "/register"))
                     .header("Content-Type", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(jsonInputString))
                     .build();
@@ -94,11 +95,12 @@ public class UserClient implements IUserRestClient {
 
             // Convertir el JSON a un objeto Java
             if(response.statusCode()==200){
-                user = objectMapper.readValue(response.body(), Usuario.class);
+                bandera = true; 
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return user; 
+        return bandera; 
     }
 }
+

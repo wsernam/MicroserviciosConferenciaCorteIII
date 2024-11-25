@@ -7,6 +7,7 @@ import com.conference.gui.clients.IUserRestClient;
 import com.conference.gui.clients.UserClient;
 import com.conference.gui.entities.Login;
 import com.conference.gui.entities.Usuario;
+import com.conference.gui.entities.Usuario_Autorizado;
 import java.awt.Dimension;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -273,7 +274,7 @@ public class GUIlogin extends javax.swing.JFrame {
             lbCamposVacios.setVisible(true);
             return;
        }
-       Usuario us = null; 
+       Usuario_Autorizado us = null; 
         try {
              us = userclient.login(txtfCorreo.getText(),new String(pswfContrasenia.getPassword()));
         } catch (Exception ex) {

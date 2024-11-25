@@ -7,6 +7,7 @@ import com.conference.gui.conference.UserConference;
 import com.conference.gui.entities.Articulo;
 import com.conference.gui.entities.Conference;
 import com.conference.gui.entities.Usuario;
+import com.conference.gui.entities.Usuario_Autorizado;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -36,7 +37,7 @@ import javax.swing.JScrollPane;
 
 public class GUIcontainer extends javax.swing.JFrame {
 
-    private Usuario usuario;
+    private Usuario_Autorizado usuario;
      UserConference objConference = new UserConference();
      Article objArticle=new  Article();
     //private UserService userService;
@@ -50,7 +51,7 @@ public class GUIcontainer extends javax.swing.JFrame {
     
     
     
-    public GUIcontainer(Usuario us) {
+    public GUIcontainer(Usuario_Autorizado us) {
         this.usuario = us;
         initComponents();
         listConferences("");//muestra todas las listas
@@ -520,7 +521,7 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
     
     }//GEN-LAST:event_btnRefrescarActionPerformed
     
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(Usuario_Autorizado usuario) {
         this.usuario = usuario;
          lbBienvenido.setText("Bienvenido! "+ usuario.getName() + " " + usuario.getLastName());
     }

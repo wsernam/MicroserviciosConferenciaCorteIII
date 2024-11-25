@@ -20,12 +20,8 @@ public class GUI {
     public static void main(String[] args) {
         UserClient userclient = new UserClient(); 
         GUIlogin login = new GUIlogin(userclient);
-     
-        UserConference conference = new UserConference();
-       
         login.setLocationRelativeTo(null);
         login.setVisible(true);
-          GUIcontainer container= new GUIcontainer();
     }
         
     

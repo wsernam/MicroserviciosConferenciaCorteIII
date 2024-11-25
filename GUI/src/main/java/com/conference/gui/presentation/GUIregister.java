@@ -60,9 +60,9 @@ public class GUIregister extends javax.swing.JFrame {
         }
         
         Usuario us = new Usuario (name,lastName, country, email, organization,  password, new ArrayList<String>(fiels)); 
-        Usuario result = userclient.register(us);
+        Boolean result = userclient.register(us);
         // Handle successful registration
-        if (result!=null) {
+        if (result) {
             clearFields();  // Clear form fields after successful registration
             JOptionPane.showMessageDialog(this, "Usuario registrado con éxito.", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
         } else {
