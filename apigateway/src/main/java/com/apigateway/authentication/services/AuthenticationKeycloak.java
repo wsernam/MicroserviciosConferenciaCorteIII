@@ -16,6 +16,8 @@ import java.net.http.HttpResponse;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
@@ -25,9 +27,15 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AuthenticationKeycloak implements IAuthentication{
+    
     private final String client_id; 
     private final String URL; 
     private final String realm; 
+    
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+    
+    
     public AuthenticationKeycloak(){
         this.client_id = "EasyConference-front";
         //TODO inicializar el client_id y URL
@@ -102,6 +110,7 @@ public class AuthenticationKeycloak implements IAuthentication{
             System.out.println("Response Body: " + response.body());
             
             if(response.statusCode()==201){
+                rabbitTemplate.convertAndSend(us);
                 return true; 
             }
         } catch (Exception e) {
