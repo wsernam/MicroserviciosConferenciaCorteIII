@@ -5,12 +5,13 @@
 package com.apigateway.authentication.services;
 
 import com.apigateway.entities.Usuario;
+import com.apigateway.entities.Usuario_Autorizado;
 
 /**
  *
  * @author Ashlee Campaz
  */
 public interface IAuthentication {
-    public Usuario login(String email, String password); 
-    public Usuario register(Usuario us); 
+    public Usuario_Autorizado login(String email, String password); 
+    public Boolean register(Usuario us); 
 }

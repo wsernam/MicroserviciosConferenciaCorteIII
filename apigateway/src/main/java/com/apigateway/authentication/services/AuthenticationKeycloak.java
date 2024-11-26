@@ -35,11 +35,12 @@ public class AuthenticationKeycloak implements IAuthentication{
         this.realm = "EasyConference";
     }
     @Override
-    public Usuario login(String email, String password) {
-       Usuario user = null; 
+    public Usuario_Autorizado login(String email, String password) {
+       Usuario_Autorizado us = null;
         String jsonInputString = String.format("{\"email\": \"%s\", \"password\": \"%s\"}",email,password);
         String formData = "client_id=EasyConference-front"+
                     "&grant_type=password"
+                    +"&client_secret=f26f7r9YteB7MEBfyPeYTSwzYXTGzGNE"
                     + "&username=" + email 
                     + "&password=" + password;
         try {
@@ -66,21 +67,18 @@ public class AuthenticationKeycloak implements IAuthentication{
                 ObjectMapper mapper = new ObjectMapper();
                 Map<String, Object> responseBody =mapper.readValue(response.body(), Map.class);
                 String access_token = responseBody.get("access_token").toString(); 
-                
-                Usuario_Autorizado us = JWTDecoder.decode(access_token, URL, realm); 
-                System.out.println(us.toString());
-                user = new Usuario();
+                us = JWTDecoder.decode(access_token, URL, realm); 
+                return us;
                 
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return user;
+        return us;
     }
 
     @Override
-    public Usuario register(Usuario us) {
-       Usuario user = null; 
+    public Boolean register(Usuario us) {
         String jsonInputString = us.creationJSON(); 
         String admin_token = getAdminToken();
         try {
@@ -103,16 +101,14 @@ public class AuthenticationKeycloak implements IAuthentication{
             System.out.println("Status Code: " + response.statusCode());
             System.out.println("Response Body: " + response.body());
             
-
-            // Convertir el JSON a un objeto Java
             if(response.statusCode()==201){
-                user = new Usuario(); 
+                return true; 
             }
         } catch (Exception e) {
             System.out.println("Register");
             e.printStackTrace();
         }
-        return user;
+        return false;
     }
     
     public String getAdminToken(){
@@ -120,7 +116,8 @@ public class AuthenticationKeycloak implements IAuthentication{
         try {
             String tokenURL = URL + "realms/" + realm + "/protocol/openid-connect/token";
             String formData = "client_id=EasyConference-front"+
-                    "&grant_type = client_credentials";
+                    "&grant_type=client_credentials"
+                    + "&client_secret=f26f7r9YteB7MEBfyPeYTSwzYXTGzGNE";
             
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(tokenURL))
@@ -138,7 +135,7 @@ public class AuthenticationKeycloak implements IAuthentication{
             
 
             // Convertir el JSON a un objeto Java
-            if(response.statusCode()==201){
+            if(response.statusCode()==200){
                 ObjectMapper mapper = new ObjectMapper();
                 Map<String, Object> responseBody =mapper.readValue(response.body(), Map.class);
                 return responseBody.get("access_token").toString();

@@ -90,11 +90,18 @@ public class Usuario implements Serializable{
 
 
    public String creationJSON() {
-        return "{" + "\"username\": "+ email  +", \"firstName\":" + name + ", \"lastName\":" + lastName +
-                ", \"email\":" + email + ", \"enabled\":"+ true + "\"credentials\": [ {"+
-                                                 "\"type\": password" +
-                                                 ",\"value\":" + password +
-                                                 ",\"temporary\": " + false+ "}]}";
+        return "{" +
+                "\"username\": \"" + email + "\"," +
+                "\"firstName\": \"" + name + "\"," +
+                "\"lastName\": \"" + lastName + "\"," +
+                "\"email\": \"" + email + "\"," +
+                "\"enabled\": " + true + "," +
+                "\"credentials\": [{" +
+                    "\"type\": \"password\"," +
+                    "\"value\": \"" + password + "\"," +
+                    "\"temporary\": " + false +
+                "}]" +
+             "}";
     }
 
     @Override
