@@ -4,26 +4,28 @@
  */
 package com.conference.gui.presentation;
 
+import com.conference.gui.entities.Articulo;
 import com.conference.gui.entities.Conference;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import javax.swing.JDesktopPane;
+import javax.swing.JInternalFrame;
 
 /**
  *
  * @author Ashlee Campaz
  */
-public class pnlConferenceInfo extends javax.swing.JPanel {
+public class pnlArticleInfo extends javax.swing.JPanel {
 
     /**
      * Creates new form pnlConferenceInfo
      */
-    private Conference conference;
-    public pnlConferenceInfo(Conference c) {
-        this.conference = c;
+    private Articulo article;
+    public pnlArticleInfo(Articulo a) {
+        this.article = a;
         initComponents();
-        lbInfoConferencia.setText(conference.toStringBasic());
+        lbInfoArticulo.setText(a.getNombre());
     }
 
     /**
@@ -39,7 +41,7 @@ public class pnlConferenceInfo extends javax.swing.JPanel {
         pnlBtnVerMas = new javax.swing.JPanel();
         lbVerMas = new javax.swing.JLabel();
         pnlInfoConferencia = new javax.swing.JPanel();
-        lbInfoConferencia = new javax.swing.JLabel();
+        lbInfoArticulo = new javax.swing.JLabel();
 
         setLayout(new java.awt.GridBagLayout());
 
@@ -75,9 +77,9 @@ public class pnlConferenceInfo extends javax.swing.JPanel {
 
         pnlInfoConferencia.setLayout(new java.awt.BorderLayout());
 
-        lbInfoConferencia.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        lbInfoConferencia.setText("INFO CONFERENCIA");
-        pnlInfoConferencia.add(lbInfoConferencia, java.awt.BorderLayout.CENTER);
+        lbInfoArticulo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        lbInfoArticulo.setText("Nombre articulo");
+        pnlInfoConferencia.add(lbInfoArticulo, java.awt.BorderLayout.CENTER);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -97,19 +99,18 @@ public class pnlConferenceInfo extends javax.swing.JPanel {
     }//GEN-LAST:event_lbVerMasMouseExited
 
     private void lbVerMasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbVerMasMouseClicked
-        JDesktopPane dktpParent = getDesktopPaneParent(this);
-        GUIconferenceInfo conferenceInfo = new GUIconferenceInfo(conference); 
-        if(dktpParent!=null){
-            dktpParent.add(conferenceInfo, java.awt.BorderLayout.CENTER);
-            conferenceInfo.setVisible(true);
+        JInternalFrame interfalFrame = getDesktopPaneParent(this);
+        if(interfalFrame!=null){
+            GUImisArticulos guimisarticulos = (GUImisArticulos) interfalFrame;
+            
         }
     }//GEN-LAST:event_lbVerMasMouseClicked
 
-    private JDesktopPane getDesktopPaneParent(pnlConferenceInfo pc){
+    private JInternalFrame getDesktopPaneParent(pnlArticleInfo pc){
         Container parent = pc.getParent(); 
         while (parent != null) {
-            if (parent instanceof JDesktopPane) {
-                return (JDesktopPane) parent;
+            if (parent instanceof JInternalFrame) {
+                return (JInternalFrame) parent;
             }
             parent = parent.getParent();
         }
@@ -117,7 +118,7 @@ public class pnlConferenceInfo extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel lbInfoConferencia;
+    private javax.swing.JLabel lbInfoArticulo;
     private javax.swing.JLabel lbVerMas;
     private javax.swing.JPanel pnlBtnVerMas;
     private javax.swing.JPanel pnlInfoConferencia;

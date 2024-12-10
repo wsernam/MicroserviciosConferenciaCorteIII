@@ -73,7 +73,6 @@ public class GUIconferenceChair extends javax.swing.JInternalFrame {
 
         pnlBtnMatchingManual.setBackground(new java.awt.Color(129, 218, 199));
         pnlBtnMatchingManual.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pnlBtnMatchingManual.setMaximumSize(new java.awt.Dimension(32767, 32767));
         pnlBtnMatchingManual.setMinimumSize(new java.awt.Dimension(0, 0));
         pnlBtnMatchingManual.setPreferredSize(new java.awt.Dimension(226, 109));
         pnlBtnMatchingManual.setLayout(new java.awt.BorderLayout());
@@ -183,7 +182,7 @@ public class GUIconferenceChair extends javax.swing.JInternalFrame {
                     .addComponent(lbEstado)
                     .addComponent(lbCiudad)
                     .addComponent(lbDireccion))
-                .addGap(85, 85, 85))
+                .addGap(52, 52, 52))
         );
         pnlConferenceInfoLayout.setVerticalGroup(
             pnlConferenceInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,7 +240,7 @@ public class GUIconferenceChair extends javax.swing.JInternalFrame {
                             .addComponent(pnlBtnMatchingAuto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(pnlBtnMatchingManual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(pnlConferenceInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(256, Short.MAX_VALUE))
+                .addContainerGap(289, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

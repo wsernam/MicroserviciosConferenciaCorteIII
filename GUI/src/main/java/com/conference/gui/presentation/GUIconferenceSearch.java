@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author Ashlee Campaz
  */
-public class GUIconferenceResearch extends javax.swing.JInternalFrame {
+public class GUIconferenceSearch extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form GUIconferenceResearch
@@ -19,7 +19,7 @@ public class GUIconferenceResearch extends javax.swing.JInternalFrame {
     
     private List<Conference> searchResults;
     private List<pnlConferenceInfo> searchResultsPanels; 
-    public GUIconferenceResearch(List<Conference> searchResults) {
+    public GUIconferenceSearch(List<Conference> searchResults) {
         this.searchResults = searchResults;
         initComponents();
     }

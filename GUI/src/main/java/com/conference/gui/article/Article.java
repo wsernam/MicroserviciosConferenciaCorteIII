@@ -1,6 +1,7 @@
 package com.conference.gui.article;
 
 import com.conference.gui.entities.Articulo;
+import com.conference.gui.presentation.infra.Subject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -15,7 +16,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
  * @author sonhuila
  */
 
-public class Article implements IArticleRest {
+public class Article extends Subject implements IArticleRest {
 
     private static final String USER_AGENT = "GUIArticles";
     private final String urlArticleService = "http://localhost:7080/api";
@@ -43,6 +44,7 @@ public class Article implements IArticleRest {
         // Verificar y procesar la respuesta
         if (response.statusCode() == 200 || response.statusCode() == 201) {
             savedArticle = objectMapper.readValue(response.body(), Articulo.class);
+            this.notifyAllObserves();
         } else {
             System.out.println("Error al guardar el artículo: Código " + response.statusCode());
         }

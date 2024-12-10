@@ -8,6 +8,8 @@ import com.conference.gui.entities.Articulo;
 import com.conference.gui.entities.Conference;
 import com.conference.gui.entities.Usuario;
 import com.conference.gui.entities.Usuario_Autorizado;
+import com.conference.gui.presentation.infra.InternalFrameFactory;
+import com.conference.gui.presentation.infra.RestClientManager;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -38,36 +40,31 @@ import javax.swing.JScrollPane;
 public class GUIcontainer extends javax.swing.JFrame {
 
     private Usuario_Autorizado usuario;
-     UserConference objConference = new UserConference();
-     Article objArticle=new  Article();
-    //private UserService userService;
-    //private ConferenceService conferenceService;
-    //private ArticleService articuloService;
+
 
     /**
      * Creates new form GUIcontainer
+     * @param us
      */
-   
-    
-    
-    
+
     public GUIcontainer(Usuario_Autorizado us) {
         this.usuario = us;
         initComponents();
-        listConferences("");//muestra todas las listas
-        listArticles();
+        //listConferences("");//muestra todas las listas
+        //listArticles();
     }
     
     public GUIcontainer(){
         initComponents();
-         listConferences("");
-         listArticles();
+         //listConferences("");
+         //listArticles();
     }
        
     @SuppressWarnings("unchecked")
     // Método que se ejecuta cuando el usuario hace clic en "Listado de conferencias"
+    /**
  public void listConferences(String searchText) {
-pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de conferencias
+    pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de conferencias
 
     // Configuramos el layout del panel para mantener el título arriba
     pnlListadoCon.setLayout(new BorderLayout());
@@ -156,9 +153,9 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
 
 }
 
+**/
 
-
-
+/**
     // Método para listar los artículos del usuario
     @SuppressWarnings("unchecked")
    public void listArticles() {
@@ -209,9 +206,9 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
     pnlListadoAr.revalidate();
     pnlListadoAr.repaint();
 }
-
-   public List<Conference> serchConferences(String searchText){
-        List<Conference> conferences = objConference.getConferencias();
+*/
+   public List<Conference> searchConferences(String searchText){
+        List<Conference> conferences = RestClientManager.getConferenceClient().getConferencias();
         // Filtramos la lista de conferencias si se proporciona un texto de búsqueda
         if (searchText != null && !searchText.isEmpty()) {
             conferences = conferences.stream()
@@ -237,13 +234,12 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
         intfInicio = new javax.swing.JInternalFrame();
         dskpaneSubContenedorPrincipal = new javax.swing.JDesktopPane();
         pnlPrincipal = new javax.swing.JPanel();
-        btnRefrescar = new javax.swing.JButton();
-        pnlListadoCon = new javax.swing.JPanel();
-        lbListadoCon = new javax.swing.JLabel();
-        pnlListadoAr = new javax.swing.JPanel();
-        lbListadoAr = new javax.swing.JLabel();
         pnlBotonCrearCon = new javax.swing.JPanel();
         lbCrearCon = new javax.swing.JLabel();
+        pnlBotonMisCon = new javax.swing.JPanel();
+        lbMisCon = new javax.swing.JLabel();
+        pnlBotonMisArt = new javax.swing.JPanel();
+        lbMisArt = new javax.swing.JLabel();
         lbBienvenido = new javax.swing.JLabel();
         txtfBusqueda = new javax.swing.JTextField();
         lbBtnBuscar = new javax.swing.JLabel();
@@ -280,34 +276,6 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
 
         pnlPrincipal.setPreferredSize(new java.awt.Dimension(900, 327));
 
-        btnRefrescar.setText("REFRESCAR");
-        btnRefrescar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRefrescarActionPerformed(evt);
-            }
-        });
-
-        pnlListadoCon.setBackground(new java.awt.Color(236, 236, 236));
-        pnlListadoCon.setPreferredSize(new java.awt.Dimension(136, 204));
-        pnlListadoCon.setLayout(new java.awt.BorderLayout());
-
-        lbListadoCon.setFont(new java.awt.Font("Nirmala UI Semilight", 0, 14)); // NOI18N
-        lbListadoCon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbListadoCon.setText("Listado de conferencias");
-        lbListadoCon.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(197, 197, 197)));
-        pnlListadoCon.add(lbListadoCon, java.awt.BorderLayout.PAGE_START);
-
-        pnlListadoAr.setBackground(new java.awt.Color(236, 236, 236));
-        pnlListadoAr.setMinimumSize(new java.awt.Dimension(145, 22));
-        pnlListadoAr.setPreferredSize(new java.awt.Dimension(136, 204));
-        pnlListadoAr.setLayout(new java.awt.BorderLayout());
-
-        lbListadoAr.setFont(new java.awt.Font("Nirmala UI Semilight", 0, 14)); // NOI18N
-        lbListadoAr.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbListadoAr.setText("Listado de articulos");
-        lbListadoAr.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(197, 197, 197)));
-        pnlListadoAr.add(lbListadoAr, java.awt.BorderLayout.PAGE_START);
-
         pnlBotonCrearCon.setBackground(new java.awt.Color(129, 218, 199));
         pnlBotonCrearCon.setLayout(new java.awt.BorderLayout());
 
@@ -329,40 +297,70 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
         });
         pnlBotonCrearCon.add(lbCrearCon, java.awt.BorderLayout.CENTER);
 
+        pnlBotonMisCon.setBackground(new java.awt.Color(129, 218, 199));
+        pnlBotonMisCon.setLayout(new java.awt.BorderLayout());
+
+        lbMisCon.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        lbMisCon.setForeground(new java.awt.Color(255, 255, 255));
+        lbMisCon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbMisCon.setText("Mis Conferencias");
+        lbMisCon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbMisCon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbMisConMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbMisConMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbMisConMouseExited(evt);
+            }
+        });
+        pnlBotonMisCon.add(lbMisCon, java.awt.BorderLayout.CENTER);
+
+        pnlBotonMisArt.setBackground(new java.awt.Color(129, 218, 199));
+        pnlBotonMisArt.setLayout(new java.awt.BorderLayout());
+
+        lbMisArt.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        lbMisArt.setForeground(new java.awt.Color(255, 255, 255));
+        lbMisArt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbMisArt.setText("Mis articulos");
+        lbMisArt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbMisArt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbMisArtMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbMisArtMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbMisArtMouseExited(evt);
+            }
+        });
+        pnlBotonMisArt.add(lbMisArt, java.awt.BorderLayout.CENTER);
+
         javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
         pnlPrincipal.setLayout(pnlPrincipalLayout);
         pnlPrincipalLayout.setHorizontalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
-                .addContainerGap(798, Short.MAX_VALUE)
-                .addComponent(btnRefrescar)
-                .addGap(111, 111, 111))
-            .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                    .addGap(11, 11, 11)
-                    .addComponent(pnlListadoCon, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(22, 22, 22)
-                    .addComponent(pnlListadoAr, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(18, 18, 18)
-                    .addComponent(pnlBotonCrearCon, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(196, Short.MAX_VALUE)))
+            .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                .addGap(274, 274, 274)
+                .addComponent(pnlBotonMisArt, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(pnlBotonMisCon, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(pnlBotonCrearCon, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(96, Short.MAX_VALUE))
         );
         pnlPrincipalLayout.setVerticalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
-                .addContainerGap(218, Short.MAX_VALUE)
-                .addComponent(btnRefrescar)
-                .addGap(124, 124, 124))
-            .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                    .addGap(64, 64, 64)
-                    .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(pnlListadoCon, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(pnlListadoAr, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                            .addGap(3, 3, 3)
-                            .addComponent(pnlBotonCrearCon, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap(75, Short.MAX_VALUE)))
+            .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                .addGap(67, 67, 67)
+                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pnlBotonMisArt, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlBotonMisCon, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlBotonCrearCon, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(206, Short.MAX_VALUE))
         );
 
         dskpaneSubContenedorPrincipal.add(pnlPrincipal, java.awt.BorderLayout.CENTER);
@@ -461,7 +459,7 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
                                           
         String searchText = txtfBusqueda.getText().trim();  // Obtener texto de búsqueda sin modificar el caso
         //listConferences(searchText);  // Llamar a la función para listar conferencias con el texto de búsqueda
-        List<Conference> conferences = serchConferences(searchText); 
+        List<Conference> conferences = searchConferences(searchText); 
         
         if(conferences.isEmpty()){
             pnlNoConferences panelNoConferencias = new pnlNoConferences(); 
@@ -469,7 +467,7 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
             panelNoConferencias.setVisible(true);
         }
         else{
-            GUIconferenceResearch searchResults = new GUIconferenceResearch(conferences); 
+            GUIconferenceSearch searchResults = new GUIconferenceSearch(conferences); 
             dskpaneSubContenedorPrincipal.add(searchResults,java.awt.BorderLayout.CENTER);
             searchResults.setVisible(true);
         }
@@ -493,10 +491,21 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
         login.setVisible(true);
     }//GEN-LAST:event_lbCerrarSesionMouseClicked
 
+    private void lbMisConMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMisConMouseClicked
+        
+    }//GEN-LAST:event_lbMisConMouseClicked
+
+    private void lbMisConMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMisConMouseEntered
+        lbMisCon.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14));
+    }//GEN-LAST:event_lbMisConMouseEntered
+
+    private void lbMisConMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMisConMouseExited
+       lbMisCon.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14));
+    }//GEN-LAST:event_lbMisConMouseExited
+
     private void lbCrearConMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCrearConMouseClicked
-        UserConference conference = new UserConference();
-       
-        GUIcreateConference crearConferencia = new GUIcreateConference(objConference);
+
+        GUIcreateConference crearConferencia = (GUIcreateConference) InternalFrameFactory.getInstance().getJInternalFrame("CC");
         try {
             crearConferencia.setMaximum(true);
         } catch (PropertyVetoException ex) {
@@ -508,18 +517,24 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
     }//GEN-LAST:event_lbCrearConMouseClicked
 
     private void lbCrearConMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCrearConMouseEntered
-        pnlBotonCrearCon.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14));
+         lbCrearCon.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14));
     }//GEN-LAST:event_lbCrearConMouseEntered
 
     private void lbCrearConMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCrearConMouseExited
-        pnlBotonCrearCon.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14));
+        lbCrearCon.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14));
     }//GEN-LAST:event_lbCrearConMouseExited
 
-    private void btnRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarActionPerformed
-       listConferences("");//muestra todas las listas
-        listArticles();
-    
-    }//GEN-LAST:event_btnRefrescarActionPerformed
+    private void lbMisArtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMisArtMouseClicked
+       
+    }//GEN-LAST:event_lbMisArtMouseClicked
+
+    private void lbMisArtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMisArtMouseEntered
+         lbMisArt.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14));
+    }//GEN-LAST:event_lbMisArtMouseEntered
+
+    private void lbMisArtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMisArtMouseExited
+        lbMisArt.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14));
+    }//GEN-LAST:event_lbMisArtMouseExited
     
     public void setUsuario(Usuario_Autorizado usuario) {
         this.usuario = usuario;
@@ -528,7 +543,6 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnRefrescar;
     private javax.swing.JDesktopPane dskpaneContenedor;
     private javax.swing.JDesktopPane dskpaneSubContenedorPrincipal;
     private javax.swing.JInternalFrame intfInicio;
@@ -536,13 +550,13 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
     private javax.swing.JLabel lbBtnBuscar;
     private javax.swing.JLabel lbCerrarSesion;
     private javax.swing.JLabel lbCrearCon;
-    private javax.swing.JLabel lbListadoAr;
-    private javax.swing.JLabel lbListadoCon;
+    private javax.swing.JLabel lbMisArt;
+    private javax.swing.JLabel lbMisCon;
     private javax.swing.JLabel lbeasyConference;
     private javax.swing.JPanel pnlBotonCrearCon;
+    private javax.swing.JPanel pnlBotonMisArt;
+    private javax.swing.JPanel pnlBotonMisCon;
     private javax.swing.JPanel pnlFondo;
-    private javax.swing.JPanel pnlListadoAr;
-    private javax.swing.JPanel pnlListadoCon;
     private javax.swing.JPanel pnlPrincipal;
     private javax.swing.JPanel pnlSuperior;
     private javax.swing.JTextField txtfBusqueda;
@@ -552,10 +566,10 @@ pnlListadoCon.removeAll();  // Limpiamos el contenido actual del panel de confer
     public void update(Object o) {
         switch (o.getClass().getSimpleName()){
             case "ConferenceService": 
-                listConferences(""); 
+                //listConferences(""); 
                 break;
             case "ArticleService":
-                listArticles();
+                //listArticles();
                 break;
         }
         this.repaint();

@@ -573,7 +573,7 @@ public class GUIcreateConference extends javax.swing.JInternalFrame {
             if (result != null) {
                 showMessage("Conferencia registrada exitosamente.");
                 GUIcontainer container = new GUIcontainer();
-                container.listConferences("");
+                //container.listConferences("");
             }
 
             this.dispose();

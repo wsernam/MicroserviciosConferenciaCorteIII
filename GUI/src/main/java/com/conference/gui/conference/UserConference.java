@@ -5,6 +5,7 @@
 package com.conference.gui.conference;
 
 import com.conference.gui.entities.Conference;
+import com.conference.gui.presentation.infra.Subject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -17,7 +18,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
  *
  * @author Personal
  */
-public class UserConference implements IUserRestConference {
+public class UserConference extends Subject implements IUserRestConference {
       private static final String USER_AGENT = "GUIConference";
     private final String urlSaveConference = "http://localhost:7777/api";
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -74,6 +75,7 @@ public class UserConference implements IUserRestConference {
             // Verificar y procesar la respuesta
             if (response.statusCode() == 200) {
                 savedConference = objectMapper.readValue(response.body(), Conference.class);
+                this.notifyAllObserves();
             } else {
                 System.out.println("Error al guardar la Conferencia: " + response.statusCode());
             }
