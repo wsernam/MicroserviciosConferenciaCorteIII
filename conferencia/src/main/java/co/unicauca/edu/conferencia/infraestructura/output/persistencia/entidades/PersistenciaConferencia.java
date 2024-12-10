@@ -17,8 +17,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 
-
-
 @Entity
 @Table(name = "conferencias")
 public class PersistenciaConferencia {

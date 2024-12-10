@@ -2,11 +2,12 @@ package co.unicauca.edu.conferencia.aplicación.puertos.output;
 
 import java.util.List;
 
-import co.unicauca.edu.conferencia.infraestructura.output.persistencia.entidades.PersistenciaConferencia;
+import co.unicauca.edu.conferencia.dominio.modelos.Conferencia;
+
 
 public interface PuertoGestionConferenciaGateway {
-    public List<PersistenciaConferencia> getConferencias();
-    public PersistenciaConferencia setConferencia(PersistenciaConferencia prmConferencia);
-    public boolean existeConferencia(int prmId);
+    public List<Conferencia> getConferencias();
+    public Conferencia setConferencia(Conferencia prmConferencia);
+    public boolean verifyById(int prmId);
     
 }

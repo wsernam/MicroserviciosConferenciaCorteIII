@@ -44,7 +44,7 @@ private final ModelMapper modelMapper;
     }
 
     @Override
-    public boolean existeConferencia(int prmId) {
+    public boolean verifyById(int prmId) {
        return this.repositorio.existsById(prmId);
     }
     

@@ -42,45 +42,51 @@ public class Conferencia {
 
 
 
-    public void setArticulosAceptados(List<Integer> articulosAceptados) {
-        this.articulosAceptados = articulosAceptados;
+
+
+    public Conferencia() {
     }
 
 
 
-    public boolean ValidarFechas(Fecha fechaInicio, Fecha fechaRecepcionArticulos, Fecha fechaEvaluacion) {
+
+
+
+
+
+    public String ValidarFechas() {
         // Validar que la fecha de inicio de la conferencia sea futura
-        if (!fechaInicio.esMayorAFechaActual()) {
-           // throw new IllegalArgumentException("La fecha de inicio debe ser mayor a la fecha actual");
-            return false;
+        if (!this.fechaInicio.esMayorAFechaActual()) {
+           
+            return "La fecha de inicio debe ser mayor a la fecha actual";
         }
 
         // La fecha de recepción de artículos debe ser antes de la conferencia
-        if (fechaRecepcionArticulos.esDespuesDe(fechaInicio)) {
-           // throw new IllegalArgumentException("La fecha de recepción de artículos debe ser antes de la conferencia");
-           return false;
+        if (this.fechaFinRecepcion.esDespuesDe(fechaInicio)) {
+           
+           return "La fecha de recepción de artículos debe ser antes de la conferencia";
         }
 
         // La fecha de evaluación debe ser válida en el rango
-        if (!fechaEvaluacion.estaEnRango(fechaRecepcionArticulos, fechaInicio)) {
-            //throw new IllegalArgumentException("La fecha de evaluación debe ser después de la recepción y antes de la fecha de inicio de la conferencia");
-            return false;
+        if (!this.fechaFinEvaluacion.estaEnRango(this.fechaFinRecepcion, fechaInicio)) {
+            
+            return "La fecha de evaluación debe ser después de la recepción y antes de la fecha de inicio de la conferencia";
         }
-        return true;
+        return "ok";
     }
 
-    public boolean MaxArticulosAceptados(int numMaxAceptados){
-        if(articulosAceptados.size()>numMaxAceptacion){
-            return false;
+    public String MaxArticulosAceptados(){
+        if(this.articulosAceptados.size()>this.numMaxAceptacion){
+            return "No es posible recibir un nuevo articulo";
         }
-        return true;    
+        return "ok";    
     }    
 
-    public boolean MaxArticulosRecividos(int numMaxRecividos){
-        if(articulosRecividos.size()>numMaxRecepcion){
-            return false;
+    public String MaxArticulosRecividos(int numMaxRecividos){
+        if(this.articulosRecividos.size()>this.numMaxRecepcion){
+            return "No es posible aceptar mas articulos";
         }
-        return true;    
+        return "ok";    
     }    
     
 }
