@@ -240,6 +240,8 @@ public class GUIcontainer extends javax.swing.JFrame {
         lbMisCon = new javax.swing.JLabel();
         pnlBotonMisArt = new javax.swing.JPanel();
         lbMisArt = new javax.swing.JLabel();
+        pnlBotonAsignarEvaluador = new javax.swing.JPanel();
+        jLabelAsignar = new javax.swing.JLabel();
         lbBienvenido = new javax.swing.JLabel();
         txtfBusqueda = new javax.swing.JTextField();
         lbBtnBuscar = new javax.swing.JLabel();
@@ -322,45 +324,59 @@ public class GUIcontainer extends javax.swing.JFrame {
         pnlBotonMisArt.setLayout(new java.awt.BorderLayout());
 
         lbMisArt.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        lbMisArt.setForeground(new java.awt.Color(255, 255, 255));
+        lbMisArt.setForeground(new java.awt.Color(245, 245, 245));
         lbMisArt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbMisArt.setText("Mis articulos");
-        lbMisArt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lbMisArt.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbMisArtMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lbMisArtMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lbMisArtMouseExited(evt);
-            }
-        });
+        lbMisArt.setText("Mis Articulos");
         pnlBotonMisArt.add(lbMisArt, java.awt.BorderLayout.CENTER);
+
+        pnlBotonAsignarEvaluador.setBackground(new java.awt.Color(129, 218, 199));
+
+        jLabelAsignar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabelAsignar.setForeground(new java.awt.Color(245, 245, 245));
+        jLabelAsignar.setText("Asignar Evaluadores");
+
+        javax.swing.GroupLayout pnlBotonAsignarEvaluadorLayout = new javax.swing.GroupLayout(pnlBotonAsignarEvaluador);
+        pnlBotonAsignarEvaluador.setLayout(pnlBotonAsignarEvaluadorLayout);
+        pnlBotonAsignarEvaluadorLayout.setHorizontalGroup(
+            pnlBotonAsignarEvaluadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBotonAsignarEvaluadorLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabelAsignar)
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+        pnlBotonAsignarEvaluadorLayout.setVerticalGroup(
+            pnlBotonAsignarEvaluadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBotonAsignarEvaluadorLayout.createSequentialGroup()
+                .addContainerGap(39, Short.MAX_VALUE)
+                .addComponent(jLabelAsignar)
+                .addGap(37, 37, 37))
+        );
 
         javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
         pnlPrincipal.setLayout(pnlPrincipalLayout);
         pnlPrincipalLayout.setHorizontalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                .addGap(274, 274, 274)
+                .addGap(102, 102, 102)
                 .addComponent(pnlBotonMisArt, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pnlBotonMisCon, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(pnlBotonCrearCon, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(pnlBotonAsignarEvaluador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         pnlPrincipalLayout.setVerticalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                .addGap(67, 67, 67)
+                .addGap(86, 86, 86)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pnlBotonAsignarEvaluador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pnlBotonMisArt, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pnlBotonMisCon, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pnlBotonCrearCon, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
 
         dskpaneSubContenedorPrincipal.add(pnlPrincipal, java.awt.BorderLayout.CENTER);
@@ -523,18 +539,6 @@ public class GUIcontainer extends javax.swing.JFrame {
     private void lbCrearConMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCrearConMouseExited
         lbCrearCon.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14));
     }//GEN-LAST:event_lbCrearConMouseExited
-
-    private void lbMisArtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMisArtMouseClicked
-       
-    }//GEN-LAST:event_lbMisArtMouseClicked
-
-    private void lbMisArtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMisArtMouseEntered
-         lbMisArt.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14));
-    }//GEN-LAST:event_lbMisArtMouseEntered
-
-    private void lbMisArtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMisArtMouseExited
-        lbMisArt.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14));
-    }//GEN-LAST:event_lbMisArtMouseExited
     
     public void setUsuario(Usuario_Autorizado usuario) {
         this.usuario = usuario;
@@ -546,6 +550,7 @@ public class GUIcontainer extends javax.swing.JFrame {
     private javax.swing.JDesktopPane dskpaneContenedor;
     private javax.swing.JDesktopPane dskpaneSubContenedorPrincipal;
     private javax.swing.JInternalFrame intfInicio;
+    private javax.swing.JLabel jLabelAsignar;
     private javax.swing.JLabel lbBienvenido;
     private javax.swing.JLabel lbBtnBuscar;
     private javax.swing.JLabel lbCerrarSesion;
@@ -553,6 +558,7 @@ public class GUIcontainer extends javax.swing.JFrame {
     private javax.swing.JLabel lbMisArt;
     private javax.swing.JLabel lbMisCon;
     private javax.swing.JLabel lbeasyConference;
+    private javax.swing.JPanel pnlBotonAsignarEvaluador;
     private javax.swing.JPanel pnlBotonCrearCon;
     private javax.swing.JPanel pnlBotonMisArt;
     private javax.swing.JPanel pnlBotonMisCon;
