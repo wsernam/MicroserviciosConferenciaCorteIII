@@ -55,7 +55,7 @@ public class ArticuloServiceImplTest {
 
         // Crear el Articulo que se va a retornar del repositorio
         Articulo articuloEntity = new Articulo();
-        articuloEntity.setIdArticulo(1);
+        articuloEntity.setId(1);
         articuloEntity.setNombre("Título del Artículo");
         articuloEntity.setAutores(new ArrayList<>(List.of("Autor 1", "Autor 2")));
         articuloEntity.setResumen("Este es un resumen del artículo.");
@@ -75,7 +75,7 @@ public class ArticuloServiceImplTest {
 
         // Verificar que se envió el evento a RabbitMQ
         ArticuloCreadoEvent eventoEsperado = new ArticuloCreadoEvent(
-                articuloEntity.getIdArticulo(),
+                articuloEntity.getId(),
                 articuloEntity.getNombre(),
                 articuloEntity.getAutores(),
                 articuloEntity.getResumen(),
@@ -92,7 +92,7 @@ public class ArticuloServiceImplTest {
     void findById() {
         Integer idArticulo = 1;
         Articulo articulo = new Articulo();
-        articulo.setIdArticulo(idArticulo);
+        articulo.setId(idArticulo);
         articulo.setNombre("Articulo Test");
 
         ArticuloDTO articuloDTO = new ArticuloDTO();

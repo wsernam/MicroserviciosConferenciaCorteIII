@@ -3,6 +3,7 @@ package co.unicauca.edu.articulo_microservicio;
 import co.unicauca.edu.articulo_microservicio.DTO.CRUDArticulosDTO.ArticuloDTO;
 import co.unicauca.edu.articulo_microservicio.api.controllers.ArticuloController;
 import co.unicauca.edu.articulo_microservicio.domain.services.IArticuloService;
+import co.unicauca.edu.articulo_microservicio.domain.services.ICalificacionService;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,6 +24,7 @@ public class ArticuloControllerTest {
 
     @Mock
     private IArticuloService articuloService;
+    private ICalificacionService calificacionService;
 
     @InjectMocks
     private ArticuloController articuloController;

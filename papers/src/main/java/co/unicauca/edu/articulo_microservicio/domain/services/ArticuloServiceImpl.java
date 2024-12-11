@@ -70,7 +70,7 @@ public class ArticuloServiceImpl implements IArticuloService {
         Articulo savedArticulo = this.servicioAccesoBaseDatos.save(articuloEntity);
         ArticuloDTO articuloDTO = modelMapper.map(savedArticulo, ArticuloDTO.class);
         
-        ArticuloCreadoEvent evento = new ArticuloCreadoEvent(savedArticulo.getIdArticulo(), savedArticulo.getNombre(), savedArticulo.getAutores(), savedArticulo.getResumen(), savedArticulo.getPalabrasClaves());
+        ArticuloCreadoEvent evento = new ArticuloCreadoEvent(savedArticulo.getId(), savedArticulo.getNombre(), savedArticulo.getAutores(), savedArticulo.getResumen(), savedArticulo.getPalabrasClaves());
         enviarEventoArticuloCreado(evento);
         
         return articuloDTO;
@@ -80,7 +80,7 @@ public class ArticuloServiceImpl implements IArticuloService {
     public ArticuloDTO update(Integer id, ArticuloDTO articulo) {
         if (servicioAccesoBaseDatos.existsById(id)) {
             Articulo articuloEntity = this.modelMapper.map(articulo, Articulo.class);
-            articuloEntity.setIdArticulo(id);
+            articuloEntity.setId(id);
             Articulo updatedArticulo = this.servicioAccesoBaseDatos.save(articuloEntity);
             return this.modelMapper.map(updatedArticulo, ArticuloDTO.class);
         }

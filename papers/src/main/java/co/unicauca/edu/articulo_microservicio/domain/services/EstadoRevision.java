@@ -4,17 +4,15 @@
  */
 package co.unicauca.edu.articulo_microservicio.domain.services;
 
-import co.unicauca.edu.articulo_microservicio.domain.services.estados.Resultado;
 import co.unicauca.edu.articulo_microservicio.domain.models.Articulo;
 
 /**
  *
  * @author wsern
  */
-public interface EstadoArticulo {
-    Resultado enviarAEvaluacion(Articulo articulo);
-    Resultado formularConObservaciones(Articulo articulo);
-    Resultado aprobar(Articulo articulo);
-    Resultado rechazar(Articulo articulo);
+public interface EstadoRevision {
+    void iniciarRevision(Articulo articulo);
+    void completarRevision(Articulo articulo);
+    void revisarEstado(Articulo articulo);
 }
 
