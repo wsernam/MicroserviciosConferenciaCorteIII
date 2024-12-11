@@ -4,8 +4,9 @@
  */
 package com.conference.gui.presentation;
 
+import com.conference.gui.clients.IRestConference;
 import com.conference.gui.conference.UserConference;
-import com.conference.gui.entities.Conference;
+import com.conference.gui.entities.Conferencia;
 import com.conference.gui.presentation.infra.Observer;
 import java.util.List;
 
@@ -18,13 +19,13 @@ public class GUImisConferencias extends javax.swing.JInternalFrame implements Ob
     /**
      * Creates new form GUImisConferencias
      */
-    private UserConference conferenceClient; 
-    private List<Conference> conferencias;
+    private IRestConference conferenceClient; 
+    private List<Conferencia> conferencias;
     public GUImisConferencias() {
         initComponents();
     }
     
-    public GUImisConferencias(UserConference conferenceClient) {
+    public GUImisConferencias(IRestConference conferenceClient) {
         this.conferenceClient = conferenceClient;
         initComponents();
         buildResultPanels();
@@ -93,8 +94,8 @@ public class GUImisConferencias extends javax.swing.JInternalFrame implements Ob
     }
 
     private void buildResultPanels(){
-        conferencias = conferenceClient.getConferencias();
-        for(Conference c: conferencias){
+        conferencias = conferenceClient.getConferences("token");
+        for(Conferencia c: conferencias){
             pnlConferenceInfo infoConference = new pnlConferenceInfo(c); 
             pnlConferencias.add(infoConference);
         }

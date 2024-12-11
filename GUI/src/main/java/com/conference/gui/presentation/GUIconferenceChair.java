@@ -4,7 +4,7 @@
  */
 package com.conference.gui.presentation;
 
-import com.conference.gui.entities.Conference;
+import com.conference.gui.entities.Conferencia;
 
 /**
  *
@@ -15,8 +15,8 @@ public class GUIconferenceChair extends javax.swing.JInternalFrame {
     /**
      * Creates new form GUIconferenceChair
      */
-    private Conference conference;
-    public GUIconferenceChair(Conference c) {
+    private Conferencia conference;
+    public GUIconferenceChair(Conferencia c) {
         this.conference = c;
         initComponents();
         setLabels();

@@ -2,10 +2,9 @@
 package com.conference.gui.presentation;
 
 
-import com.conference.gui.conference.IUserRestConference;
-import com.conference.gui.entities.Conference;
-import com.conference.gui.entities.Usuario;
-import com.conference.gui.entities.Usuario_Autorizado;
+import com.conference.gui.clients.IRestConference;
+import com.conference.gui.entities.Conferencia;
+import com.conference.gui.entities.Fecha;
 import com.conference.gui.presentation.infra.ApplicationContext;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -43,11 +42,11 @@ public class GUIcreateConference extends javax.swing.JInternalFrame {
     /**
      * Creates new form GUIcreateConference
      */
-       private IUserRestConference conferenceService;
+       private IRestConference conferenceService;
       
 
     
-    public GUIcreateConference(IUserRestConference con) {
+    public GUIcreateConference(IRestConference con) {
         this.conferenceService = con;
        
         initComponents();
@@ -568,10 +567,15 @@ public class GUIcreateConference extends javax.swing.JInternalFrame {
                 showMessage("El número de artículos aceptados debe ser menor que el número total de artículos.");
                 return;
             }
-      
-            // Si todas las validaciones pasan, crear el objeto Conference con los datos que POR AHORA necesitamos
-            Conference conferencia = new Conference(organizador, nombre, temas,  entidadOrganizadora, pais,  estado,  ciudad,  direccion,  fechaFinLD,  fechaInicioLD,  fechaFinRecepcionLD,  fechaFinEvaluacionLD, numMaxArt,  numMaxArtAcep,  calMinima );
-            Conference result = conferenceService.setConferencia(conferencia);
+
+            Fecha fechaInicioCon = new Fecha(fechaInicioLD);
+            Fecha fechaFinCon = new Fecha(fechaFinLD);
+            Fecha fechaPlazoMaxRep = new Fecha(fechaFinRecepcionLD);
+            Fecha fechaPlazoMaxEva = new Fecha(fechaFinEvaluacionLD); 
+
+            Conferencia conferencia = new Conferencia (organizador, nombre, temas,  entidadOrganizadora, pais,  estado,  ciudad,  direccion,  fechaFinCon,  fechaInicioCon,  fechaPlazoMaxRep,  fechaPlazoMaxEva, numMaxArt,  numMaxArtAcep,  calMinima );
+            Conferencia result = conferenceService.createConference(conferencia);
+
 
             // Guardar la conferencia o realizar la acción que corresponda
             if (result != null) {

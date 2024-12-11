@@ -5,6 +5,7 @@
 package com.conference.gui.presentation;
 
 import com.conference.gui.article.Article;
+import com.conference.gui.clients.IRestArticle;
 import com.conference.gui.entities.Articulo;
 import com.conference.gui.presentation.infra.Observer;
 import java.util.List;
@@ -19,14 +20,14 @@ public class GUImisArticulos extends javax.swing.JInternalFrame implements Obser
      * Creates new form GUImisArticulos
      */
     
-    private Article articleClient;
+    private IRestArticle articleClient;
     private List<Articulo> articulos; 
     
     public GUImisArticulos() {
         initComponents();
     }
     
-    public GUImisArticulos(Article articleClient) {
+    public GUImisArticulos(IRestArticle articleClient) {
         this.articleClient = articleClient;
         initComponents();
     }

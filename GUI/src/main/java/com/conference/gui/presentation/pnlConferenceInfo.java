@@ -4,7 +4,7 @@
  */
 package com.conference.gui.presentation;
 
-import com.conference.gui.entities.Conference;
+import com.conference.gui.entities.Conferencia;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -19,8 +19,8 @@ public class pnlConferenceInfo extends javax.swing.JPanel {
     /**
      * Creates new form pnlConferenceInfo
      */
-    private Conference conference;
-    public pnlConferenceInfo(Conference c) {
+    private Conferencia conference;
+    public pnlConferenceInfo(Conferencia c) {
         this.conference = c;
         initComponents();
         lbInfoConferencia.setText(conference.toStringBasic());

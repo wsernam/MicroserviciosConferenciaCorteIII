@@ -4,6 +4,7 @@
  */
 package com.conference.gui.presentation.infra;
 
+import com.conference.gui.entities.Usuario_Autorizado;
 import com.conference.gui.presentation.GUIcreateArticle;
 import com.conference.gui.presentation.GUIcreateConference;
 import com.conference.gui.presentation.GUImisArticulos;
@@ -19,7 +20,9 @@ public class InternalFrameFactory {
    private GUImisArticulos misArticulos;
    private GUImisConferencias misConferencias; 
    private GUIcreateConference createConference; 
-
+   private Usuario_Autorizado usuario; 
+   
+ 
    
    public static InternalFrameFactory getInstance(){
         if(instance==null){

@@ -4,9 +4,10 @@
  */
 package com.conference.gui.presentation.infra;
 
-import com.conference.gui.article.Article;
+import com.conference.gui.clients.ArticleClient;
+import com.conference.gui.clients.ConferenceClient;
 import com.conference.gui.clients.UserClient;
-import com.conference.gui.conference.UserConference;
+import com.conference.gui.entities.Usuario_Autorizado;
 
 /**
  *
@@ -14,13 +15,18 @@ import com.conference.gui.conference.UserConference;
  */
 public class RestClientManager {
     private static UserClient userClient;
-    private static UserConference conferenceClient;
-    private static Article articleClient;
+    private static ConferenceClient conferenceClient;
+    private static ArticleClient articleClient;
     
+    private static Usuario_Autorizado usuario; 
     
-    public static UserConference getConferenceClient(){
+    public static void createClientManager (Usuario_Autorizado us){
+        usuario = us;
+    }
+    
+    public static ConferenceClient getConferenceClient(){
         if(conferenceClient ==null){
-            conferenceClient = new UserConference();
+            conferenceClient = new ConferenceClient(usuario);
             conferenceClient.addObserver((Observer) InternalFrameFactory.getInstance().getJInternalFrame("MC"));
         }
         return conferenceClient; 
@@ -33,9 +39,9 @@ public class RestClientManager {
         return userClient; 
     }
     
-    public static Article getArticleClient(){
+    public static ArticleClient getArticleClient(){
         if(articleClient==null){
-            articleClient = new Article(); 
+            articleClient = new ArticleClient(usuario); 
             articleClient.addObserver((Observer) InternalFrameFactory.getInstance().getJInternalFrame("MA"));
         }
         return articleClient; 

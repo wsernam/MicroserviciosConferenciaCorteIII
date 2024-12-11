@@ -3,7 +3,7 @@ package com.conference.gui.presentation;
 import com.conference.gui.article.Article;
 import com.conference.gui.article.IArticleRest;
 import com.conference.gui.entities.Articulo;
-import com.conference.gui.entities.Conference;
+import com.conference.gui.entities.Conferencia;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
@@ -22,7 +22,7 @@ import javax.swing.JPanel;
  */
 public class GUIcreateArticle extends javax.swing.JInternalFrame {
 
-    private Conference conference;
+    private Conferencia conference;
     private IArticleRest objServicioArticulos;
     private String lastDialogMessage;
 
@@ -39,7 +39,7 @@ public class GUIcreateArticle extends javax.swing.JInternalFrame {
         return pnlAutores;
     }
 
-    public GUIcreateArticle(IArticleRest as, Conference co) {
+    public GUIcreateArticle(IArticleRest as, Conferencia co) {
         this.objServicioArticulos = as;
         this.conference = co;
         listadoAutores = new ArrayList<>();

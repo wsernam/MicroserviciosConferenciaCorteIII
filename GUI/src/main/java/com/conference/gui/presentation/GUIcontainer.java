@@ -5,7 +5,7 @@ import com.conference.gui.article.Article;
 import com.conference.gui.clients.UserClient;
 import com.conference.gui.conference.UserConference;
 import com.conference.gui.entities.Articulo;
-import com.conference.gui.entities.Conference;
+import com.conference.gui.entities.Conferencia;
 import com.conference.gui.entities.Usuario;
 import com.conference.gui.entities.Usuario_Autorizado;
 import com.conference.gui.presentation.infra.ApplicationContext;
@@ -51,6 +51,7 @@ public class GUIcontainer extends javax.swing.JFrame {
     public GUIcontainer(Usuario_Autorizado us) {
         this.usuario = us;
         initComponents();
+        RestClientManager.createClientManager(us);
         //listConferences("");//muestra todas las listas
         //listArticles();
     }
@@ -208,8 +209,8 @@ public class GUIcontainer extends javax.swing.JFrame {
     pnlListadoAr.repaint();
 }
 */
-   public List<Conference> searchConferences(String searchText){
-        List<Conference> conferences = RestClientManager.getConferenceClient().getConferencias();
+   public List<Conferencia> searchConferences(String searchText){
+        List<Conferencia> conferences = RestClientManager.getConferenceClient().getConferences(usuario.getToken());
         // Filtramos la lista de conferencias si se proporciona un texto de búsqueda
         if (searchText != null && !searchText.isEmpty()) {
             conferences = conferences.stream()
@@ -487,7 +488,7 @@ public class GUIcontainer extends javax.swing.JFrame {
                                           
         String searchText = txtfBusqueda.getText().trim();  // Obtener texto de búsqueda sin modificar el caso
         //listConferences(searchText);  // Llamar a la función para listar conferencias con el texto de búsqueda
-        List<Conference> conferences = searchConferences(searchText); 
+        List<Conferencia> conferences = searchConferences(searchText); 
         
         if(conferences.isEmpty()){
             pnlNoConferences panelNoConferencias = new pnlNoConferences(); 
@@ -523,7 +524,15 @@ public class GUIcontainer extends javax.swing.JFrame {
     }//GEN-LAST:event_lbCerrarSesionMouseClicked
 
     private void lbMisConMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMisConMouseClicked
-        
+        GUImisConferencias misConferencias = (GUImisConferencias) InternalFrameFactory.getInstance().getJInternalFrame("MC");
+        try {
+            misConferencias.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(GUIcontainer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        dskpaneContenedor.add(misConferencias, java.awt.BorderLayout.CENTER);
+        misConferencias.setVisible(true);
     }//GEN-LAST:event_lbMisConMouseClicked
 
     private void lbMisConMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMisConMouseEntered
@@ -555,9 +564,17 @@ public class GUIcontainer extends javax.swing.JFrame {
         lbCrearCon.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14));
     }//GEN-LAST:event_lbCrearConMouseExited
 
-    private void jLabelAsignarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAsignarMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelAsignarMouseClicked
+    private void lbMisArtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMisArtMouseClicked
+       GUImisArticulos misArticulos = (GUImisArticulos) InternalFrameFactory.getInstance().getJInternalFrame("MA");
+        try {
+            misArticulos.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(GUIcontainer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        dskpaneContenedor.add(misArticulos, java.awt.BorderLayout.CENTER);
+        misArticulos.setVisible(true);
+    }//GEN-LAST:event_lbMisArtMouseClicked
 
     private void jLabelAsignarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAsignarMouseEntered
         jLabelAsignar.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14));

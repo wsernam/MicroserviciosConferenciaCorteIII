@@ -5,7 +5,7 @@
 package com.conference.gui.presentation;
 
 import com.conference.gui.entities.Articulo;
-import com.conference.gui.entities.Conference;
+import com.conference.gui.entities.Conferencia;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;

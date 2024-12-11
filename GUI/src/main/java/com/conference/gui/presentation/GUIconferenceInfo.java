@@ -1,6 +1,6 @@
 package com.conference.gui.presentation;
 
-import com.conference.gui.entities.Conference;
+import com.conference.gui.entities.Conferencia;
 import com.conference.gui.entities.Usuario_Autorizado;
 import com.conference.gui.presentation.infra.ApplicationContext;
 
@@ -13,9 +13,12 @@ public class GUIconferenceInfo extends javax.swing.JInternalFrame {
     /**
      * Creates new form GUIconferenceInfo
      */
-    private Conference conference;
 
-    public GUIconferenceInfo(Conference c) {
+    private Conferencia conference;
+
+
+    public GUIconferenceInfo(Conferencia c) {
+
         this.conference = c;
         initComponents();
         setLabels();

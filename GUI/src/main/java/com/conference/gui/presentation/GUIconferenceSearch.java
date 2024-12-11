@@ -4,7 +4,7 @@
  */
 package com.conference.gui.presentation;
 
-import com.conference.gui.entities.Conference;
+import com.conference.gui.entities.Conferencia;
 import java.util.List;
 
 /**
@@ -17,16 +17,16 @@ public class GUIconferenceSearch extends javax.swing.JInternalFrame {
      * Creates new form GUIconferenceResearch
      */
     
-    private List<Conference> searchResults;
+    private List<Conferencia> searchResults;
     private List<pnlConferenceInfo> searchResultsPanels; 
-    public GUIconferenceSearch(List<Conference> searchResults) {
+    public GUIconferenceSearch(List<Conferencia> searchResults) {
         this.searchResults = searchResults;
         initComponents();
     }
 
     public void buildResultPanels(){
         
-        for(Conference c: searchResults){
+        for(Conferencia c: searchResults){
             pnlConferenceInfo infoConference = new pnlConferenceInfo(c); 
             searchResultsPanels.add(infoConference);
             pnlResultados.add(infoConference);
