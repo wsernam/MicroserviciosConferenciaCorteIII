@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)  // O cualquier otra estrategia de generación
-    private int id;
-    private String name;
-    private String email;
+    private int idUsuario;
+    private String nombreUsuario;
+    private String correoUsuario;
 }

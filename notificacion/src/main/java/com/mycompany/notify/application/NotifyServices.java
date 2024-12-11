@@ -62,9 +62,9 @@ public class NotifyServices {
         var usuario = usuarioContexto.extraerUsuarioDesdeCabeceras(request);
 
         // Construimos la notificación
-        String destinatario = usuario.getEmail();
+        String destinatario = usuario.getCorreoUsuario();
         String asunto = "Notificación personalizada desde Notify-Service";
-        String cuerpo = String.format("Hola %s, tienes un nuevo mensaje: %s", usuario.getName(), mensaje);
+        String cuerpo = String.format("Hola %s, tienes un nuevo mensaje: %s", usuario.getNombreUsuario(), mensaje);
 
         // Enviamos la notificación
         enviarNotificacion(destinatario, asunto, cuerpo);

@@ -106,5 +106,22 @@ public class ConfigRabbitMQ {
                              .to(usuarioExchange)
                              .with("articulo.asignado");
     }
-}
+    
+    @Bean
+    public Queue paperStateChangedQueue() {
+        return new Queue("paper-state-changed-queue", true);
+    }
 
+    @Bean
+    public DirectExchange paperExchange() {
+        return new DirectExchange("paper-exchange");
+    }
+
+    @Bean
+    public Binding paperStateChangedBinding(@Qualifier("paperStateChangedQueue") Queue paperStateChangedQueue,
+                                            DirectExchange paperExchange) {
+        return BindingBuilder.bind(paperStateChangedQueue)
+                             .to(paperExchange)
+                             .with("paper.state.changed");
+    }
+}
