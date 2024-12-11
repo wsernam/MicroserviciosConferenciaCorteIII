@@ -50,5 +50,13 @@ private  ModelMapper modelMapper;
     public boolean verifyById(int prmId) {
        return this.repositorio.existsById(prmId);
     }
+
+    @Override
+    public Conferencia EncontrarPorId(Integer prmId) {
+        PersistenciaConferencia conferenciaEncontrada= this.repositorio.findById(prmId).orElse(null);
+        return this.modelMapper.map(conferenciaEncontrada, Conferencia.class);
+    }
+
+  
     
 }

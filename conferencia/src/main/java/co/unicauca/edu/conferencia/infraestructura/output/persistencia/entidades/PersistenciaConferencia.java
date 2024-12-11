@@ -2,13 +2,16 @@ package co.unicauca.edu.conferencia.infraestructura.output.persistencia.entidade
 
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
-
+import co.unicauca.edu.conferencia.dominio.modelos.Articulo;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -24,7 +27,7 @@ import lombok.Setter;
 public class PersistenciaConferencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     public String nombre;
     public String temas;
@@ -41,7 +44,10 @@ public class PersistenciaConferencia {
     public int numMaxAceptacion;
     public float calificacionMinAceptable;
     public List<Integer> articulosAceptados;
-    public List<Integer> articulosRecibidos;
+
+    @OneToMany(mappedBy = "conferencia", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Articulo> articulosRecibidos = new ArrayList<>();
+
     private List<Integer> organizadores;
     private List<Integer> autores;
     private List<Integer> evaluadores;

@@ -24,7 +24,7 @@ public class ArticuloDTO {
     private ArrayList<String> autores;
     private String resumen;
     private String palabrasClaves;
-    private List<ConferenciaDTO> objConferencias;
+    private Long idConferencia;
     // Agregar lista de calificaciones
     
     public ArticuloDTO()

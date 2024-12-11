@@ -28,7 +28,7 @@ public class AdaptadorGestionConferencias implements PuertoGestionConferencia {
 
       String resultado=prmConferencia.validarFechas();
       if(!resultado.equals("ok")){
-        return this.mensaje.prepararRespuestaFallida(resultado);
+        return (Conferencia) this.mensaje.prepararRespuestaFallida(resultado);
         
       }else{
        return this.servicioRepositorio.setConferencia(prmConferencia);
@@ -39,6 +39,12 @@ public class AdaptadorGestionConferencias implements PuertoGestionConferencia {
     @Override
     public boolean existeConferencia(int prmId) {
        return this.servicioRepositorio.verifyById(prmId);
+    }
+
+    @Override
+    public Integer AgragarArticulo(Integer prmArticulId) {
+      // TODO Auto-generated method stub
+      throw new UnsupportedOperationException("Unimplemented method 'AgragarArticulo'");
     }
     
     

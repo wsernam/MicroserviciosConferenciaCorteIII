@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.mapstruct.Mapper;
 
+import co.unicauca.edu.conferencia.dominio.modelos.Articulo;
 import co.unicauca.edu.conferencia.dominio.modelos.Conferencia;
+import co.unicauca.edu.conferencia.infraestructura.input.DTOs.DTOArticulo;
 import co.unicauca.edu.conferencia.infraestructura.input.DTOs.DTOPeticion;
 import co.unicauca.edu.conferencia.infraestructura.input.DTOs.DTORespuesta;
 
@@ -49,6 +51,15 @@ public interface ConferenciaMapperInfrastructuraDominio {
      * @return La lista de objetos ConferenciaDTORespuesta que representan la respuesta para enviar al cliente.
      */
     List<DTORespuesta> mappearDeConferenciasARespuesta(List<Conferencia> Conferencias);
+
+
+    Articulo mappearDeDTOArticuloAArticulo(DTOArticulo articuloDTO);
+
+   
+     
+    
+
+
 }
 
 

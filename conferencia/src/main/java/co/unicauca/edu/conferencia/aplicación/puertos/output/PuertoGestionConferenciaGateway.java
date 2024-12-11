@@ -9,5 +9,6 @@ public interface PuertoGestionConferenciaGateway {
     public List<Conferencia> getConferencias();
     public Conferencia setConferencia(Conferencia prmConferencia);
     public boolean verifyById(int prmId);
+    public Conferencia EncontrarPorId(Integer prmId);
     
 }

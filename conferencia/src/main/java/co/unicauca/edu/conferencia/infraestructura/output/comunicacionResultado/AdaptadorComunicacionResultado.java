@@ -12,8 +12,9 @@ import co.unicauca.edu.conferencia.dominio.modelos.Conferencia;
 public class AdaptadorComunicacionResultado implements PuertoComunicacionResultado {
     
     @Override
-    public Conferencia prepararRespuestaFallida(String error) {
+    public Object prepararRespuestaFallida(String error) {
         throw new ResponseStatusException(HttpStatus.CONFLICT, error);//Se puede lanzar un BAD_REQUEST
     }
+   
     
 }

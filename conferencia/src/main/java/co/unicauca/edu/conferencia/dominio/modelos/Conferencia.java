@@ -1,10 +1,11 @@
 package co.unicauca.edu.conferencia.dominio.modelos;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Conferencia {
-    public Long id;
+    public Integer id;
     public String nombre;
     public String temas;
     public String entidadOrganizadora;
@@ -19,13 +20,14 @@ public class Conferencia {
     public int numMaxRecepcion;
     public int numMaxAceptacion;
     public float calificacionMinAceptable;
-    public List<Integer> articulosAceptados;
-    public List<Integer> articulosRecibidos;
+    public List<Articulo> articulosAceptados;
+    public List<Articulo> articulosRecibidos;
 
-    public Conferencia(String nombre, String temas, String entidadOrganizadora, String pais, String estado,
-                        String ciudad, String direccion, LocalDate fechaFin, LocalDate fechaInicio, 
-                        LocalDate fechaFinRecepcion, LocalDate fechaFinEvaluacion, int numMaxRecepcion, 
-                        int numMaxAceptacion, float calificacionMinAceptable) {
+    
+    public Conferencia(Integer id, String nombre, String temas, String entidadOrganizadora, String pais, String estado,
+            String ciudad, String direccion, LocalDate fechaFin, LocalDate fechaInicio, LocalDate fechaFinRecepcion,
+            LocalDate fechaFinEvaluacion, int numMaxRecepcion, int numMaxAceptacion, float calificacionMinAceptable) {
+        this.id = id;
         this.nombre = nombre;
         this.temas = temas;
         this.entidadOrganizadora = entidadOrganizadora;
@@ -40,6 +42,8 @@ public class Conferencia {
         this.numMaxRecepcion = numMaxRecepcion;
         this.numMaxAceptacion = numMaxAceptacion;
         this.calificacionMinAceptable = calificacionMinAceptable;
+        this.articulosAceptados = new ArrayList<>();
+        this.articulosRecibidos = new ArrayList<>();
     }
 
     public Conferencia() {
@@ -65,14 +69,14 @@ public class Conferencia {
     }
 
     public String maxArticulosAceptados() {
-        if (articulosAceptados.size() > numMaxAceptacion) {
+        if (articulosAceptados.size() >= numMaxAceptacion) {
             return "No es posible aceptar más artículos";
         }
         return "ok";
     }
 
     public String maxArticulosRecibidos() {
-        if (articulosRecibidos.size() > numMaxRecepcion) {
+        if (articulosRecibidos.size() >= numMaxRecepcion) {
             return "No es posible recibir más artículos";
         }
         return "ok";
@@ -152,11 +156,11 @@ public class Conferencia {
     public void setFechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -200,20 +204,20 @@ public class Conferencia {
         this.calificacionMinAceptable = calificacionMinAceptable;
     }
 
-    public List<Integer> getArticulosAceptados() {
-        return articulosAceptados;
+    public List<Articulo> getArticulosAceptados() {
+        return this.articulosAceptados;
     }
 
-    public void setArticulosAceptados(List<Integer> articulosAceptados) {
-        this.articulosAceptados = articulosAceptados;
+    public void setArticulosAceptados(Articulo articulosAceptados) {
+        this.articulosAceptados.add(articulosAceptados);
     }
 
-    public List<Integer> getArticulosRecibidos() {
-        return articulosRecibidos;
+    public List<Articulo> getArticulosRecibidos() {
+        return this.articulosRecibidos;
     }
 
-    public void setArticulosRecibidos(List<Integer> articulosRecibidos) {
-        this.articulosRecibidos = articulosRecibidos;
+    public void setArticulosRecibidos(Articulo articulosRecibidos) {
+        this.articulosRecibidos.add(articulosRecibidos);
     }
 
     @Override

@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class DTORespuesta {
-    private int id;
+    private Integer id;
     private String nombre;
     private String temas;
     private String entidadOrganizadora;
@@ -26,8 +26,7 @@ public class DTORespuesta {
     private int numMaxRecepcion;
     private int numMaxAceptacion;
     private float calificacionMinAceptable;
-    private List<Integer> articulosAceptados;
-    private List<Integer> articulosRecividos;
+
     public DTORespuesta() {
     }
     @Override
@@ -48,8 +47,7 @@ public class DTORespuesta {
                 ", numMaxRecepcion=" + numMaxRecepcion +
                 ", numMaxAceptacion=" + numMaxAceptacion +
                 ", calificacionMinAceptable=" + calificacionMinAceptable +
-                ", articulosAceptados=" + articulosAceptados +
-                ", articulosRecividos=" + articulosRecividos +
+
                 '}';
     }
     
