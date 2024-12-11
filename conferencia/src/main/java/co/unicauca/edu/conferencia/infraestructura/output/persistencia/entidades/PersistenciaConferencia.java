@@ -1,7 +1,9 @@
 package co.unicauca.edu.conferencia.infraestructura.output.persistencia.entidades;
 
-import java.sql.Date;
+
+import java.time.LocalDate;
 import java.util.List;
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,42 +26,51 @@ public class PersistenciaConferencia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nombre;
-    private String temas;
-    private String entidadOrganizadora;
-    private String pais;
-    private String estado;
-    private String ciudad;
-    private String direccion;
-
-    @Temporal(TemporalType.DATE)
-    private Date fechaInicio;
-
-    @Temporal(TemporalType.DATE)
-    private Date fechaFin;
-
-    @Temporal(TemporalType.DATE)
-    private Date fechaFinRecepcion;
-
-    @Temporal(TemporalType.DATE)
-    private Date fechaFinEvaluacion;
-
-    private int numMaxRecepcion;
-    private int numMaxAceptacion;
-    private float calificacionMinAceptable;
-
-   
+    public String nombre;
+    public String temas;
+    public String entidadOrganizadora;
+    public String pais;
+    public String estado;
+    public String ciudad;
+    public String direccion;
+    public LocalDate fechaFin;
+    public LocalDate fechaInicio;
+    public LocalDate fechaFinRecepcion;
+    public LocalDate fechaFinEvaluacion;
+    public int numMaxRecepcion;
+    public int numMaxAceptacion;
+    public float calificacionMinAceptable;
+    public List<Integer> articulosAceptados;
+    public List<Integer> articulosRecibidos;
     private List<Integer> organizadores;
-
-    
     private List<Integer> autores;
-
-    
     private List<Integer> evaluadores;
+    public PersistenciaConferencia() {
+    }
 
-    
-    private List<Integer> articulosRecibidos;
-
-    
-    private List<Integer> articulosAceptados;
+    @Override
+    public String toString() {
+        return "PersistenciaConferencia{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", temas='" + temas + '\'' +
+                ", entidadOrganizadora='" + entidadOrganizadora + '\'' +
+                ", pais='" + pais + '\'' +
+                ", estado='" + estado + '\'' +
+                ", ciudad='" + ciudad + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", fechaInicio=" + fechaInicio +
+                ", fechaFin=" + fechaFin +
+                ", fechaFinRecepcion=" + fechaFinRecepcion +
+                ", fechaFinEvaluacion=" + fechaFinEvaluacion +
+                ", numMaxRecepcion=" + numMaxRecepcion +
+                ", numMaxAceptacion=" + numMaxAceptacion +
+                ", calificacionMinAceptable=" + calificacionMinAceptable +
+                ", organizadores=" + organizadores +
+                ", autores=" + autores +
+                ", evaluadores=" + evaluadores +
+                ", articulosRecibidos=" + articulosRecibidos +
+                ", articulosAceptados=" + articulosAceptados +
+                '}';
+    }
 }

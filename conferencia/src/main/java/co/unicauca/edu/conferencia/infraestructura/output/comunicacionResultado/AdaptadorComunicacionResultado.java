@@ -1,4 +1,6 @@
-package co.unicauca.edu.conferencia.aplicación.puertos.output.comunicacionResultado;
+package co.unicauca.edu.conferencia.infraestructura.output.comunicacionResultado;
+
+
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

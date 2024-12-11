@@ -25,8 +25,11 @@ public class AdaptadorGestionConferencias implements PuertoGestionConferencia {
 
     @Override
     public Conferencia crearConferencia(Conferencia prmConferencia) {
-      if(!prmConferencia.ValidarFechas().equals("ok")){
-        return this.mensaje.prepararRespuestaFallida(prmConferencia.ValidarFechas());
+
+      String resultado=prmConferencia.validarFechas();
+      if(!resultado.equals("ok")){
+        return this.mensaje.prepararRespuestaFallida(resultado);
+        
       }else{
        return this.servicioRepositorio.setConferencia(prmConferencia);
 

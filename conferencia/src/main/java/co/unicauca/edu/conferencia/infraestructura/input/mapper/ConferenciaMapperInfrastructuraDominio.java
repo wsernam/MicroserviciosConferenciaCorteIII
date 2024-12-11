@@ -25,7 +25,6 @@ import co.unicauca.edu.conferencia.infraestructura.input.DTOs.DTORespuesta;
  */
 @Mapper(componentModel = "spring")
 
-
 public interface ConferenciaMapperInfrastructuraDominio {
    /**
      * Mapea un ConferenciaDTOPeticion (DTO de solicitud) al modelo de dominio Conferencia.

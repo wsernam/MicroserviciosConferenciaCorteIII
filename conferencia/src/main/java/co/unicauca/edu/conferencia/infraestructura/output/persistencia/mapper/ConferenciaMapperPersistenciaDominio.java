@@ -10,4 +10,3 @@ public class ConferenciaMapperPersistenciaDominio {
         return new ModelMapper();
     }
 }
-
