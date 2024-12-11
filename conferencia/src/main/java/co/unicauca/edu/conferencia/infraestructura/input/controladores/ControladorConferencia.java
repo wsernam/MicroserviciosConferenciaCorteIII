@@ -19,7 +19,7 @@ import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/Conferencia")
 
 
 public class ControladorConferencia {

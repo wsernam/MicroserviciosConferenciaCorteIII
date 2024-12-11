@@ -1,6 +1,7 @@
 package co.unicauca.edu.articulo_microservicio.api.controllers;
 
 import co.unicauca.edu.articulo_microservicio.domain.services.IArticuloService;
+import co.unicauca.edu.articulo_microservicio.domain.services.IConferenciaService;
 import co.unicauca.edu.articulo_microservicio.DTO.CRUDArticulosDTO.ArticuloDTO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +25,14 @@ public class ArticuloController {
 
     @Autowired
     private IArticuloService articuloService;
+    private IConferenciaService conferenciaService;
 
     /*Recibe articulo a registrar y retorna el articulo registrado*/
     @PostMapping("/articulos")
     public ResponseEntity<ArticuloDTO> crearArticulo(@RequestBody ArticuloDTO articulo) {
         ArticuloDTO objArticulo = null;
         objArticulo = articuloService.save(articulo);
+        conferenciaService.enviarArticuloAConferencia(objArticulo);
         return ResponseEntity.ok(objArticulo);
     }
 
