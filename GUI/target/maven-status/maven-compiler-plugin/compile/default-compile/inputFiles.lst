@@ -1,31 +1,31 @@
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\article\Article.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\article\IArticleRest.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\clients\IUserRestClient.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\clients\UserClient.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\conference\IUserRestConference.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\conference\UserConference.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\entities\Articulo.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\entities\Conference.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\entities\Login.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\entities\Usuario.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\entities\Usuario_Autorizado.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\GUI.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\GUIassignEvaluator.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\GUIconferenceChair.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\GUIconferenceInfo.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\GUIconferenceSearch.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\GUIcontainer.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\GUIcreateArticle.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\GUIcreateConference.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\GUIlogin.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\GUImisArticulos.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\GUImisConferencias.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\GUIregister.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\infra\InternalFrameFactory.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\infra\Observer.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\infra\RestClientManager.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\infra\Subject.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\pnlArticleInfo.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\pnlAutor.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\pnlConferenceInfo.java
-C:\Users\Personal\Documents\SoftwareII\TERCERCORTE\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\pnlNoConferences.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\article\Article.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\article\IArticleRest.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\clients\IUserRestClient.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\clients\UserClient.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\conference\IUserRestConference.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\conference\UserConference.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\entities\Articulo.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\entities\Conference.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\entities\Login.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\entities\Usuario.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\entities\Usuario_Autorizado.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\GUI.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\GUIassignEvaluator.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\GUIconferenceChair.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\GUIconferenceInfo.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\GUIconferenceSearch.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\GUIcontainer.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\GUIcreateArticle.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\GUIcreateConference.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\GUIlogin.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\GUImisArticulos.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\GUImisConferencias.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\GUIregister.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\infra\InternalFrameFactory.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\infra\Observer.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\infra\RestClientManager.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\infra\Subject.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\pnlArticleInfo.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\pnlAutor.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\pnlConferenceInfo.java
+E:\Universidad\6 semestre\Ing Sw2\MicroserviciosConferenciaCorteIII\GUI\src\main\java\com\conference\gui\presentation\pnlNoConferences.java
