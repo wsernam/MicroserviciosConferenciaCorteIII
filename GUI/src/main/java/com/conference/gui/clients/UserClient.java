@@ -26,7 +26,7 @@ import java.net.http.HttpResponse;
 public class UserClient implements IUserRestClient {
      private static final String USER_AGENT = "GUILogin";
      
-     private String urlUserService = "http://localhost:8081/EasyConference";
+     private String urlUserService = "http://localhost:8081/user";
      public UserClient (){
      
      }
@@ -79,7 +79,7 @@ public class UserClient implements IUserRestClient {
 
             // Crear la solicitud
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(urlUserService + "/register"))
+                    .uri(URI.create(urlUserService + ""))
                     .header("Content-Type", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(jsonInputString))
                     .build();

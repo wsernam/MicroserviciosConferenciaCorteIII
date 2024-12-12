@@ -4,11 +4,13 @@
  */
 package com.conference.gui.entities;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -17,7 +19,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@AllArgsConstructor
+@NoArgsConstructor
 public class Conference {
      private static final long serialVersionUID = 1L;
     @Id
@@ -25,9 +27,6 @@ public class Conference {
     private String nombre;
     private int cantidadMaxArticulos;
     private List<Articulo> articuloList= new ArrayList<>();
-
-    public Conference() {
-    }
 
     public Conference( String nombre, int cantidadMaxArticulos) {
         this.nombre = nombre;

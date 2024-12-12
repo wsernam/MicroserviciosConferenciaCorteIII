@@ -1,19 +1,18 @@
 package com.conference.gui.entities;
 
-import jakarta.persistence.Id;
 import java.util.ArrayList;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.util.List;
+import lombok.NoArgsConstructor;
 /**
  *
  * @author Ashlee Campaz
  */
 @Getter
 @Setter
-@AllArgsConstructor
+@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true) // Ignorar propiedades desconocidas
 public class Articulo {
     
@@ -24,9 +23,6 @@ public class Articulo {
     private String palabrasClaves;
 
 
-    public Articulo() {
-    }
-
     public Articulo( String nombre, ArrayList<String> autores, String resumen, String palabrasClaves) {
 
         this.nombre = nombre;
@@ -35,9 +31,4 @@ public class Articulo {
         this.palabrasClaves = palabrasClaves;
      
     }
-
-
-
-   
-    
 }

@@ -1,16 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.conference.gui.entities;
 
+import jakarta.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  *
  * @author Ashlee Campaz
  */
+@Getter
+@Setter
+@Entity
+@NoArgsConstructor
 public class Usuario {
     private String name;
     private String lastName;
@@ -29,64 +34,6 @@ public class Usuario {
         this.organization = organization;
         this.password = password;
         this.researchfields  = researcherfields;
-    }
-     
-     public Usuario(){}
-     
-    public List<String> getResearcherfields() {
-        return researchfields;
-    }
-
-    public void setResearcherfields(List<String> researcherfields) {
-        this.researchfields = researcherfields;
-    }
-    
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getOrganization() {
-        return organization;
-    }
-
-    public void setOrganization(String organization) {
-        this.organization = organization;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
     
      @Override
@@ -111,15 +58,5 @@ public class Usuario {
 
     public void setResearchfields(ArrayList<String> researchfields) {
         this.researchfields = researchfields;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
-    
+    }    
 }
