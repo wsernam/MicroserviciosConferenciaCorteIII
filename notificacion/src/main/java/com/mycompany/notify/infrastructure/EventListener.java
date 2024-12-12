@@ -8,7 +8,7 @@ import com.mycompany.notify.application.NotifyServices;
 import com.mycompany.notify.domain.Evaluador;
 import com.mycompany.notify.domain.Eventos.ArticuloAsignadoEvent;
 import com.mycompany.notify.domain.Eventos.ArticuloCreadoEvent;
-import com.mycompany.notify.domain.Eventos.ArticulosEstadoActualizadoEvent;
+import com.mycompany.notify.domain.Eventos.ArticuloEstadoActualizadoEvent;
 import com.mycompany.notify.domain.Eventos.ConferenciaCreadaEvent;
 import com.mycompany.notify.domain.Eventos.EvaluadorRegistradoEvent;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -99,14 +99,14 @@ public class EventListener {
 
     
     @RabbitListener(queues = "paper-state-changed-queue")
-    public void handleArticulosEstadoActualizadoEvent(ArticulosEstadoActualizadoEvent evento) {
+    public void handleArticulosEstadoActualizadoEvent(ArticuloEstadoActualizadoEvent evento, String Comentario) {
         // Notificar a cada evaluador
         for (Evaluador evaluador : evento.getEvaluadores()) {
             String destinatario = evaluador.getCorreoEvaluador();
             String asunto = "Cambio de estado en el artículo: " + evento.getTituloArticulo();
             String cuerpo = String.format(
                 "El artículo '%s' ha cambiado de estado: '%s' a '%s'. Comentario: %s",
-                evento.getTituloArticulo(), evento.getEstadoAnterior(), evento.getEstadoActual(), evento.getComentario()
+                evento.getTituloArticulo(), evento.getEstadoAnterior(), evento.getEstadoActual(), Comentario
             );
             notifyServices.enviarNotificacion(destinatario, asunto, cuerpo);
         }
@@ -116,7 +116,7 @@ public class EventListener {
         String asuntoAutor = "Actualización en el estado de su artículo: " + evento.getTituloArticulo();
         String cuerpoAutor = String.format(
             "Su artículo '%s' ha cambiado de estado: '%s' a '%s'. Comentario: %s",
-            evento.getTituloArticulo(), evento.getEstadoAnterior(), evento.getEstadoActual(), evento.getComentario()
+            evento.getTituloArticulo(), evento.getEstadoAnterior(), evento.getEstadoActual(), Comentario
         );
         notifyServices.enviarNotificacion(destinatarioAutor, asuntoAutor, cuerpoAutor);
     }
