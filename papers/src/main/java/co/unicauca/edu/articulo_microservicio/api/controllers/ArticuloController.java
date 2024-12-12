@@ -3,6 +3,7 @@ package co.unicauca.edu.articulo_microservicio.api.controllers;
 import co.unicauca.edu.articulo_microservicio.domain.services.IArticuloService;
 import co.unicauca.edu.articulo_microservicio.domain.services.IConferenciaService;
 import co.unicauca.edu.articulo_microservicio.DTO.CRUDArticulosDTO.ArticuloDTO;
+import co.unicauca.edu.articulo_microservicio.domain.services.EstadoRevision;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -77,5 +78,12 @@ public class ArticuloController {
     public Boolean existeArticulo(@RequestParam Integer id) {
         Boolean bandera = articuloService.existsById(id);
         return bandera;
+    }
+    
+    //actualiza estado de articulo
+    @PutMapping("/{id}/estado")
+    public ResponseEntity<Void> actualizarEstado(@PathVariable Integer id, @RequestParam EstadoRevision nuevoEstado) {
+        articuloService.actualizarEstadoArticulo(id, nuevoEstado);
+        return ResponseEntity.ok().build();
     }
 }

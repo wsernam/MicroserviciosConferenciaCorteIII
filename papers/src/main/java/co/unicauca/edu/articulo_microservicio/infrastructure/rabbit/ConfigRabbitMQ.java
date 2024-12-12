@@ -16,7 +16,9 @@ public class ConfigRabbitMQ {
 
     public static final String ARTICULO_EXCHANGE = "articulo-exchange";
     public static final String ARTICULO_ROUTING_KEY = "articulo.creado";
+    public static final String ESTADO_ACTUALIZADO_ROUTING_KEY = "articulo.estado.actualizado";
 
+    
     @Bean
     public DirectExchange articuloExchange() {
         return new DirectExchange(ARTICULO_EXCHANGE);

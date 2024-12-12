@@ -6,6 +6,7 @@ import co.unicauca.edu.articulo_microservicio.DTO.ArticulosConConferenciasDTO.Ar
 import co.unicauca.edu.articulo_microservicio.DTO.ArticulosConConferenciasDTO.ConferenciaDTO;
 import co.unicauca.edu.articulo_microservicio.DTO.CRUDArticulosDTO.ArticuloDTO;
 import co.unicauca.edu.articulo_microservicio.domain.events.ArticuloCreadoEvent;
+import co.unicauca.edu.articulo_microservicio.domain.events.EstadoActualizadoEvent;
 import co.unicauca.edu.articulo_microservicio.infrastructure.rabbit.ConfigRabbitMQ;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +40,9 @@ public class ArticuloServiceImpl implements IArticuloService {
 
     public void enviarEventoArticuloCreado(ArticuloCreadoEvent evento) {
         try {
-            rabbitTemplate.convertAndSend(ConfigRabbitMQ.ARTICULO_EXCHANGE, ConfigRabbitMQ.ARTICULO_ROUTING_KEY, evento);
+            rabbitTemplate.convertAndSend(ConfigRabbitMQ.ARTICULO_EXCHANGE, 
+                    ConfigRabbitMQ.ARTICULO_ROUTING_KEY, 
+                    evento);
             logger.info("Evento ArticuloCreadoEvent enviado exitosamente: {}", evento);
         } catch (Exception e) {
             logger.error("Error al enviar el evento ArticuloCreadoEvent: {}", evento, e);
@@ -108,4 +111,42 @@ public class ArticuloServiceImpl implements IArticuloService {
         ArticuloDTO articuloDTO = articuloOpt.map(articulo -> modelMapper.map(articulo, ArticuloDTO.class)).orElse(null);
         return new ArticuloConConferenciasDTO(articuloDTO, conferencias);
     }
+    
+    @Override
+    public void actualizarEstadoArticulo(Integer id, EstadoRevision nuevoEstado) {
+        // Buscar el artículo por su ID
+        Optional<Articulo> articuloOpt = servicioAccesoBaseDatos.findById(id);
+
+        if (articuloOpt.isPresent()) {
+            Articulo articulo = articuloOpt.get();
+            EstadoRevision estadoAnterior = articulo.getEstadoActual(); // Obtener el estado actual
+            articulo.setEstadoActual(nuevoEstado); // Actualizar al nuevo estado
+
+            // Guardar los cambios en la base de datos
+            servicioAccesoBaseDatos.save(articulo);
+            // Crear y enviar el evento
+            EstadoActualizadoEvent evento = new EstadoActualizadoEvent(
+                id, 
+                articulo.getNombre(), 
+                estadoAnterior.name(),  // Convertir el enum a String
+                nuevoEstado.name(),     // Convertir el enum a String
+                articulo.getEvaluadores(),
+                articulo.getAutor().getIdUsuario(),
+                articulo.getAutor().getNombreUsuario(),
+                articulo.getAutor().getCorreoUsuario()
+            );
+            rabbitTemplate.convertAndSend(ConfigRabbitMQ.ARTICULO_EXCHANGE,
+                ConfigRabbitMQ.ESTADO_ACTUALIZADO_ROUTING_KEY,
+                evento);
+
+            // Loguear la operación
+            logger.info("Estado del artículo actualizado de {} a {} y evento publicado: {}", 
+                        estadoAnterior, nuevoEstado, evento);
+        } else {
+            // Manejo de error: artículo no encontrado
+            logger.warn("Artículo con ID {} no encontrado para actualizar el estado.", id);
+            throw new IllegalArgumentException("Artículo no encontrado");
+        }
+    }
+
 }

@@ -27,4 +27,6 @@ public interface IArticuloService {
     public List<ConferenciaDTO> ListarConferenciasDeArticulo(Integer idArticulo);
 
     public ArticuloConConferenciasDTO listarDatosrticuloConSusConferencias(Integer idArticulo);
+    
+    public void actualizarEstadoArticulo(Integer id, EstadoRevision nuevoEstado);
 }

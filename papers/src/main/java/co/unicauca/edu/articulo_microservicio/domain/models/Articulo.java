@@ -26,13 +26,15 @@ public class Articulo {
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private Integer id;
     private String nombre;
-    private ArrayList<String> autores;
+    private ArrayList<String> autores;//autores del articulo
+    private AppUser Autor; // el q subio el articulo y recivira notificacion del estado de su articulo
     private String resumen;
     private String palabrasClaves;
     @OneToMany(mappedBy = "articulo", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Calificacion> calificaciones;
     @Enumerated(EnumType.STRING)
     private EstadoRevision estadoActual;
+    private List<Evaluador> evaluadores;   // Lista de evaluadores asignados
         
     public void iniciarRevision() {
         estadoActual.iniciarRevision(this);
