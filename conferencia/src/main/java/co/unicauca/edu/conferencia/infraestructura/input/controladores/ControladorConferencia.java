@@ -33,7 +33,14 @@ public class ControladorConferencia {
 
     @Autowired
     private PuertoGestionConferencia objGestionConferenciaDom;
-
+    
+    @Autowired
+    public ControladorConferencia(ConferenciaMapperInfrastructuraDominio objMapeador, 
+                                   PuertoGestionConferencia objGestionConferenciaDom) {
+        this.objMapeador = objMapeador;
+        this.objGestionConferenciaDom = objGestionConferenciaDom;
+    }
+    
     @PostConstruct
     public void init() {
         System.out.println("Mapeador: " + objMapeador);
@@ -73,7 +80,7 @@ public class ControladorConferencia {
     @PostMapping("/PostularEvaluador")
     public ResponseEntity<Void> postularEvaluador(@RequestBody DTOEvaluador evaluadorDTO) {
         // Mapear DTO a modelo de dominio
-        Evaluador evaluador = objMapeador.mappearDeDTOEvaluadorAEvaluador(evaluadorDTO);
+        Evaluador evaluador = objMapeador.mappearDeDTOEntradaEvaluadorAEvaluador(evaluadorDTO);
 
         // Llamar al caso de uso para procesar la postulación
         objGestionConferenciaDom.postularEvaluador(evaluador);

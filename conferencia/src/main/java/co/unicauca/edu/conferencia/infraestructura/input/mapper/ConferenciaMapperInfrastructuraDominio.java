@@ -8,7 +8,7 @@ import co.unicauca.edu.conferencia.dominio.modelos.Articulo;
 import co.unicauca.edu.conferencia.dominio.modelos.Conferencia;
 import co.unicauca.edu.conferencia.dominio.modelos.Evaluador;
 import co.unicauca.edu.conferencia.infraestructura.input.DTOs.DTOArticulo;
-import co.unicauca.edu.conferencia.infraestructura.input.DTOs.DTOEntradaEvaluador;
+import co.unicauca.edu.conferencia.infraestructura.input.DTOs.DTOEvaluador;
 import co.unicauca.edu.conferencia.infraestructura.input.DTOs.DTOPeticion;
 import co.unicauca.edu.conferencia.infraestructura.input.DTOs.DTORespuesta;
 
@@ -54,8 +54,13 @@ public interface ConferenciaMapperInfrastructuraDominio {
      */
     List<DTORespuesta> mappearDeConferenciasARespuesta(List<Conferencia> Conferencias);
  
+    /**
+     *
+     * @param articuloDTO
+     * @return
+     */
     Articulo mappearDeDTOArticuloAArticulo(DTOArticulo articuloDTO);
-    Evaluador mappearDeDTOEntradaEvaluadorAEvaluador(DTOEntradaEvaluador evaluadorDTO);
+    Evaluador mappearDeDTOEntradaEvaluadorAEvaluador(DTOEvaluador evaluadorDTO);
 
 
    

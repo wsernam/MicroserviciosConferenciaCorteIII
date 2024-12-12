@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import co.unicauca.edu.conferencia.dominio.modelos.Articulo;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,18 +39,44 @@ public class PersistenciaConferencia {
     public int numMaxRecepcion;
     public int numMaxAceptacion;
     public float calificacionMinAceptable;
-    private List<Integer> articulosRecibidos;
-    private List<Integer> articulosAceptados;
-    private List<Integer> organizadores;
-    private List<Integer> autores;
-    private List<Integer> evaluadores;
+    public List<Integer> articulosRecibidos;
+    public List<Integer> articulosAceptados;
+    public List<Integer> organizadores;
+    public List<Integer> autores;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PersistenciaEvaluador> evaluadores = new ArrayList<>();
+    public List<PersistenciaEvaluador> evaluadores;
 
     public PersistenciaConferencia() {
         this.articulosAceptados = new ArrayList<>();
         this.articulosRecibidos = new ArrayList<>();
+        this.evaluadores = new ArrayList<>();
     }
+
+    public List<Integer> getArticulosRecibidos() {
+        return articulosRecibidos;
+    }
+
+    public void setArticulosRecibidos(List<Integer> articulosRecibidos) {
+        this.articulosRecibidos = articulosRecibidos;
+    }
+
+    public List<Integer> getArticulosAceptados() {
+        return articulosAceptados;
+    }
+
+    public void setArticulosAceptados(List<Integer> articulosAceptados) {
+        this.articulosAceptados = articulosAceptados;
+    }
+
+    public List<PersistenciaEvaluador> getEvaluadores() {
+        return evaluadores;
+    }
+
+    public void setEvaluadores(List<PersistenciaEvaluador> evaluadores) {
+        this.evaluadores = evaluadores;
+    }
+    
+    
 
     @Override
     public String toString() {

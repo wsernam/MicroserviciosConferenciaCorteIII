@@ -3,8 +3,10 @@ package co.unicauca.edu.conferencia.dominio.modelos;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Conferencia {
+
     public Integer id;
     public String nombre;
     public String temas;
@@ -17,13 +19,14 @@ public class Conferencia {
     public LocalDate fechaInicio;
     public LocalDate fechaFinRecepcion;
     public LocalDate fechaFinEvaluacion;
+    public int numMaxEvaluadores;
     public int numMaxRecepcion;
     public int numMaxAceptacion;
     public float calificacionMinAceptable;
     public List<Integer> articulosAceptados;
     public List<Integer> articulosRecibidos;
+    private List<Evaluador> evaluadores; // Lista con la información completa de los evaluadores
 
-    
     public Conferencia(Integer id, String nombre, String temas, String entidadOrganizadora, String pais, String estado,
             String ciudad, String direccion, LocalDate fechaFin, LocalDate fechaInicio, LocalDate fechaFinRecepcion,
             LocalDate fechaFinEvaluacion, int numMaxRecepcion, int numMaxAceptacion, float calificacionMinAceptable) {
@@ -39,16 +42,19 @@ public class Conferencia {
         this.fechaInicio = fechaInicio;
         this.fechaFinRecepcion = fechaFinRecepcion;
         this.fechaFinEvaluacion = fechaFinEvaluacion;
+        this.numMaxEvaluadores = 8;
         this.numMaxRecepcion = numMaxRecepcion;
         this.numMaxAceptacion = numMaxAceptacion;
         this.calificacionMinAceptable = calificacionMinAceptable;
         this.articulosAceptados = new ArrayList<>();
         this.articulosRecibidos = new ArrayList<>();
+        this.evaluadores = new ArrayList<>();
     }
 
     public Conferencia() {
         this.articulosAceptados = new ArrayList<>();
         this.articulosRecibidos = new ArrayList<>();
+        this.evaluadores = new ArrayList<>();
     }
 
     public String validarFechas() {
@@ -84,8 +90,26 @@ public class Conferencia {
         return "ok";
     }
 
+    public boolean puedeAceptarEvaluador() {
+        // Verificar si ya se ha alcanzado el límite de evaluadores
+        return evaluadores.size() < numMaxEvaluadores;
+    }
 
-    
+    public String postularEvaluador(Evaluador evaluador) {
+        // Verificar si el evaluador ya está registrado en la conferencia
+        if (evaluadores.contains(evaluador)) {
+            return "El evaluador ya está registrado en esta conferencia.";
+        }
+
+        // Verificar si la conferencia puede aceptar más evaluadores
+        if (!puedeAceptarEvaluador()) {
+            return "No es posible agregar más evaluadores, el límite ha sido alcanzado.";
+        }
+
+        // Agregar el evaluador a la lista de la conferencia
+        evaluadores.add(evaluador);
+        return "Evaluador postulado exitosamente.";
+    }
 
     public String getNombre() {
         return nombre;
@@ -158,6 +182,7 @@ public class Conferencia {
     public void setFechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
+
     public Integer getId() {
         return id;
     }
@@ -206,10 +231,6 @@ public class Conferencia {
         this.calificacionMinAceptable = calificacionMinAceptable;
     }
 
-
-
-
-
     public List<Integer> getArticulosAceptados() {
         return articulosAceptados;
     }
@@ -226,27 +247,42 @@ public class Conferencia {
         this.articulosRecibidos = articulosRecibidos;
     }
 
-    @Override
-    public String toString() {
-        return "Conferencia{" +
-                "nombre='" + nombre + '\'' +
-                ", temas='" + temas + '\'' +
-                ", entidadOrganizadora='" + entidadOrganizadora + '\'' +
-                ", pais='" + pais + '\'' +
-                ", estado='" + estado + '\'' +
-                ", ciudad='" + ciudad + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", fechaFin=" + fechaFin +
-                ", fechaInicio=" + fechaInicio +
-                ", fechaFinRecepcion=" + fechaFinRecepcion +
-                ", fechaFinEvaluacion=" + fechaFinEvaluacion +
-                ", numMaxRecepcion=" + numMaxRecepcion +
-                ", numMaxAceptacion=" + numMaxAceptacion +
-                ", calificacionMinAceptable=" + calificacionMinAceptable +
-                ", articulosAceptados=" + articulosAceptados +
-                ", articulosRecibidos=" + articulosRecibidos +
-                '}';
+    public List<Evaluador> getEvaluadores() {
+        return evaluadores;
     }
 
+    public void setEvaluadores(List<Evaluador> evaluadores) {
+        this.evaluadores = evaluadores;
+    }
+
+    public int getNumMaxEvaluadores() {
+        return numMaxEvaluadores;
+    }
+
+    public void setNumMaxEvaluadores(int numMaxEvaluadores) {
+        this.numMaxEvaluadores = numMaxEvaluadores;
+    }
+
+    @Override
+    public String toString() {
+        return "Conferencia{"
+                + "nombre='" + nombre + '\''
+                + ", temas='" + temas + '\''
+                + ", entidadOrganizadora='" + entidadOrganizadora + '\''
+                + ", pais='" + pais + '\''
+                + ", estado='" + estado + '\''
+                + ", ciudad='" + ciudad + '\''
+                + ", direccion='" + direccion + '\''
+                + ", fechaFin=" + fechaFin
+                + ", fechaInicio=" + fechaInicio
+                + ", fechaFinRecepcion=" + fechaFinRecepcion
+                + ", fechaFinEvaluacion=" + fechaFinEvaluacion
+                + ", numMaxRecepcion=" + numMaxRecepcion
+                + ", numMaxAceptacion=" + numMaxAceptacion
+                + ", calificacionMinAceptable=" + calificacionMinAceptable
+                + ", articulosAceptados=" + articulosAceptados
+                + ", articulosRecibidos=" + articulosRecibidos
+                + '}';
+    }
 
 }

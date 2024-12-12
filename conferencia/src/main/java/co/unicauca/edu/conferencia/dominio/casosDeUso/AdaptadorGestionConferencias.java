@@ -82,12 +82,13 @@ public class AdaptadorGestionConferencias implements PuertoGestionConferencia {
         Conferencia conferencia = servicioRepositorio.EncontrarPorId(evaluador.getConferenciaId());
 
         // Verificar si ya se ha alcanzado el límite de evaluadores
-        if (!conferencia.puedeAceptarEvaluador()) {
-            mensaje.prepararRespuestaFallida("Límite de evaluadores alcanzado");
+        String resultado = conferencia.postularEvaluador(evaluador);
+        if (resultado.contains("No es posible")) {
+            mensaje.prepararRespuestaFallida(resultado);
             return;
         }
 
-        // Agregar el evaluador a la conferencia
+        // Si se logra postular correctamente, almacenar en el repositorio
         servicioRepositorio.postularEvaluador(evaluador);
         System.out.println("Evaluador postulado correctamente.");
     }
