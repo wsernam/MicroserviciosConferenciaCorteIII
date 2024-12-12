@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package co.unicauca.edu.articulo_microservicio.api.controllers;
-import co.unicauca.edu.articulo_microservicio.domain.models.Articulo;
 import co.unicauca.edu.articulo_microservicio.domain.services.ICalificacionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

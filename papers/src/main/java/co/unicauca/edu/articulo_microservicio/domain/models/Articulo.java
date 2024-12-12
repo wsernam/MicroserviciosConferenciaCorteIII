@@ -8,9 +8,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Transient;
 import co.unicauca.edu.articulo_microservicio.domain.services.EstadoRevision;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.OneToMany;
 import java.util.List;
 import lombok.NoArgsConstructor;
@@ -30,7 +31,7 @@ public class Articulo {
     private String palabrasClaves;
     @OneToMany(mappedBy = "articulo", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Calificacion> calificaciones;
-    @Transient // Ignorar este campo en la persistencia
+    @Enumerated(EnumType.STRING)
     private EstadoRevision estadoActual;
         
     public void iniciarRevision() {
@@ -43,6 +44,10 @@ public class Articulo {
 
     public void revisarEstado() {
         estadoActual.revisarEstado(this);
+    }
+
+    public void evaluar(boolean aprobado) {
+        estadoActual.evaluar(this, aprobado);
     }
     
     public void agregarCalificacion(Calificacion calificacion) {
