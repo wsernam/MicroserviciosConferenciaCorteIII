@@ -8,6 +8,7 @@ import com.conference.gui.entities.Articulo;
 import com.conference.gui.entities.Conference;
 import com.conference.gui.entities.Usuario;
 import com.conference.gui.entities.Usuario_Autorizado;
+import com.conference.gui.presentation.infra.ApplicationContext;
 import com.conference.gui.presentation.infra.InternalFrameFactory;
 import com.conference.gui.presentation.infra.RestClientManager;
 
@@ -503,7 +504,10 @@ public class GUIcontainer extends javax.swing.JFrame {
     }//GEN-LAST:event_lbBtnBuscarMouseClicked
 
     private void lbCerrarSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarSesionMouseEntered
+          ApplicationContext.getInstance().setUsuarioLogueado(null);
+        
         lbCerrarSesion.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14));
+        
     }//GEN-LAST:event_lbCerrarSesionMouseEntered
 
     private void lbCerrarSesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarSesionMouseExited

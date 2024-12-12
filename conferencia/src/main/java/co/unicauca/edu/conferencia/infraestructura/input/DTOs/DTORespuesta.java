@@ -13,6 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class DTORespuesta {
     private Integer id;
+    private String organizador;
     private String nombre;
     private String temas;
     private String entidadOrganizadora;

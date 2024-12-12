@@ -25,6 +25,7 @@ public class PersistenciaConferencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    public String organizador;
     public String nombre;
     public String temas;
     public String entidadOrganizadora;

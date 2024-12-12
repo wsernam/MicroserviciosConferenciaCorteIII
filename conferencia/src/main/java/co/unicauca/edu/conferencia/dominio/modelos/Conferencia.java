@@ -8,6 +8,7 @@ import java.util.Objects;
 public class Conferencia {
 
     public Integer id;
+    public String organizador;
     public String nombre;
     public String temas;
     public String entidadOrganizadora;

@@ -12,7 +12,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class DTOPeticion {
-     private String nombre;
+    private String organizador;
+    private String nombre;
     private String temas;
     private String entidadOrganizadora;
     private String pais;
