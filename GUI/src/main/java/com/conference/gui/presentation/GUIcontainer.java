@@ -334,6 +334,17 @@ public class GUIcontainer extends javax.swing.JFrame {
         jLabelAsignar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jLabelAsignar.setForeground(new java.awt.Color(245, 245, 245));
         jLabelAsignar.setText("Asignar Evaluadores");
+        jLabelAsignar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelAsignarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabelAsignarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabelAsignarMouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlBotonAsignarEvaluadorLayout = new javax.swing.GroupLayout(pnlBotonAsignarEvaluador);
         pnlBotonAsignarEvaluador.setLayout(pnlBotonAsignarEvaluadorLayout);
@@ -539,6 +550,18 @@ public class GUIcontainer extends javax.swing.JFrame {
     private void lbCrearConMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCrearConMouseExited
         lbCrearCon.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14));
     }//GEN-LAST:event_lbCrearConMouseExited
+
+    private void jLabelAsignarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAsignarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelAsignarMouseClicked
+
+    private void jLabelAsignarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAsignarMouseEntered
+        jLabelAsignar.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14));
+    }//GEN-LAST:event_jLabelAsignarMouseEntered
+
+    private void jLabelAsignarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAsignarMouseExited
+        jLabelAsignar.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14));
+    }//GEN-LAST:event_jLabelAsignarMouseExited
     
     public void setUsuario(Usuario_Autorizado usuario) {
         this.usuario = usuario;

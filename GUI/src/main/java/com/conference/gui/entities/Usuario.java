@@ -3,7 +3,6 @@ package com.conference.gui.entities;
 import jakarta.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

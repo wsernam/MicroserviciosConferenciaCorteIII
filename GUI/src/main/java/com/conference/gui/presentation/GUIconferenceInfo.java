@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 package com.conference.gui.presentation;
 
 import com.conference.gui.entities.Conference;
@@ -173,6 +169,9 @@ public class GUIconferenceInfo extends javax.swing.JInternalFrame {
         lbPostulacionEvaluador.setText("Postularme como evaluador");
         lbPostulacionEvaluador.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbPostulacionEvaluador.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbPostulacionEvaluadorMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lbPostulacionEvaluadorMouseEntered(evt);
             }
@@ -236,6 +235,10 @@ public class GUIconferenceInfo extends javax.swing.JInternalFrame {
     private void lbPostulacionEvaluadorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPostulacionEvaluadorMouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_lbPostulacionEvaluadorMouseExited
+
+    private void lbPostulacionEvaluadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPostulacionEvaluadorMouseClicked
+        
+    }//GEN-LAST:event_lbPostulacionEvaluadorMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
