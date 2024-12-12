@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import co.unicauca.edu.conferencia.aplicación.puertos.input.PuertoGestionConferencia;
 import co.unicauca.edu.conferencia.dominio.modelos.Articulo;
 import co.unicauca.edu.conferencia.dominio.modelos.Conferencia;
+import co.unicauca.edu.conferencia.dominio.modelos.Evaluador;
 import co.unicauca.edu.conferencia.infraestructura.input.DTOs.DTOArticulo;
+import co.unicauca.edu.conferencia.infraestructura.input.DTOs.DTOEvaluador;
 import co.unicauca.edu.conferencia.infraestructura.input.DTOs.DTOPeticion;
 import co.unicauca.edu.conferencia.infraestructura.input.DTOs.DTORespuesta;
 import co.unicauca.edu.conferencia.infraestructura.input.mapper.ConferenciaMapperInfrastructuraDominio;
@@ -24,31 +26,26 @@ import jakarta.annotation.PostConstruct;
 @RestController
 @RequestMapping("/api/Conferencia")
 
-
 public class ControladorConferencia {
-    
-   @Autowired
+
+    @Autowired
     private ConferenciaMapperInfrastructuraDominio objMapeador;
 
     @Autowired
     private PuertoGestionConferencia objGestionConferenciaDom;
 
-   
-
-
     @PostConstruct
     public void init() {
         System.out.println("Mapeador: " + objMapeador);
         System.out.println("Gestión Conferencia: " + objGestionConferenciaDom);
-        
+
     }
- 
 
     @PostMapping("/CrearConferencia")
     public DTORespuesta create(@RequestBody DTOPeticion objConferencia) {
-       Conferencia objConferenciaCrear = objMapeador.mappearDePeticionAConferencia(objConferencia);
+        Conferencia objConferenciaCrear = objMapeador.mappearDePeticionAConferencia(objConferencia);
         Conferencia objConferenciaCreado = objGestionConferenciaDom.crearConferencia(objConferenciaCrear);
-       DTORespuesta respuesta= objMapeador.mappearDeConferenciaARespuesta(objConferenciaCreado);
+        DTORespuesta respuesta = objMapeador.mappearDeConferenciaARespuesta(objConferenciaCreado);
 
         return respuesta;
 
@@ -59,21 +56,29 @@ public class ControladorConferencia {
         return objMapeador.mappearDeConferenciasARespuesta(this.objGestionConferenciaDom.listarConferencia());
     }
 
-   @GetMapping("/VerificarConferencia/{prmId}")
+    @GetMapping("/VerificarConferencia/{prmId}")
     public boolean VerificarConferencia(@PathVariable int prmId) {
         return this.objGestionConferenciaDom.existeConferencia(prmId);
     }
 
-      // Endpoint para recibir los datos del artículo y guardarlos en conferencia
+    // Endpoint para recibir los datos del artículo y guardarlos en conferencia
     @PostMapping("/AddArticulos")
     public ResponseEntity<Void> guardarArticulo(@RequestBody DTOArticulo articuloDTO) {
-        Articulo objArticulo=this.objMapeador.mappearDeDTOArticuloAArticulo(articuloDTO);
+        Articulo objArticulo = this.objMapeador.mappearDeDTOArticuloAArticulo(articuloDTO);
         // Llamar al servicio para guardar el artículo en las listas de conferencia
         this.objGestionConferenciaDom.AñadirArticulo(objArticulo);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    @PostMapping("/PostularEvaluador")
+    public ResponseEntity<Void> postularEvaluador(@RequestBody DTOEvaluador evaluadorDTO) {
+        // Mapear DTO a modelo de dominio
+        Evaluador evaluador = objMapeador.mappearDeDTOEvaluadorAEvaluador(evaluadorDTO);
+
+        // Llamar al caso de uso para procesar la postulación
+        objGestionConferenciaDom.postularEvaluador(evaluador);
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
 }
-
-    
-

@@ -7,72 +7,88 @@ import co.unicauca.edu.conferencia.aplicación.puertos.output.PuertoComunicacion
 import co.unicauca.edu.conferencia.aplicación.puertos.output.PuertoGestionConferenciaGateway;
 import co.unicauca.edu.conferencia.dominio.modelos.Articulo;
 import co.unicauca.edu.conferencia.dominio.modelos.Conferencia;
+import co.unicauca.edu.conferencia.dominio.modelos.Evaluador;
 
 public class AdaptadorGestionConferencias implements PuertoGestionConferencia {
- PuertoGestionConferenciaGateway servicioRepositorio;
- PuertoComunicacionResultado mensaje;
- 
+
+    PuertoGestionConferenciaGateway servicioRepositorio;
+    PuertoComunicacionResultado mensaje;
 
     public AdaptadorGestionConferencias(PuertoGestionConferenciaGateway servicioRepositorio,
-        PuertoComunicacionResultado mensaje) {
-    this.servicioRepositorio = servicioRepositorio;
-    this.mensaje = mensaje;
-}
+            PuertoComunicacionResultado mensaje) {
+        this.servicioRepositorio = servicioRepositorio;
+        this.mensaje = mensaje;
+    }
 
     @Override
     public List<Conferencia> listarConferencia() {
-       return this.servicioRepositorio.getConferencias();
+        return this.servicioRepositorio.getConferencias();
     }
 
     @Override
     public Conferencia crearConferencia(Conferencia prmConferencia) {
 
-      String resultado=prmConferencia.validarFechas();
-      if(!resultado.equals("ok")){
-        return (Conferencia) this.mensaje.prepararRespuestaFallida(resultado);
-        
-      }else{
-       return this.servicioRepositorio.setConferencia(prmConferencia);
+        String resultado = prmConferencia.validarFechas();
+        if (!resultado.equals("ok")) {
+            return (Conferencia) this.mensaje.prepararRespuestaFallida(resultado);
 
-      }
+        } else {
+            return this.servicioRepositorio.setConferencia(prmConferencia);
+
+        }
     }
 
     @Override
     public boolean existeConferencia(int prmId) {
-       return this.servicioRepositorio.verifyById(prmId);
+        return this.servicioRepositorio.verifyById(prmId);
     }
 
-    
     @Override
     public Conferencia AñadirArticulo(Articulo prmArticulo) {
-        System.out.println("EL ARTICULO QUE LLEGA ES:"+prmArticulo);
-        Integer idConferencia=prmArticulo.getConferencia();
-        System.out.println("EL ID DE LA CONFERENCIA DEL ARTICULO ES:"+idConferencia);
-       
-        if(!servicioRepositorio.verifyById(idConferencia)){
+        System.out.println("EL ARTICULO QUE LLEGA ES:" + prmArticulo);
+        Integer idConferencia = prmArticulo.getConferencia();
+        System.out.println("EL ID DE LA CONFERENCIA DEL ARTICULO ES:" + idConferencia);
+
+        if (!servicioRepositorio.verifyById(idConferencia)) {
             System.out.println("NO EXISTE LA CONFERENCIA");
             return (Conferencia) this.mensaje.prepararRespuestaFallida("No existe la conferencia");
         }
         System.out.println("EXISTE LA CONFERENCIA");
-        Conferencia conferencia=servicioRepositorio.EncontrarPorId(idConferencia);
-        System.out.println("LA CONFERENCIA ES:"+conferencia);
-        String resultado=conferencia.maxArticulosRecibidos();
-        if(!resultado.equals("ok")){
+        Conferencia conferencia = servicioRepositorio.EncontrarPorId(idConferencia);
+        System.out.println("LA CONFERENCIA ES:" + conferencia);
+        String resultado = conferencia.maxArticulosRecibidos();
+        if (!resultado.equals("ok")) {
             System.out.println("llEGO AL MAXIMO DE ARTICULOS");
             return (Conferencia) this.mensaje.prepararRespuestaFallida(resultado);
         }
 
-        Conferencia respuesta=this.servicioRepositorio.addArticulo(prmArticulo.getId(), conferencia.getId());
-      
-        System.out.println("CONFERENCIA CON SUS ARTICULOS"+conferencia);
+        Conferencia respuesta = this.servicioRepositorio.addArticulo(prmArticulo.getId(), conferencia.getId());
+
+        System.out.println("CONFERENCIA CON SUS ARTICULOS" + conferencia);
 
         return respuesta;
-        
-
-
     }
 
+    @Override
+    public void postularEvaluador(Evaluador evaluador) {
+        // Verificar si la conferencia existe
+        if (!servicioRepositorio.verifyById(evaluador.getConferenciaId())) {
+            System.out.println("Conferencia no encontrada para el evaluador.");
+            mensaje.prepararRespuestaFallida("Conferencia no encontrada");
+            return;
+        }
 
-    
-    
+        // Obtener la conferencia asociada
+        Conferencia conferencia = servicioRepositorio.EncontrarPorId(evaluador.getConferenciaId());
+
+        // Verificar si ya se ha alcanzado el límite de evaluadores
+        if (!conferencia.puedeAceptarEvaluador()) {
+            mensaje.prepararRespuestaFallida("Límite de evaluadores alcanzado");
+            return;
+        }
+
+        // Agregar el evaluador a la conferencia
+        servicioRepositorio.postularEvaluador(evaluador);
+        System.out.println("Evaluador postulado correctamente.");
+    }
 }
