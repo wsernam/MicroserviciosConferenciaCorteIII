@@ -20,6 +20,7 @@ public class ConfigTecnologia {
                 objConferenciaComunicacionResultado);
         return objGestionarConferencia;
     }
+   
 
     
 }

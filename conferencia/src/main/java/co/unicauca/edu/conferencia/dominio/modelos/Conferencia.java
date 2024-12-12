@@ -20,8 +20,8 @@ public class Conferencia {
     public int numMaxRecepcion;
     public int numMaxAceptacion;
     public float calificacionMinAceptable;
-    public List<Articulo> articulosAceptados;
-    public List<Articulo> articulosRecibidos;
+    public List<Integer> articulosAceptados;
+    public List<Integer> articulosRecibidos;
 
     
     public Conferencia(Integer id, String nombre, String temas, String entidadOrganizadora, String pais, String estado,
@@ -47,6 +47,8 @@ public class Conferencia {
     }
 
     public Conferencia() {
+        this.articulosAceptados = new ArrayList<>();
+        this.articulosRecibidos = new ArrayList<>();
     }
 
     public String validarFechas() {
@@ -204,20 +206,24 @@ public class Conferencia {
         this.calificacionMinAceptable = calificacionMinAceptable;
     }
 
-    public List<Articulo> getArticulosAceptados() {
-        return this.articulosAceptados;
+
+
+
+
+    public List<Integer> getArticulosAceptados() {
+        return articulosAceptados;
     }
 
-    public void setArticulosAceptados(Articulo articulosAceptados) {
-        this.articulosAceptados.add(articulosAceptados);
+    public void setArticulosAceptados(List<Integer> articulosAceptados) {
+        this.articulosAceptados = articulosAceptados;
     }
 
-    public List<Articulo> getArticulosRecibidos() {
-        return this.articulosRecibidos;
+    public List<Integer> getArticulosRecibidos() {
+        return articulosRecibidos;
     }
 
-    public void setArticulosRecibidos(Articulo articulosRecibidos) {
-        this.articulosRecibidos.add(articulosRecibidos);
+    public void setArticulosRecibidos(List<Integer> articulosRecibidos) {
+        this.articulosRecibidos = articulosRecibidos;
     }
 
     @Override

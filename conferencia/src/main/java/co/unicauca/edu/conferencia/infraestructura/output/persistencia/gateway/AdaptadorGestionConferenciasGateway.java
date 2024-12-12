@@ -1,5 +1,6 @@
 package co.unicauca.edu.conferencia.infraestructura.output.persistencia.gateway;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -56,6 +57,18 @@ private  ModelMapper modelMapper;
         PersistenciaConferencia conferenciaEncontrada= this.repositorio.findById(prmId).orElse(null);
         return this.modelMapper.map(conferenciaEncontrada, Conferencia.class);
     }
+    @Override
+    public Conferencia addArticulo(Integer prmIdArticulo, Integer idConferencia){
+        
+        PersistenciaConferencia conferencia = this.repositorio.findById(idConferencia).orElse(null);
+        ArrayList<Integer>listaArticulos = new ArrayList<>();
+        listaArticulos=(ArrayList<Integer>) conferencia.getArticulosRecibidos();
+        listaArticulos.add(prmIdArticulo);
+       conferencia.setArticulosRecibidos(listaArticulos);
+       PersistenciaConferencia resultado=repositorio.save(conferencia);
+       return this.modelMapper.map(resultado, Conferencia.class);
+
+   }
 
   
     

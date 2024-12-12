@@ -40,7 +40,7 @@ public class ConferenciaService {
         ArticuloDeConferenciaDTO articuloDTO = modelMapper.map(articulo, ArticuloDeConferenciaDTO.class);
 
         // 2. Realizar la llamada HTTP al microservicio conferencia
-        String url = "http://localhost:7777/api/conferencia/GuardarArticulos";
+        String url = "http://localhost:7777/api/conferencia/AddArticulos";
 
         webClientBuilder.build()
                 .post()

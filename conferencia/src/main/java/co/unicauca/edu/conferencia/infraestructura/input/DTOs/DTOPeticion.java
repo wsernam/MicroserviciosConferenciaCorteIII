@@ -1,8 +1,10 @@
 package co.unicauca.edu.conferencia.infraestructura.input.DTOs;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-
+import co.unicauca.edu.conferencia.dominio.modelos.Articulo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,7 +26,9 @@ public class DTOPeticion {
     private int numMaxRecepcion;
     private int numMaxAceptacion;
     private float calificacionMinAceptable;
+   
     public DTOPeticion() {
+        
     }
     @Override
     public String toString() {

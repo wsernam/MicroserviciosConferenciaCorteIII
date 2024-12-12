@@ -10,6 +10,6 @@ public interface PuertoGestionConferencia {
       public List<Conferencia> listarConferencia();
     public Conferencia crearConferencia(Conferencia prmConferencia);
     public boolean existeConferencia(int prmId);
-    public Integer AgragarArticulo(Integer prmArticuloId);
+    public Conferencia AñadirArticulo(Articulo prmArticulo);
     
 }

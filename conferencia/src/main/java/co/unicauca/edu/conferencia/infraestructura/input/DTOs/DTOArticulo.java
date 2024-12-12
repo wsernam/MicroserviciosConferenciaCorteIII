@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class DTOArticulo {
     private Integer id;
-    private Integer idConferencia;
+    private Integer conferencia;
     private String nombre;
     private ArrayList<String> autores;
     private String palabrasClaves;

@@ -51,8 +51,7 @@ public interface ConferenciaMapperInfrastructuraDominio {
      * @return La lista de objetos ConferenciaDTORespuesta que representan la respuesta para enviar al cliente.
      */
     List<DTORespuesta> mappearDeConferenciasARespuesta(List<Conferencia> Conferencias);
-
-
+ 
     Articulo mappearDeDTOArticuloAArticulo(DTOArticulo articuloDTO);
 
    
