@@ -46,12 +46,12 @@ public class PersistenciaConferencia {
 
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "conferencia_id") // Esto crea una clave foránea en la tabla Articulo
+    @JoinColumn(name = "conferencia_articulosRecibidos") // Esto crea una clave foránea en la tabla Articulo
     public List<PersistenciaArticulo> articulosRecibidos;
 
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "conferencia_id") // Esto crea una clave foránea en la tabla Articulo
+    @JoinColumn(name = "conferencia_articulosAceptados") // Esto crea una clave foránea en la tabla Articulo
     public List<PersistenciaArticulo> articulosAceptados;
 
 
@@ -88,4 +88,30 @@ public class PersistenciaConferencia {
                 + ", evaluadores=" + evaluadores
                 + '}';
     }
+
+    public List<PersistenciaArticulo> getArticulosRecibidos() {
+        return articulosRecibidos;
+    }
+
+    public void setArticulosRecibidos(List<PersistenciaArticulo> articulosRecibidos) {
+        this.articulosRecibidos = articulosRecibidos;
+    }
+
+    public List<PersistenciaArticulo> getArticulosAceptados() {
+        return articulosAceptados;
+    }
+
+    public void setArticulosAceptados(List<PersistenciaArticulo> articulosAceptados) {
+        this.articulosAceptados = articulosAceptados;
+    }
+
+    public List<PersistenciaEvaluador> getEvaluadores() {
+        return evaluadores;
+    }
+
+    public void setEvaluadores(List<PersistenciaEvaluador> evaluadores) {
+        this.evaluadores = evaluadores;
+    }
+    
+    
 }

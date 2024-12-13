@@ -16,6 +16,7 @@ public class DTOArticulo {
     private ArrayList<String> autores;
     private Articulo articuloAsignado;
     private String palabrasClaves;
+    private String estadoActual;
     public DTOArticulo() {
     }
     

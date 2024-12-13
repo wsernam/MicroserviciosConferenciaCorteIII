@@ -10,6 +10,7 @@ public class Articulo {
     private String nombre;
     private ArrayList<String> autores;
     private String palabrasClaves;
+    private String estadoActual;
     private Evaluador evaluadorAsignado;
     
     
@@ -20,7 +21,7 @@ public class Articulo {
    
 
 
-    public Articulo(Integer id, Integer conferencia, String nombre, ArrayList<String> autores, String palabrasClaves,
+    public Articulo(Integer id, Integer conferencia, String nombre, ArrayList<String> autores, String palabrasClaves, String estadoActual,
             Evaluador evaluadorAsignado) {
         this.id = id;
         this.conferencia = conferencia;
@@ -28,6 +29,7 @@ public class Articulo {
         this.autores = autores;
         this.palabrasClaves = palabrasClaves;
         this.evaluadorAsignado = evaluadorAsignado;
+        this.estadoActual=estadoActual;
     }
 
 
@@ -101,6 +103,14 @@ public class Articulo {
 
     public Evaluador getEvaluadorAsignado() {
         return evaluadorAsignado;
+    }
+
+    public String getEstadoActual() {
+        return estadoActual;
+    }
+
+    public void setEstadoActual(String estadoActual) {
+        this.estadoActual = estadoActual;
     }
 
 

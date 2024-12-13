@@ -76,28 +76,25 @@ public class AdaptadorGestionConferenciasGateway implements PuertoGestionConfere
 
     @Override
     public Conferencia addArticulo(Articulo articulo) {
-  
-         Integer idConferencia=articulo.getConferencia();
-   
+        Integer idConferencia = articulo.getConferencia();
 
-        // Obtener la conferencia asociada
-        Conferencia conferencia = EncontrarPorId(idConferencia);
-       
-       
-        // Guardar los cambios en la conferencia persistencia
-        Integer idArticulo=articulo.getId();
-        PersistenciaArticulo perArticulo= modelMapper.map(articulo, PersistenciaArticulo.class);
-        perArticulo.setId(idArticulo);
-        this.repositorioA.save(perArticulo);
+        // Obtener la conferencia asociada desde la base de datos
+        PersistenciaConferencia persistenciaConferencia = repositorio.findById(idConferencia)
+                .orElseThrow(() -> new RuntimeException("Conferencia no encontrada"));
 
-        PersistenciaConferencia persistenciaConferencia = modelMapper.map(conferencia, PersistenciaConferencia.class);
+        // Mapear el Articulo al objeto persistente
+        PersistenciaArticulo perArticulo = modelMapper.map(articulo, PersistenciaArticulo.class);
+
+        // Asociar el artículo a la conferencia
         persistenciaConferencia.getArticulosRecibidos().add(perArticulo);
+
+        // Guardar cambios (se encarga Hibernate de sincronizar las relaciones)
         repositorio.save(persistenciaConferencia);
 
+        // Mapear de vuelta a DTO o la clase de dominio
         return modelMapper.map(persistenciaConferencia, Conferencia.class);
-
-        
     }
+
 
     @Override
     public String postularEvaluador(Evaluador evaluador) {

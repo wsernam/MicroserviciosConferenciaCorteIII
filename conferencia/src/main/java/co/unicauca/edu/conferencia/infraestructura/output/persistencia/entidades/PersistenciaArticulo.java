@@ -22,9 +22,18 @@ public class PersistenciaArticulo {
     private String nombre;
     private ArrayList<String> autores;
     private String palabrasClaves;
+    private String estadoActual;
     @OneToOne(mappedBy = "articuloAsignado", cascade = CascadeType.ALL)
     private PersistenciaEvaluador evaluadorAsignado;
     public PersistenciaArticulo() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
   
