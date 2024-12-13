@@ -21,12 +21,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ArticuloEstadoActualizadoEvent {
-    private int idArticulo;              // ID del artículo
+    private Integer idArticulo;              // ID del artículo
     private String tituloArticulo;       // Título del artículo
     private String estadoAnterior;    // Estado anterior del artículo
     private String estadoActual;      // Estado actual del artículo
     private List<Evaluador> evaluadores;   // Lista de evaluadores asignados
-    private int idAutor;              // ID del autor del artículo
+    private Integer idAutor;              // ID del autor del artículo
     private String nombreAutor;       // Nombre del autor del artículo
     private String correoAutor;       // Correo del autor
 }
