@@ -7,6 +7,7 @@ package com.conference.gui.presentation.infra;
 import com.conference.gui.clients.ArticleClient;
 import com.conference.gui.clients.ConferenceClient;
 import com.conference.gui.clients.UserClient;
+import com.conference.gui.entities.Usuario;
 import com.conference.gui.entities.Usuario_Autorizado;
 
 /**
@@ -18,9 +19,9 @@ public class RestClientManager {
     private static ConferenceClient conferenceClient;
     private static ArticleClient articleClient;
     
-    private static Usuario_Autorizado usuario; 
+    private static Usuario usuario; 
     
-    public static void createClientManager (Usuario_Autorizado us){
+    public static void createClientManager (Usuario us){
         usuario = us;
     }
     

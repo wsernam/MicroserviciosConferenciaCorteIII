@@ -1,9 +1,8 @@
 
 package com.conference.gui.presentation;
 
-import com.conference.gui.article.Article;
+
 import com.conference.gui.clients.UserClient;
-import com.conference.gui.conference.UserConference;
 import com.conference.gui.entities.Articulo;
 import com.conference.gui.entities.Conferencia;
 import com.conference.gui.entities.Usuario;
@@ -40,7 +39,7 @@ import javax.swing.JScrollPane;
 
 public class GUIcontainer extends javax.swing.JFrame {
 
-    private Usuario_Autorizado usuario;
+    private Usuario usuario;
 
 
     /**
@@ -48,7 +47,7 @@ public class GUIcontainer extends javax.swing.JFrame {
      * @param us
      */
 
-    public GUIcontainer(Usuario_Autorizado us) {
+    public GUIcontainer(Usuario us) {
         this.usuario = us;
         initComponents();
         RestClientManager.createClientManager(us);
@@ -210,7 +209,7 @@ public class GUIcontainer extends javax.swing.JFrame {
 }
 */
    public List<Conferencia> searchConferences(String searchText){
-        List<Conferencia> conferences = RestClientManager.getConferenceClient().getConferences(usuario.getToken());
+        List<Conferencia> conferences = RestClientManager.getConferenceClient().getConferences();
         // Filtramos la lista de conferencias si se proporciona un texto de búsqueda
         if (searchText != null && !searchText.isEmpty()) {
             conferences = conferences.stream()
@@ -337,9 +336,6 @@ public class GUIcontainer extends javax.swing.JFrame {
         jLabelAsignar.setForeground(new java.awt.Color(245, 245, 245));
         jLabelAsignar.setText("Asignar Evaluadores");
         jLabelAsignar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelAsignarMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabelAsignarMouseEntered(evt);
             }
@@ -584,7 +580,7 @@ public class GUIcontainer extends javax.swing.JFrame {
         jLabelAsignar.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14));
     }//GEN-LAST:event_jLabelAsignarMouseExited
     
-    public void setUsuario(Usuario_Autorizado usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
          lbBienvenido.setText("Bienvenido! "+ usuario.getName() + " " + usuario.getLastName());
     }

@@ -4,7 +4,7 @@
  */
 package com.conference.gui.presentation.infra;
 
-import com.conference.gui.entities.Usuario_Autorizado;
+import com.conference.gui.entities.Usuario;
 
 /**
  *
@@ -12,7 +12,7 @@ import com.conference.gui.entities.Usuario_Autorizado;
  */
 public class ApplicationContext {
     private static ApplicationContext instance;
-    private Usuario_Autorizado usuarioLogueado;
+    private Usuario usuarioLogueado;
 
     private ApplicationContext() {}
 
@@ -23,11 +23,11 @@ public class ApplicationContext {
         return instance;
     }
 
-    public Usuario_Autorizado getUsuarioLogueado() {
+    public Usuario getUsuarioLogueado() {
         return usuarioLogueado;
     }
 
-    public void setUsuarioLogueado(Usuario_Autorizado usuarioLogueado) {
+    public void setUsuarioLogueado(Usuario usuarioLogueado) {
         this.usuarioLogueado = usuarioLogueado;
     }
 }

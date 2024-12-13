@@ -20,9 +20,9 @@ public class UserClient implements IUserRestClient {
      
      }
      @Override
-     public  Usuario_Autorizado login(String email, String password) throws Exception{
+     public  Usuario login(String email, String password) throws Exception{
          
-        Usuario_Autorizado user = null; 
+        Usuario user = null; 
         String jsonInputString = String.format("{\"email\": \"%s\", \"password\": \"%s\"}",email,password);
         
          
@@ -48,7 +48,7 @@ public class UserClient implements IUserRestClient {
 
             // Convertir el JSON a un objeto Java
             if(response.statusCode()==200){
-                user = objectMapper.readValue(response.body(), Usuario_Autorizado.class);
+                user = objectMapper.readValue(response.body(), Usuario.class);
             }
         } catch (Exception e) {
             e.printStackTrace();

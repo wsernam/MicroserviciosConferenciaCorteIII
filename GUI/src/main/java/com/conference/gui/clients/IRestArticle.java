@@ -13,9 +13,9 @@ import java.util.List;
  */
 public interface IRestArticle {
     
-    public List<Articulo> getArticles(String token);
+    public List<Articulo> getArticles();
     
-    public List<Articulo>  getArticlesUser(String username, String token);
+    public List<Articulo>  getArticlesUser();
     
-    public Articulo createArticle(Articulo ar, String token); 
+    public Articulo createArticle(Articulo ar); 
 }

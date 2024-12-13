@@ -13,9 +13,9 @@ import java.util.List;
  * @author Ashlee Campaz
  */
 public interface IRestConference {
-    public List<Conferencia> getConferences(String token);
+    public List<Conferencia> getConferences();
     
-    public List<Conferencia>  getConferenceUser(String username, String token);
+    public List<Conferencia>  getConferenceUser();
     
-    public Conferencia createConference(Conferencia co, String token); 
+    public Conferencia createConference(Conferencia co); 
 }

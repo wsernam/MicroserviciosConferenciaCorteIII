@@ -4,7 +4,6 @@
  */
 package com.conference.gui.presentation;
 
-import com.conference.gui.article.Article;
 import com.conference.gui.clients.IRestArticle;
 import com.conference.gui.entities.Articulo;
 import com.conference.gui.presentation.infra.Observer;
