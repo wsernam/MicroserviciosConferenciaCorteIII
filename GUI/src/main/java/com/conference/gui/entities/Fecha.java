@@ -50,6 +50,13 @@ public class Fecha implements Comparable<Fecha> {
     public boolean esIgualA(Fecha otraFecha) {
         return this.fecha.isEqual(otraFecha.getFecha());
     }
+
+    @Override
+    public String toString() {
+        return fecha.toString();
+    }
+    
+    
 }
  
     

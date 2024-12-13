@@ -5,7 +5,6 @@
 package com.conference.gui.presentation;
 
 import com.conference.gui.clients.IRestConference;
-import com.conference.gui.conference.UserConference;
 import com.conference.gui.entities.Conferencia;
 import com.conference.gui.presentation.infra.Observer;
 import java.util.List;
@@ -94,7 +93,7 @@ public class GUImisConferencias extends javax.swing.JInternalFrame implements Ob
     }
 
     private void buildResultPanels(){
-        conferencias = conferenceClient.getConferences("token");
+        conferencias = conferenceClient.getConferences();
         for(Conferencia c: conferencias){
             pnlConferenceInfo infoConference = new pnlConferenceInfo(c); 
             pnlConferencias.add(infoConference);

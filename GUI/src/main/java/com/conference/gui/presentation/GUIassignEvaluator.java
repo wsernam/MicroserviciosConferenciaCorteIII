@@ -2,8 +2,8 @@
 package com.conference.gui.presentation;
 
 
-import com.conference.gui.conference.IUserRestConference;
-import com.conference.gui.entities.Conference;
+import com.conference.gui.clients.IRestConference;
+import com.conference.gui.entities.Conferencia;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -39,11 +39,11 @@ public class GUIassignEvaluator extends javax.swing.JInternalFrame {
     /**
      * Creates new form GUIcreateConference
      */
-       private IUserRestConference conferenceService;
+       private IRestConference conferenceService;
       
 
     
-    public GUIassignEvaluator(IUserRestConference con) {
+    public GUIassignEvaluator(IRestConference con) {
         this.conferenceService = con;
        
         initComponents();

@@ -1,9 +1,11 @@
 package com.conference.gui.presentation;
 
-import com.conference.gui.article.Article;
-import com.conference.gui.article.IArticleRest;
+
+import com.conference.gui.clients.ArticleClient;
+import com.conference.gui.clients.IRestArticle;
 import com.conference.gui.entities.Articulo;
 import com.conference.gui.entities.Conferencia;
+import com.conference.gui.presentation.infra.ApplicationContext;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
@@ -23,7 +25,7 @@ import javax.swing.JPanel;
 public class GUIcreateArticle extends javax.swing.JInternalFrame {
 
     private Conferencia conference;
-    private IArticleRest objServicioArticulos;
+    private IRestArticle objServicioArticulos;
     private String lastDialogMessage;
 
     /**
@@ -39,7 +41,7 @@ public class GUIcreateArticle extends javax.swing.JInternalFrame {
         return pnlAutores;
     }
 
-    public GUIcreateArticle(IArticleRest as, Conferencia co) {
+    public GUIcreateArticle(IRestArticle as, Conferencia co) {
         this.objServicioArticulos = as;
         this.conference = co;
         listadoAutores = new ArrayList<>();
@@ -282,8 +284,8 @@ public class GUIcreateArticle extends javax.swing.JInternalFrame {
                 Articulo articulo = new Articulo(nombre, nombresAutores, resumen, palabrasClaves);
 
                 // Guarda el artículo usando el método `save` de `Article`
-                Article articleService = new Article();
-                Articulo articuloGuardado = articleService.save(articulo);
+                ArticleClient articleService = new ArticleClient(ApplicationContext.getInstance().getUsuarioLogueado());
+                Articulo articuloGuardado = articleService.createArticle(articulo);
 
                 if (articuloGuardado != null) {
                     mostrarMensajeExito("Artículo enviado exitosamente con ID: " + articuloGuardado.getIdArticulo());

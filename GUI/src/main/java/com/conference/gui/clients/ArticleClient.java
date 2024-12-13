@@ -5,7 +5,7 @@
 package com.conference.gui.clients;
 
 import com.conference.gui.entities.Articulo;
-import com.conference.gui.entities.Usuario_Autorizado;
+import com.conference.gui.entities.Usuario;
 import com.conference.gui.presentation.infra.Subject;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,22 +23,21 @@ import java.util.List;
 public class ArticleClient extends Subject implements IRestArticle{
     
     private static final String USER_AGENT = "GUIArticles";
-    private final String urlArticleService = "http://localhost:8081/EasyConference";
+    private final String urlArticleService = "http://localhost:7080/api";
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private Usuario_Autorizado usuario;
+    private Usuario usuario;
      
-     public ArticleClient(Usuario_Autorizado us){
+     public ArticleClient(Usuario us){
          this.usuario = us;
      }
     @Override
-    public List<Articulo> getArticles(String token) {
+    public List<Articulo> getArticles() {
         List<Articulo> articulos = new ArrayList<>();
     try {
         // Crear la solicitud HTTP de tipo GET
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(urlArticleService.concat("/Article"))) // Endpoint para obtener todos los artículos
+                .uri(URI.create(urlArticleService.concat("/articulos"))) // Endpoint para obtener todos los artículos
                 .header("User-Agent", USER_AGENT)
-                .header("Authorization", "Bearer " + usuario.getToken())
                 .GET() // Método GET
                 .build();
 
@@ -60,14 +59,13 @@ public class ArticleClient extends Subject implements IRestArticle{
     }
 
     @Override
-    public List<Articulo> getArticlesUser(String username,String token) {
+    public List<Articulo> getArticlesUser() {
         List<Articulo> articulos = new ArrayList<>();
     try {
         // Crear la solicitud HTTP de tipo GET
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(urlArticleService + "/Article/" + usuario.getUsername())) // Endpoint para obtener todos los artículos
+                .uri(URI.create(urlArticleService + "/articulos/" + usuario.getId())) // Endpoint para obtener todos los artículos
                 .header("User-Agent", USER_AGENT)
-                .header("Authorization", "Bearer " + usuario.getToken())
                 .GET() // Método GET
                 .build();
 
@@ -89,7 +87,7 @@ public class ArticleClient extends Subject implements IRestArticle{
     }
 
     @Override
-    public Articulo createArticle(Articulo ar,String token) {
+    public Articulo createArticle(Articulo ar) {
         Articulo savedArticle = null;
     try {
         // Convertir el objeto `Articulo` a JSON
@@ -100,7 +98,6 @@ public class ArticleClient extends Subject implements IRestArticle{
                 .uri(URI.create(urlArticleService.concat("/articulos")))
                 .header("Content-Type", "application/json")
                 .header("User-Agent", USER_AGENT)
-                .header("Authorization", "Bearer " + usuario.getToken())
                 .POST(HttpRequest.BodyPublishers.ofString(jsonInputString))
                 .build();
 

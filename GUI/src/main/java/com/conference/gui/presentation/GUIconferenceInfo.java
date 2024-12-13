@@ -1,6 +1,7 @@
 package com.conference.gui.presentation;
 
 import com.conference.gui.entities.Conferencia;
+import com.conference.gui.entities.Usuario;
 import com.conference.gui.entities.Usuario_Autorizado;
 import com.conference.gui.presentation.infra.ApplicationContext;
 
@@ -256,7 +257,7 @@ public class GUIconferenceInfo extends javax.swing.JInternalFrame {
             }
 
             // 2. Obtener los datos del evaluador desde la sesión o el objeto de usuario autorizado
-            Usuario_Autorizado usuarioLogueado = obtenerUsuarioLogueado(); // Método ficticio que retorna el usuario logueado
+            Usuario usuarioLogueado = obtenerUsuarioLogueado(); // Método ficticio que retorna el usuario logueado
             if (usuarioLogueado == null) {
                 javax.swing.JOptionPane.showMessageDialog(this,
                         "No se ha encontrado un usuario logueado.",
@@ -323,7 +324,7 @@ public class GUIconferenceInfo extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_lbPostulacionEvaluadorMouseClicked
 
-    private Usuario_Autorizado obtenerUsuarioLogueado() {
+    private Usuario obtenerUsuarioLogueado() {
         // Accedemos al ApplicationContext para obtener el usuario logueado
         ApplicationContext context = ApplicationContext.getInstance();
         return context.getUsuarioLogueado();

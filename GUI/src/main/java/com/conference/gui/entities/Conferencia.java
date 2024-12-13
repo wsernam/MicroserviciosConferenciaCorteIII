@@ -7,8 +7,10 @@ package com.conference.gui.entities;
 import jakarta.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -17,8 +19,11 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@NoArgsConstructor
 @AllArgsConstructor
 public class Conferencia {
+    private Long id;
+    private String organizador;
     private String nombre;
     private String temas;
     private String entidadOrganizadora;
@@ -34,11 +39,12 @@ public class Conferencia {
     private int numMaxAceptacion;
     private float calificacionMinAceptable;
     private List<Integer> articulosAceptados;
-    private List<Integer> articulosRecividos;
+    private List<Integer> articulosRecibidos;
 
-    public Conferencia(String nombre, String temas, String entidadOrganizadora, String pais, String estado,
+    public Conferencia(String organizador, String nombre, String temas, String entidadOrganizadora, String pais, String estado,
             String ciudad, String direccion, Fecha fechaFin, Fecha fechaInicio, Fecha fechaFinRecepcion,
             Fecha fechaFinEvaluacion, int numMaxRecepcion, int numMaxAceptacion, float calificacionMinAceptable) {
+       this.organizador = organizador;
         this.nombre = nombre;
         this.temas = temas;
         this.entidadOrganizadora = entidadOrganizadora;
@@ -55,7 +61,26 @@ public class Conferencia {
         this.calificacionMinAceptable = calificacionMinAceptable;
     }
 
-
+    public Conferencia(Long id,String organizador, String nombre, String temas, String entidadOrganizadora, String pais, String estado,
+            String ciudad, String direccion, Fecha fechaFin, Fecha fechaInicio, Fecha fechaFinRecepcion,
+            Fecha fechaFinEvaluacion, int numMaxRecepcion, int numMaxAceptacion, float calificacionMinAceptable) {
+       this.id = id;
+       this.organizador = organizador;
+        this.nombre = nombre;
+        this.temas = temas;
+        this.entidadOrganizadora = entidadOrganizadora;
+        this.pais = pais;
+        this.estado = estado;
+        this.ciudad = ciudad;
+        this.direccion = direccion;
+        this.fechaFin = fechaFin;
+        this.fechaInicio = fechaInicio;
+        this.fechaFinRecepcion = fechaFinRecepcion;
+        this.fechaFinEvaluacion = fechaFinEvaluacion;
+        this.numMaxRecepcion = numMaxRecepcion;
+        this.numMaxAceptacion = numMaxAceptacion;
+        this.calificacionMinAceptable = calificacionMinAceptable;
+    }
 
 
     public void setArticulosAceptados(List<Integer> articulosAceptados) {
@@ -93,7 +118,7 @@ public class Conferencia {
     }    
 
     public boolean MaxArticulosRecividos(int numMaxRecividos){
-        if(articulosRecividos.size()>numMaxRecepcion){
+        if(articulosRecibidos.size()>numMaxRecepcion){
             return false;
         }
         return true;    
@@ -101,6 +126,33 @@ public class Conferencia {
 
     public String toStringBasic(){
         return nombre + "/t" + pais + "/t"  + ciudad + "/t" + temas;
+    }
+    
+    @Override
+    public String toString() {
+        return "{" +
+                "\"nombre\":\"" + nombre + "\"," +
+                "\"temas\":\"" + temas + "\"," +
+                "\"entidadOrganizadora\":\"" + entidadOrganizadora + "\"," +
+                "\"organizador\":\"" + organizador + "\","+
+                "\"pais\":\"" + pais + "\"," +
+                "\"estado\":\"" + estado + "\"," +
+                "\"ciudad\":\"" + ciudad + "\"," +
+                "\"direccion\":\"" + direccion + "\"," +
+                "\"fechaFin\":\"" + fechaFin.toString() + "\"," +
+                "\"fechaInicio\":\"" + fechaInicio.toString() + "\"," +
+                "\"fechaFinRecepcion\":\"" + fechaFinRecepcion.toString() + "\"," +
+                "\"fechaFinEvaluacion\":\"" + fechaFinEvaluacion.toString() + "\"," +
+                "\"numMaxRecepcion\":" + numMaxRecepcion + "," +
+                "\"numMaxAceptacion\":" + numMaxAceptacion + "," +
+                "\"calificacionMinAceptable\":" + calificacionMinAceptable + "," +
+                "\"articulosAceptados\":[" + listToJson(articulosAceptados) + "]," +
+                "\"articulosRecibidos\":[" + listToJson(articulosRecibidos) + "]" +
+                "}";
+    }
+    
+    private String listToJson(List<Integer> list) {
+        return list == null ? "" : list.stream().map(Object::toString).collect(Collectors.joining(","));
     }
     
 }

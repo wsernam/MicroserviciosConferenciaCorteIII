@@ -275,7 +275,7 @@ public class GUIlogin extends javax.swing.JFrame {
             lbCamposVacios.setVisible(true);
             return;
        }
-       Usuario_Autorizado us = null; 
+       Usuario us = null; 
         try {
              us = userclient.login(txtfCorreo.getText(),new String(pswfContrasenia.getPassword()));
         } catch (Exception ex) {
