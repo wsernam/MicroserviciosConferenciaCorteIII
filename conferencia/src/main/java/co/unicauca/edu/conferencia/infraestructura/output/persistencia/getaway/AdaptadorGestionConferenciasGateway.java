@@ -1,4 +1,4 @@
-package co.unicauca.edu.conferencia.infraestructura.output.persistencia.gateway;
+package co.unicauca.edu.conferencia.infraestructura.output.persistencia.getaway;
 
 import java.util.ArrayList;
 import java.util.List;
