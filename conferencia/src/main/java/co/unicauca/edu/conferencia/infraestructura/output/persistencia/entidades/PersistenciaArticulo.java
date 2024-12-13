@@ -2,6 +2,7 @@ package co.unicauca.edu.conferencia.infraestructura.output.persistencia.entidade
 
 import java.util.ArrayList;
 
+import co.unicauca.edu.conferencia.dominio.modelos.Evaluador;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -19,46 +20,11 @@ public class PersistenciaArticulo {
     private String nombre;
     private ArrayList<String> autores;
     private String palabrasClaves;
+    private Evaluador evaluadorAsignado;
     public PersistenciaArticulo() {
     }
 
-    public Integer getId() {
-        return id;
-    }
+  
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getConferencia() {
-        return conferencia;
-    }
-
-    public void setConferencia(Integer conferencia) {
-        this.conferencia = conferencia;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public ArrayList<String> getAutores() {
-        return autores;
-    }
-
-    public void setAutores(ArrayList<String> autores) {
-        this.autores = autores;
-    }
-
-    public String getPalabrasClaves() {
-        return palabrasClaves;
-    }
-
-    public void setPalabrasClaves(String palabrasClaves) {
-        this.palabrasClaves = palabrasClaves;
-    }
+  
 }

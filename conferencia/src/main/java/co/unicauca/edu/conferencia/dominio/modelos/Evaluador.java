@@ -10,21 +10,52 @@ public class Evaluador {
     private String country;
     private String email;
     private String organization;
+    private Articulo articuloAsignado;
     private List<String> researchfields;
     private Integer idConferencia; // La conferencia a la que se postula
     public Evaluador() {
     }
 
-    public Evaluador(Long id, String name, String lastName, String country, String email, String organization, List<String> researchfields, Integer idConferencia) {
+   
+
+    public Articulo getArticuloAsignado() {
+        return articuloAsignado;
+    }
+
+
+
+    public void setArticuloAsignado(Articulo articuloAsignado) {
+        this.articuloAsignado = articuloAsignado;
+    }
+
+
+
+    public Integer getIdConferencia() {
+        return idConferencia;
+    }
+
+
+
+    public void setIdConferencia(Integer idConferencia) {
+        this.idConferencia = idConferencia;
+    }
+
+
+
+    public Evaluador(Long id, String name, String lastName, String country, String email, String organization,
+            Articulo articuloAsignado, List<String> researchfields, Integer idConferencia) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.country = country;
         this.email = email;
         this.organization = organization;
+        this.articuloAsignado = articuloAsignado;
         this.researchfields = researchfields;
         this.idConferencia = idConferencia;
     }
+
+
 
     public Long getId() {
         return id;

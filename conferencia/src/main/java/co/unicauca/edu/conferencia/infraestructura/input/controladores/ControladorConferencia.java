@@ -89,5 +89,16 @@ public class ControladorConferencia {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    @GetMapping("/VerificarConferencia/{prmId}")
+    public boolean VerificarConferencia(@PathVariable Integer prmId) {
+        return this.objGestionConferenciaDom.existeConferencia(prmId);
+    }
+
+    @PostMapping("/asignar-evaluadores")
+    public ResponseEntity<List<Articulo>> asignarEvaluadores(@RequestBody Conferencia conferencia) {
+        List<Articulo> articulosAsignados = objGestionConferenciaDom.asignarEvaluadores(conferencia);
+        return ResponseEntity.ok(articulosAsignados);
+    }
+
   
 }

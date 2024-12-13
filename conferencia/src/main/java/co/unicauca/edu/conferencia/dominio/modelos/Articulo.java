@@ -10,20 +10,28 @@ public class Articulo {
     private String nombre;
     private ArrayList<String> autores;
     private String palabrasClaves;
+    private Evaluador evaluadorAsignado;
     
     
     public Articulo() {
     }
 
 
-    public Articulo(Integer id, Integer conferencia, String nombre, ArrayList<String> autores,
-            String palabrasClaves) {
+   
+
+
+    public Articulo(Integer id, Integer conferencia, String nombre, ArrayList<String> autores, String palabrasClaves,
+            Evaluador evaluadorAsignado) {
         this.id = id;
         this.conferencia = conferencia;
         this.nombre = nombre;
         this.autores = autores;
         this.palabrasClaves = palabrasClaves;
+        this.evaluadorAsignado = evaluadorAsignado;
     }
+
+
+
 
 
     public Integer getId() {
@@ -85,6 +93,22 @@ public class Articulo {
                 ", autores=" + autores +
                 ", palabrasClaves='" + palabrasClaves + '\'' +
                 '}';
+    }
+
+
+
+
+
+    public Evaluador getEvaluadorAsignado() {
+        return evaluadorAsignado;
+    }
+
+
+
+
+
+    public void setEvaluadorAsignado(Evaluador evaluadorAsignado) {
+        this.evaluadorAsignado = evaluadorAsignado;
     }
     
     

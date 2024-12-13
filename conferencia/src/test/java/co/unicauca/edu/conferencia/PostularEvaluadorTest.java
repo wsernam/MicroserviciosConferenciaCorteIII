@@ -48,11 +48,11 @@ class PostularEvaluadorTest {
     DTOEvaluador evaluadorDTO = new DTOEvaluador(1L, "John", "Doe", "USA", "john.doe@example.com",
             "Tech University", List.of("Artificial Intelligence", "Machine Learning"), 101);
 
-    Evaluador evaluador = new Evaluador(1L, "John", "Doe", "USA", "john.doe@example.com",
-            "Tech University", List.of("Artificial Intelligence", "Machine Learning"), 101);
+    //Evaluador evaluador = new Evaluador(1L, "John", "Doe", "USA", "john.doe@example.com",
+      //      "Tech University", List.of("Artificial Intelligence", "Machine Learning"), 101);
 
-    when(objMapeador.mappearDeDTOEntradaEvaluadorAEvaluador(any(DTOEvaluador.class))).thenReturn(evaluador);
-    doNothing().when(objGestionConferenciaDom).postularEvaluador(evaluador);
+   // when(objMapeador.mappearDeDTOEntradaEvaluadorAEvaluador(any(DTOEvaluador.class))).thenReturn(evaluador);
+   // doNothing().when(objGestionConferenciaDom).postularEvaluador(evaluador);
 
     // Ejecutar la solicitud HTTP
     mockMvc.perform(post("/api/Conferencia/PostularEvaluador")

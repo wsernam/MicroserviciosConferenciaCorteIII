@@ -1,10 +1,13 @@
 package co.unicauca.edu.conferencia.dominio.casosDeUso;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import co.unicauca.edu.conferencia.aplicación.puertos.input.PuertoGestionConferencia;
 import co.unicauca.edu.conferencia.aplicación.puertos.output.PuertoComunicacionResultado;
 import co.unicauca.edu.conferencia.aplicación.puertos.output.PuertoGestionConferenciaGateway;
+import co.unicauca.edu.conferencia.dominio.StrictAssignment;
 import co.unicauca.edu.conferencia.dominio.modelos.Articulo;
 import co.unicauca.edu.conferencia.dominio.modelos.Conferencia;
 import co.unicauca.edu.conferencia.dominio.modelos.Evaluador;
@@ -92,6 +95,43 @@ public class AdaptadorGestionConferencias implements PuertoGestionConferencia {
         // Si se logra postular correctamente, almacenar en el repositorio
         servicioRepositorio.postularEvaluador(evaluador);
         System.out.println("Evaluador postulado correctamente.");
+    }
+
+
+    @Override
+    public List<Articulo> asignarEvaluadores(Conferencia conferencia) {
+        // Crear instancia de StrictAssignment
+        StrictAssignment strictAssignment = new StrictAssignment(1);
+
+        // Obtener el mapa de afinidad inicial
+        Map<Articulo, List<Evaluador>> afinidadMap = strictAssignment.AffinityAssignment(
+           conferencia.getArticulosRecibidos(),
+            conferencia.getEvaluadores()
+        );
+
+        List<Articulo> articulosAsignados = new ArrayList<>();
+
+        // Iterar sobre los artículos y sus evaluadores afines
+        for (Articulo articulo : conferencia.getArticulosRecibidos()) {
+            List<Evaluador> evaluadoresAfines = afinidadMap.get(articulo);
+            if (evaluadoresAfines != null) {
+                // Filtrar evaluadores que no tengan conflictos
+                List<Evaluador> evaluadoresFiltrados = evaluadoresAfines.stream()
+                    .filter(evaluador -> !evaluador.getEmail().equals(conferencia.getOrganizador())) // No debe coincidir con el organizador
+                    .toList();
+
+                if (!evaluadoresFiltrados.isEmpty()) {
+                    // Asignar el primer evaluador disponible
+                    Evaluador evaluadorAsignado = evaluadoresFiltrados.get(0);
+                    evaluadoresFiltrados.remove(0);
+                    articulo.setEvaluadorAsignado(evaluadorAsignado);
+                    evaluadorAsignado.setArticuloAsignado(articulo);
+                    articulosAsignados.add(articulo);
+                }
+            }
+        }
+
+        return articulosAsignados;
     }
 
    

@@ -15,8 +15,10 @@ public interface PuertoGestionConferencia {
     public boolean existeConferencia(int prmId);
 
     public Conferencia AñadirArticulo(Articulo prmArticulo);
-    
+
     public void postularEvaluador(Evaluador evaluador);
+    
+    List<Articulo> asignarEvaluadores(Conferencia conferencia);
     
 
 }
