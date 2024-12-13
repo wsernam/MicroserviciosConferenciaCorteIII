@@ -69,13 +69,13 @@ public class EventListener {
             // Construir el mensaje
             String mensaje = String.format(
             "Hola %s, te has registrado como evaluador en la conferencia '%s' (ID: %d). ¡Gracias por tu participación!",
-            evento.getEvaluador().getNombreUsuario(),
+            evento.getNombre(),
             evento.getNombreConferencia(),
             evento.getIdConferencia()
         );
 
         // Delegar la notificación al servicio
-        notifyServices.enviarNotificacion(evento.getEvaluador().getCorreoUsuario(), "Registro como Evaluador", mensaje);
+        notifyServices.enviarNotificacion(evento.getCorreo(), "Registro como Evaluador", mensaje);
     }
     
     @RabbitListener(queues = "articulo-asignado-queue")
@@ -84,9 +84,8 @@ public class EventListener {
         for (Evaluador evaluador : evento.getEvaluadores()) {
             // Construir el mensaje de notificación para cada evaluador
             String mensaje = String.format(
-                "Hola %s, %s te ha asignado el artículo '%s' (ID: %d) para evaluar en la conferencia '%s'.",
+                "Hola %s, se te ah asignado el artículo '%s' (ID: %d) para evaluar en la conferencia '%s'.",
                 evaluador.getNombreEvaluador(),
-                evento.getAsignadoPor().getNombreUsuario(),
                 evento.getTituloArticulo(),
                 evento.getIdArticulo(),
                 evento.getNombreConferencia()
