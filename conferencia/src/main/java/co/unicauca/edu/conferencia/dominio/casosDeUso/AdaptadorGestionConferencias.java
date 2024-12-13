@@ -127,6 +127,7 @@ public class AdaptadorGestionConferencias implements PuertoGestionConferencia {
                 Evaluador evaluadorAsignado = evaluadoresFiltrados.get(0); // Seleccionar el primero disponible
                 articulo.setEvaluadorAsignado(evaluadorAsignado);
                 evaluadorAsignado.setArticuloAsignado(articulo);
+                
                 articulosAsignados.add(articulo);
             }
         }
