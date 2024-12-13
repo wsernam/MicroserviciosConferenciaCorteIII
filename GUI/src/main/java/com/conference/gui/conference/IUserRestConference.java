@@ -13,6 +13,5 @@ import java.util.List;
 public interface IUserRestConference {
     
    public List<Conference> getConferencias();
-    public Conference setConferencia(Conference prmConferencia);
-    
+   public Conference setConferencia(Conference prmConferencia);    
 }

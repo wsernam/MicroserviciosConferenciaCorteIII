@@ -1,15 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.conference.gui.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,8 +15,10 @@ import lombok.Setter;
 @NoArgsConstructor
 
 public class Conference {
-     private static final long serialVersionUID = 1L;
-    private String   organizador;
+
+    private static final long serialVersionUID = 1L;
+    private Long id;
+    private String organizador;
     private String nombre;
     private String temas;
     private String entidadOrganizadora;
@@ -59,14 +52,12 @@ public class Conference {
         this.calificacionMinAceptable = calificacionMinAceptable;
     }
 
-
-
     @Override
     public String toString() {
-        return "Conference{" + "  nombre=" + nombre  + '}';
+        return "Conference{" + "  nombre=" + nombre + '}';
     }
-    
-    public String toStringBasic(){
-        return "Conferencia"; 
+
+    public String toStringBasic() {
+        return "Conferencia";
     }
 }

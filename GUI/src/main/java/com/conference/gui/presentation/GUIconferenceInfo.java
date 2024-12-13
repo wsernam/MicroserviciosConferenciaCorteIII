@@ -12,16 +12,18 @@ public class GUIconferenceInfo extends javax.swing.JInternalFrame {
      * Creates new form GUIconferenceInfo
      */
     private Conference conference;
+
     public GUIconferenceInfo(Conference c) {
         this.conference = c;
         initComponents();
         setLabels();
     }
-    
-    private void setLabels(){
-    
+
+    private void setLabels() {
+
         //TODO implementation 
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -225,19 +227,63 @@ public class GUIconferenceInfo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_lbSubirArticuloMouseEntered
 
     private void lbSubirArticuloMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbSubirArticuloMouseExited
-        lbSubirArticulo.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14));
+        lbSubirArticulo.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14));
     }//GEN-LAST:event_lbSubirArticuloMouseExited
 
     private void lbPostulacionEvaluadorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPostulacionEvaluadorMouseEntered
-        // TODO add your handling code here:
+        lbPostulacionEvaluador.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14));
     }//GEN-LAST:event_lbPostulacionEvaluadorMouseEntered
 
     private void lbPostulacionEvaluadorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPostulacionEvaluadorMouseExited
-        // TODO add your handling code here:
+        lbPostulacionEvaluador.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14));
     }//GEN-LAST:event_lbPostulacionEvaluadorMouseExited
 
     private void lbPostulacionEvaluadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPostulacionEvaluadorMouseClicked
-        
+        try {
+            // 1. Mostrar un cuadro de confirmación para la postulación
+            int confirm = javax.swing.JOptionPane.showConfirmDialog(this,
+                    "¿Estás seguro de que deseas postularte como evaluador para esta conferencia?",
+                    "Confirmar Postulación", javax.swing.JOptionPane.YES_NO_OPTION);
+
+            // Si el usuario cancela la acción, simplemente salir
+            if (confirm != javax.swing.JOptionPane.YES_OPTION) {
+                return;
+            }
+
+            // 2. Lógica para enviar la postulación
+            String endpoint = "http://localhost:7777/api/conferencias/" + conference.getId() + "/postulaciones";
+            java.net.URL url = new java.net.URL(endpoint);
+            java.net.HttpURLConnection conn = (java.net.HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setDoOutput(true);
+
+            // Datos del evaluador (pueden obtenerse de la sesión activa)
+            String evaluatorJson = "{\"userId\": \"123\", \"nombre\": \"John Doe\"}"; // Ejemplo
+            try (java.io.OutputStream os = conn.getOutputStream()) {
+                byte[] input = evaluatorJson.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }
+
+            // 3. Manejar la respuesta del servidor
+            int responseCode = conn.getResponseCode();
+            if (responseCode == 200 || responseCode == 201) {
+                javax.swing.JOptionPane.showMessageDialog(this,
+                        "Postulación registrada exitosamente.",
+                        "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this,
+                        "Ocurrió un error al registrar la postulación. Intenta de nuevo.",
+                        "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (Exception e) {
+            // 4. Manejo de errores
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Error de conexión: " + e.getMessage(),
+                    "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_lbPostulacionEvaluadorMouseClicked
 
 
