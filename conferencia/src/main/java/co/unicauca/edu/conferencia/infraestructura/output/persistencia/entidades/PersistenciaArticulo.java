@@ -21,6 +21,44 @@ public class PersistenciaArticulo {
     private String palabrasClaves;
     public PersistenciaArticulo() {
     }
-    
-    
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getConferencia() {
+        return conferencia;
+    }
+
+    public void setConferencia(Integer conferencia) {
+        this.conferencia = conferencia;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public ArrayList<String> getAutores() {
+        return autores;
+    }
+
+    public void setAutores(ArrayList<String> autores) {
+        this.autores = autores;
+    }
+
+    public String getPalabrasClaves() {
+        return palabrasClaves;
+    }
+
+    public void setPalabrasClaves(String palabrasClaves) {
+        this.palabrasClaves = palabrasClaves;
+    }
 }
