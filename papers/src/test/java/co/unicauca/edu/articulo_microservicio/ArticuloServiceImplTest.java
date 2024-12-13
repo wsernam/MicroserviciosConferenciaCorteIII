@@ -47,7 +47,7 @@ public class ArticuloServiceImplTest {
     void testSave() {
         // Crear el ArticuloDTO que se va a guardar
         ArticuloDTO articuloDTO = new ArticuloDTO();
-        articuloDTO.setIdArticulo(1);
+        articuloDTO.setId(1);
         articuloDTO.setNombre("Título del Artículo");
         articuloDTO.setAutores(new ArrayList<>(List.of("Autor 1", "Autor 2")));
         articuloDTO.setResumen("Este es un resumen del artículo.");
@@ -96,7 +96,7 @@ public class ArticuloServiceImplTest {
         articulo.setNombre("Articulo Test");
 
         ArticuloDTO articuloDTO = new ArticuloDTO();
-        articuloDTO.setIdArticulo(idArticulo);
+        articuloDTO.setId(idArticulo);
         articuloDTO.setNombre("Articulo Test");
 
         when(servicioAccesoBaseDatos.findById(idArticulo)).thenReturn(Optional.of(articulo));
