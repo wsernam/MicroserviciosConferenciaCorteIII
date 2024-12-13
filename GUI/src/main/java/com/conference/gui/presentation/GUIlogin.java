@@ -265,30 +265,32 @@ public class GUIlogin extends javax.swing.JFrame {
     }//GEN-LAST:event_lbNotienesCuentaMouseExited
 
     private void lbNotienesCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNotienesCuentaMouseClicked
-        this.dispose();
-        GUIregister registro = new GUIregister(userclient);
-        registro.setVisible(true);
+       
     }//GEN-LAST:event_lbNotienesCuentaMouseClicked
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-       if(txtfCorreo.getText().isBlank() || String.valueOf(pswfContrasenia.getPassword()).isBlank()){
+        Usuario us = null; 
+         GUIcontainer container = new GUIcontainer(); 
+            // Pasar Usuario, ConferenceService y ArticleService al constructor de GUIcontainer
+            container.setUsuario(us);
+            container.setVisible(true);
+            cleanFields();
+        if(txtfCorreo.getText().isBlank() || String.valueOf(pswfContrasenia.getPassword()).isBlank()){
             lbCamposVacios.setVisible(true);
             return;
        }
-       Usuario us = null; 
+      
         try {
              us = userclient.login(txtfCorreo.getText(),new String(pswfContrasenia.getPassword()));
         } catch (Exception ex) {
             Logger.getLogger(GUIlogin.class.getName()).log(Level.SEVERE, null, ex);
         }
        if (us != null) {
-            ApplicationContext.getInstance().setUsuarioLogueado(us);
+             this.dispose();
+        GUIregister registro = new GUIregister(userclient);
+        registro.setVisible(true);
             this.dispose();
-            GUIcontainer container = new GUIcontainer(); 
-            // Pasar Usuario, ConferenceService y ArticleService al constructor de GUIcontainer
-            container.setUsuario(us);
-            container.setVisible(true);
-            cleanFields();
+           
         } else {
             JOptionPane.showMessageDialog(null, "Contraseña y/o usuario incorrecto", "Información", JOptionPane.INFORMATION_MESSAGE);
         }

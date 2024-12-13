@@ -53,6 +53,46 @@
             "projectName": "conferencia",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ApigatewayApplication<com.apigateway-apigateway>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.apigateway.ApigatewayApplication",
+            "projectName": "com.apigateway-apigateway",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-GUI<com.conference-GUI>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.conference.gui.GUI",
+            "projectName": "com.conference-GUI",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ConferenciaAplicacion<co.unicauca.edu-conferencia>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "co.unicauca.edu.conferencia.ConferenciaAplicacion",
+            "projectName": "co.unicauca.edu-conferencia",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-UsuariosService<com.conference-usuarios-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.conference.usuarios.UsuariosService",
+            "projectName": "com.conference-usuarios-service",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
