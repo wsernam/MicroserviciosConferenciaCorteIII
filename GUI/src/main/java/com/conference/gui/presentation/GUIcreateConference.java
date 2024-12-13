@@ -542,15 +542,15 @@ public class GUIcreateConference extends javax.swing.JInternalFrame {
             }
 
             // Crear objeto Conferencia
-            Conferencia conferencia = new Conferencia(
+            Conferencia conferencia = new Conferencia(organizador,
                 nombre, temas, entidadOrganizadora, pais, estado, ciudad, direccion,
                 new Fecha(fechaInicioLD), new Fecha(fechaFinLD), new Fecha(fechaFinRecepcionLD),
                 new Fecha(fechaFinEvaluacionLD), numMaxArt, numMaxArtAcep, calMinima
             );
 
             // Llamar al servicio para crear la conferencia
-            String token = ApplicationContext.getInstance().getUsuarioLogueado().getToken();
-            Conferencia result = conferenceService.createConference(conferencia, token);
+            
+            Conferencia result = conferenceService.createConference(conferencia);
 
             if (result != null) {
                 showMessage("Conferencia registrada exitosamente.");

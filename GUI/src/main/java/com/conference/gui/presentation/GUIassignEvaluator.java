@@ -40,11 +40,11 @@ public class GUIassignEvaluator extends javax.swing.JInternalFrame {
      * Creates new form GUIcreateConference
      */
        private IRestConference conferenceService;
-       private IRestConference conferenceService;
+
       
 
     
-    public GUIassignEvaluator(IRestConference con) {
+
     public GUIassignEvaluator(IRestConference con) {
         this.conferenceService = con;
        
