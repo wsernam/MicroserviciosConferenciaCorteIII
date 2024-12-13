@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.unicauca.edu.conferencia.dominio.modelos.Articulo;
+import co.unicauca.edu.conferencia.dominio.modelos.Evaluador;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,6 +31,7 @@ public class DTORespuesta {
     private float calificacionMinAceptable;
     public List<DTOArticulo> articulosAceptados;
     public List<DTOArticulo> articulosRecibidos;
+    private List<Evaluador> evaluadores;
     public DTORespuesta() {
         this.articulosAceptados = new ArrayList<>();
         this.articulosRecibidos = new ArrayList<>();
