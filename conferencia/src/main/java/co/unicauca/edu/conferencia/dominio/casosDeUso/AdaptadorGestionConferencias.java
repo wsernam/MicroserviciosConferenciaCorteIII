@@ -102,37 +102,38 @@ public class AdaptadorGestionConferencias implements PuertoGestionConferencia {
     public List<Articulo> asignarEvaluadores(Conferencia conferencia) {
         // Crear instancia de StrictAssignment
         StrictAssignment strictAssignment = new StrictAssignment(1);
-
+    
         // Obtener el mapa de afinidad inicial
         Map<Articulo, List<Evaluador>> afinidadMap = strictAssignment.AffinityAssignment(
-           conferencia.getArticulosRecibidos(),
+            conferencia.getArticulosRecibidos(),
             conferencia.getEvaluadores()
         );
-
+    
         List<Articulo> articulosAsignados = new ArrayList<>();
-
-        // Iterar sobre los artículos y sus evaluadores afines
+    
+        // Iterar sobre los artículos recibidos
         for (Articulo articulo : conferencia.getArticulosRecibidos()) {
-            List<Evaluador> evaluadoresAfines = afinidadMap.get(articulo);
-            if (evaluadoresAfines != null) {
-                // Filtrar evaluadores que no tengan conflictos
-                List<Evaluador> evaluadoresFiltrados = evaluadoresAfines.stream()
-                    .filter(evaluador -> !evaluador.getEmail().equals(conferencia.getOrganizador())) // No debe coincidir con el organizador
-                    .toList();
-
-                if (!evaluadoresFiltrados.isEmpty()) {
-                    // Asignar el primer evaluador disponible
-                    Evaluador evaluadorAsignado = evaluadoresFiltrados.get(0);
-                    evaluadoresFiltrados.remove(0);
-                    articulo.setEvaluadorAsignado(evaluadorAsignado);
-                    evaluadorAsignado.setArticuloAsignado(articulo);
-                    articulosAsignados.add(articulo);
-                }
+            // Obtener evaluadores afines del mapa
+            List<Evaluador> evaluadoresAfines = afinidadMap.getOrDefault(articulo, new ArrayList<>());
+    
+            // Filtrar evaluadores válidos (sin conflicto)
+            List<Evaluador> evaluadoresFiltrados = evaluadoresAfines.stream()
+                .filter(evaluador -> !evaluador.getEmail().equals(conferencia.getOrganizador())) // Excluir al organizador
+                .filter(evaluador -> evaluador.getArticuloAsignado() == null) // Evaluador no debe tener un artículo asignado
+                .toList();
+    
+            // Asignar evaluador si hay alguno disponible
+            if (!evaluadoresFiltrados.isEmpty()) {
+                Evaluador evaluadorAsignado = evaluadoresFiltrados.get(0); // Seleccionar el primero disponible
+                articulo.setEvaluadorAsignado(evaluadorAsignado);
+                evaluadorAsignado.setArticuloAsignado(articulo);
+                articulosAsignados.add(articulo);
             }
         }
-
+    
         return articulosAsignados;
     }
+    
 
    
    

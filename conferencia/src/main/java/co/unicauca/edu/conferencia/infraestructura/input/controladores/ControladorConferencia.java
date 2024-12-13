@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import co.unicauca.edu.conferencia.aplicación.puertos.input.PuertoGestionConferencia;
 import co.unicauca.edu.conferencia.dominio.modelos.Articulo;
 import co.unicauca.edu.conferencia.dominio.modelos.Conferencia;
@@ -92,9 +90,9 @@ public class ControladorConferencia {
     }
 
     @PostMapping("/asignar-evaluadores")
-    public ResponseEntity<List<Articulo>> asignarEvaluadores(@RequestBody Conferencia conferencia) {
+    public List<Articulo> asignarEvaluadores(@RequestBody Conferencia conferencia) {
         List<Articulo> articulosAsignados = objGestionConferenciaDom.asignarEvaluadores(conferencia);
-        return ResponseEntity.ok(articulosAsignados);
+        return articulosAsignados;
     }
 
   

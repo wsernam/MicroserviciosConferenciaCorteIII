@@ -2,6 +2,8 @@ package co.unicauca.edu.conferencia.dominio.modelos;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Evaluador {
 
     private Long id;
@@ -10,6 +12,7 @@ public class Evaluador {
     private String country;
     private String email;
     private String organization;
+    @JsonIgnore
     private Articulo articuloAsignado;
     private List<String> researchfields;
     private Integer idConferencia; // La conferencia a la que se postula
