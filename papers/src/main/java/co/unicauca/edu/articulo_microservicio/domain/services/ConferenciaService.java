@@ -17,12 +17,18 @@ import reactor.core.publisher.Mono;
  * @author sonhuila
  */
 @Service
-public class ConferenciaService {
+public class ConferenciaService implements IConferenciaService{
+
     @Autowired
     private WebClient.Builder webClientBuilder;
 
+    @Autowired
+    private ModelMapper modelMapper; // Asegúrate de que este bean esté configurado correctamente
+    
+
+    @Override
     public List<ConferenciaDTO> obtenerConferenciasDeArticulo(Integer idArticulo) {
-        String url = "ttp://localhost:7777/api/conferencia/articulo/" + idArticulo;
+        String url = "http://localhost:7777/api/Conferencia/articulo/" + idArticulo;
 
         Mono<ConferenciaDTO[]> response = webClientBuilder.build()
                 .get()
@@ -33,14 +39,22 @@ public class ConferenciaService {
         ConferenciaDTO[] conferenciasArray = response.block();
         return conferenciasArray != null ? List.of(conferenciasArray) : List.of();
     }
-      private ModelMapper modelMapper;
-
+    @Override
     public void enviarArticuloAConferencia(ArticuloDTO articulo) {
-        // 1. Mapear el Articulo al DTO
-        ArticuloDeConferenciaDTO articuloDTO = modelMapper.map(articulo, ArticuloDeConferenciaDTO.class);
+        // Crear una instancia de ArticuloDeConferenciaDTO manualmente
+        ArticuloDeConferenciaDTO articuloDTO = new ArticuloDeConferenciaDTO();
 
-        // 2. Realizar la llamada HTTP al microservicio conferencia
-        String url = "http://localhost:7777/api/conferencia/AddArticulos";
+        // Mapear los campos manualmente
+        articuloDTO.setId(articulo.getId());
+        articuloDTO.setConferencia(articulo.getIdConferencia());
+        articuloDTO.setNombre(articulo.getNombre());
+        articuloDTO.setAutores(articulo.getAutores());
+        articuloDTO.setPalabrasClaves(articulo.getPalabrasClaves());
+    
+        // Convertir el estadoActual (Enum) a String antes de asignarlo
+        articuloDTO.setEstadoActual(articulo.getEstadoActual().name());
+        // Realizar la llamada HTTP al microservicio conferencia
+        String url = "http://localhost:7777/api/Conferencia/AddArticulos";
 
         webClientBuilder.build()
                 .post()
@@ -51,5 +65,5 @@ public class ConferenciaService {
                 .block(); // Ejecuta la llamada de manera sincrónica
     }
 
-
 }
+

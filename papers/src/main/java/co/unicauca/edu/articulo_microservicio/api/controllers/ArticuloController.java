@@ -28,13 +28,13 @@ public class ArticuloController {
 
     @Autowired
     private IArticuloService articuloService;
+    @Autowired
     private IConferenciaService conferenciaService;
 
     /*Recibe articulo a registrar y retorna el articulo registrado*/
     @PostMapping("/articulos")
     public ResponseEntity<ArticuloDTO> crearArticulo(@RequestBody ArticuloDTO articulo) {
-        ArticuloDTO objArticulo = null;
-        objArticulo = articuloService.save(articulo);
+        ArticuloDTO objArticulo = articuloService.save(articulo);
         conferenciaService.enviarArticuloAConferencia(objArticulo);
         return ResponseEntity.ok(objArticulo);
     }

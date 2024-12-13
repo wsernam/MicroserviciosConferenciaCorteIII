@@ -219,6 +219,11 @@ public class GUIcontainer extends javax.swing.JFrame {
         return conferences;
    }
    
+    private void jLabelAsignarMouseClicked(java.awt.event.MouseEvent evt) {
+         // Implementa aquí la funcionalidad que deseas ejecutar cuando se haga clic.
+         System.out.println("Label Asignar clickeado.");
+    }
+   
    
     /**
      * This method is called from within the constructor to initialize the form.

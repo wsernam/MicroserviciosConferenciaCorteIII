@@ -68,6 +68,7 @@ public class ControladorConferencia {
     @PostMapping("/AddArticulos")
     public ResponseEntity<Void> guardarArticulo(@RequestBody DTOArticulo articuloDTO) {
         Articulo objArticulo = this.objMapeador.mappearDeDTOArticuloAArticulo(articuloDTO);
+        System.out.println("ss "+objArticulo.getEstadoActual());
         // Llamar al servicio para guardar el artículo en las listas de conferencia
         this.objGestionConferenciaDom.AñadirArticulo(objArticulo);
         return ResponseEntity.status(HttpStatus.CREATED).build();

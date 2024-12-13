@@ -490,43 +490,29 @@ public class GUIcreateConference extends javax.swing.JInternalFrame {
 
         // Validación de campos vacíos
         if (nombre.isEmpty() || temas.isEmpty() || entidadOrganizadora.isEmpty() || fechaInicio.isEmpty() || fechaFin.isEmpty() ||
-            fechaFinRecepcion.isEmpty() || numMaxRecepcion.isEmpty() || fechaFinEvaluacion.isEmpty() || numMaxAceptacion.isEmpty() || numMaxRecepcion.isEmpty() ||
+            fechaFinRecepcion.isEmpty() || numMaxRecepcion.isEmpty() || fechaFinEvaluacion.isEmpty() || numMaxAceptacion.isEmpty() ||
             pais.isEmpty() || ciudad.isEmpty() || estado.isEmpty() || direccion.isEmpty()) {
 
             showMessage("Todos los campos deben ser completados.");
             return;
         }
 
-        // Verificación previa de los campos numéricos para evitar NumberFormatException
+        // Validación de campos numéricos
         int numMaxArt;
         int numMaxArtAcep;
         float calMinima;
 
         try {
-            numMaxArt = Integer.parseInt(numMaxRecepcion); // Validar numMaxRecepcion
+            numMaxArt = Integer.parseInt(numMaxRecepcion);
+            numMaxArtAcep = Integer.parseInt(numMaxAceptacion);
+            calMinima = Float.parseFloat(calificacionMinAceptable);
         } catch (NumberFormatException e) {
-            showMessage("Error: El campo 'Número máximo de artículos' debe ser un número entero.");
+            showMessage("Error: Algunos campos numéricos tienen un formato no válido.");
             return;
         }
 
-        try {
-            numMaxArtAcep = Integer.parseInt(numMaxAceptacion); // Validar maxArtAcep
-        } catch (NumberFormatException e) {
-            showMessage("Error: El campo 'Número máximo de artículos aceptados' debe ser un número entero.");
-            return;
-        }
-
-        try {
-            calMinima = Float.parseFloat(numMaxAceptacion); // Validar maxCalAcep
-        } catch (NumberFormatException e) {
-            showMessage("Error: El campo 'Calificación mínima' debe ser un número decimal.");
-            return;
-        }
-
-        // Formato de fecha esperado
+        // Validación de fechas
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
-        // Parseo de fechas
         try {
             LocalDate fechaInicioLD = LocalDate.parse(fechaInicio, formatter);
             LocalDate fechaFinLD = LocalDate.parse(fechaFin, formatter);
@@ -534,62 +520,49 @@ public class GUIcreateConference extends javax.swing.JInternalFrame {
             LocalDate fechaFinEvaluacionLD = LocalDate.parse(fechaFinEvaluacion, formatter);
             LocalDate fechaActual = LocalDate.now();
 
-            // Validar fecha de inicio (debe ser al menos un mes mayor que la actual y menor a la fecha fin)
             if (ChronoUnit.DAYS.between(fechaActual, fechaInicioLD) < 30) {
                 showMessage("La fecha de inicio debe ser al menos 30 días después de la actual.");
                 return;
             }
-            if (fechaInicioLD.isAfter(fechaFinLD)) {
+            if (fechaInicioLD.isAfter(fechaFinLD) || fechaFinLD.isBefore(fechaInicioLD)) {
                 showMessage("La fecha de inicio debe ser antes de la fecha de fin.");
                 return;
             }
-
-            // Validar fecha de fin (debe ser después de la fecha de inicio)
-            if (fechaFinLD.isBefore(fechaInicioLD)) {
-                showMessage("La fecha de fin debe ser después de la fecha de inicio.");
-                return;
-            }
-
-            // Validar plazo máximo de recepción de artículos (debe ser antes de la fecha de inicio y después de la fecha actual)
             if (fechaFinRecepcionLD.isAfter(fechaInicioLD) || fechaFinRecepcionLD.isBefore(fechaActual)) {
-                showMessage("La recepción de artículos debe realizarse antes de la fecha de inicio y no puede ser en el pasado.");
+                showMessage("La recepción de artículos debe ser antes de la fecha de inicio y no puede ser en el pasado.");
                 return;
             }
-
-            // Validar plazo máximo de evaluación de artículos (debe ser antes de la fecha de fin)
             if (fechaFinEvaluacionLD.isAfter(fechaFinLD) || fechaFinEvaluacionLD.isBefore(fechaFinRecepcionLD)) {
-                showMessage("La evaluación de artículos debe realizarse antes de la fecha de fin y después de la recepción.");
+                showMessage("La evaluación de artículos debe ser antes de la fecha de fin y después de la recepción.");
                 return;
             }
-
-            // Validar número máximo de artículos aceptados (debe ser menor al número de artículos recibidos)
             if (numMaxArtAcep >= numMaxArt) {
                 showMessage("El número de artículos aceptados debe ser menor que el número total de artículos.");
                 return;
             }
 
-            Fecha fechaInicioCon = new Fecha(fechaInicioLD);
-            Fecha fechaFinCon = new Fecha(fechaFinLD);
-            Fecha fechaPlazoMaxRep = new Fecha(fechaFinRecepcionLD);
-            Fecha fechaPlazoMaxEva = new Fecha(fechaFinEvaluacionLD); 
+            // Crear objeto Conferencia
+            Conferencia conferencia = new Conferencia(
+                nombre, temas, entidadOrganizadora, pais, estado, ciudad, direccion,
+                new Fecha(fechaInicioLD), new Fecha(fechaFinLD), new Fecha(fechaFinRecepcionLD),
+                new Fecha(fechaFinEvaluacionLD), numMaxArt, numMaxArtAcep, calMinima
+            );
 
-            Conferencia conferencia = new Conferencia (organizador, nombre, temas,  entidadOrganizadora, pais,  estado,  ciudad,  direccion,  fechaFinCon,  fechaInicioCon,  fechaPlazoMaxRep,  fechaPlazoMaxEva, numMaxArt,  numMaxArtAcep,  calMinima );
-            Conferencia result = conferenceService.createConference(conferencia);
+            // Llamar al servicio para crear la conferencia
+            String token = ApplicationContext.getInstance().getUsuarioLogueado().getToken();
+            Conferencia result = conferenceService.createConference(conferencia, token);
 
-
-            // Guardar la conferencia o realizar la acción que corresponda
             if (result != null) {
                 showMessage("Conferencia registrada exitosamente.");
-                GUIcontainer container = new GUIcontainer();
-                //container.listConferences("");
+                this.dispose();
+            } else {
+                showMessage("Error al registrar la conferencia. Inténtelo de nuevo.");
             }
 
-            this.dispose();
-
         } catch (DateTimeParseException e) {
-            showMessage("Error: Formato de fecha no válido. Debe ser dd-MM-yyyy.");
+            showMessage("Error: Formato de fecha no válido. Use dd-MM-yyyy.");
         }
-        
+
     } catch (Exception e) {
         showMessage("Error: " + e.getMessage());
     }
