@@ -15,7 +15,7 @@ public class ArticuloDeConferenciaDTO {
     private String nombre;
     private ArrayList<String> autores;
     private String palabrasClaves;
-    private EstadoRevision estadoActual;
+    private String estadoActual;
     public ArticuloDeConferenciaDTO() {
     }
     

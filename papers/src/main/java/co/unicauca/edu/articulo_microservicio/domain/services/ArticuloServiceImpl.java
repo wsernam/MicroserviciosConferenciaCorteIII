@@ -1,5 +1,6 @@
 package co.unicauca.edu.articulo_microservicio.domain.services;
 
+import co.unicauca.edu.articulo_microservicio.DTO.ArticuloDeConferenciaDTO;
 import co.unicauca.edu.articulo_microservicio.domain.models.Articulo;
 import co.unicauca.edu.articulo_microservicio.infrastructure.repositories.IArticuloRepository;
 import co.unicauca.edu.articulo_microservicio.DTO.ArticulosConConferenciasDTO.ArticuloConConferenciasDTO;
@@ -14,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.Optional;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
 import org.modelmapper.TypeToken;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,8 @@ public class ArticuloServiceImpl implements IArticuloService {
         this.modelMapper = modelMapper;
         this.servicioConsumirObtencionConferencias = servicioConsumirObtencionConferencias;
         this.rabbitTemplate = rabbitTemplate;
+
+  
     }
 
     public void enviarEventoArticuloCreado(ArticuloCreadoEvent evento) {
