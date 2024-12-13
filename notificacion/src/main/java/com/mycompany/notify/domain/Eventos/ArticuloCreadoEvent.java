@@ -25,5 +25,4 @@ public class ArticuloCreadoEvent {
     private int idArticulo;   // ID del artículo
     private String nombre;    // Nombre del artículo
     private String resumen;   // Resumen del artículo
-    private AppUser autor;    // Información del autor
 }

@@ -27,12 +27,12 @@ public class EventListener {
     // Escuchar el evento de creación de conferencia
     @RabbitListener(queues = "conferencia-creada-queue")
     public void handleConferenciaCreada(ConferenciaCreadaEvent evento) {
+        
         // Procesar el evento recibido y enviar la notificación
-        String destinatario = evento.getCreador().getNombreUsuario(); // Notificar al creador
+        String destinatario = "wsernamunoz@gmail.com"; // Notificar al creador
         String asunto = "Nueva conferencia creada: " + evento.getNombreConferencia();
         String cuerpo = String.format(
-            "Hola %s, se ha creado la conferencia '%s' (ID: %d) con un máximo de %d artículos.",
-            evento.getCreador().getNombreUsuario(),
+            "Hola, se ha creado la conferencia '%s' (ID: %d) con un máximo de %d artículos.",
             evento.getNombreConferencia(),
             evento.getIdConferencia(),
             evento.getCantidadMaxArticulos()
@@ -48,11 +48,10 @@ public class EventListener {
     @RabbitListener(queues = "articulo-creado-queue")
     public void handleArticuloCreado(ArticuloCreadoEvent evento) {
         // Procesar el evento recibido y enviar la notificación
-        String destinatario = evento.getAutor().getCorreoUsuario(); // Notificar al autor del artículo
+        String destinatario = "wsernamunoz@gmail.com"; // Notificar al autor del artículo
         String asunto = "Nuevo artículo creado: " + evento.getNombre();
         String cuerpo = String.format(
-            "Hola %s, se ha creado un nuevo artículo titulado '%s' (ID: %d). Resumen: %s",
-            evento.getAutor().getNombreUsuario(),
+            "Hola, se ha creado un nuevo artículo titulado '%s' (ID: %d). Resumen: %s",
             evento.getNombre(),
             evento.getIdArticulo(),
             evento.getResumen()

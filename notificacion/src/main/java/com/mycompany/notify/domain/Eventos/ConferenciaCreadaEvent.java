@@ -24,5 +24,4 @@ public class ConferenciaCreadaEvent {
     private int idConferencia;                     // ID de la conferencia
     private String nombreConferencia;              // Nombre de la conferencia
     private int cantidadMaxArticulos;   // Máxima cantidad de artículos permitidos
-    private AppUser creador;            // Usuario que creó la conferencia
 }
