@@ -1,6 +1,8 @@
 package com.conference.gui.presentation;
 
 import com.conference.gui.entities.Conference;
+import com.conference.gui.entities.Usuario_Autorizado;
+import com.conference.gui.presentation.infra.ApplicationContext;
 
 /**
  *
@@ -250,22 +252,54 @@ public class GUIconferenceInfo extends javax.swing.JInternalFrame {
                 return;
             }
 
-            // 2. Lógica para enviar la postulación
-            String endpoint = "http://localhost:7777/api/conferencias/" + conference.getId() + "/postulaciones";
+            // 2. Obtener los datos del evaluador desde la sesión o el objeto de usuario autorizado
+            Usuario_Autorizado usuarioLogueado = obtenerUsuarioLogueado(); // Método ficticio que retorna el usuario logueado
+            if (usuarioLogueado == null) {
+                javax.swing.JOptionPane.showMessageDialog(this,
+                        "No se ha encontrado un usuario logueado.",
+                        "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // 3. Endpoint para postular evaluadores
+            String endpoint = "http://localhost:7777/api/conferencias/PostularEvaluador";
+
+            // 4. Configurar la conexión
             java.net.URL url = new java.net.URL(endpoint);
             java.net.HttpURLConnection conn = (java.net.HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setDoOutput(true);
 
-            // Datos del evaluador (pueden obtenerse de la sesión activa)
-            String evaluatorJson = "{\"userId\": \"123\", \"nombre\": \"John Doe\"}"; // Ejemplo
+            // 5. Crear el JSON para el evaluador (DTOEvaluador) usando los datos del usuario logueado
+            String evaluatorJson = String.format("""
+        {
+            "id": %d, 
+            "name": "%s", 
+            "lastName": "%s", 
+            "country": "%s", 
+            "email": "%s", 
+            "organization": "%s", 
+            "researchfields": %s,
+            "idConferencia": %d
+        }
+        """,
+                    usuarioLogueado.getId(),
+                    usuarioLogueado.getName(),
+                    usuarioLogueado.getLastName(),
+                    usuarioLogueado.getCountry(),
+                    usuarioLogueado.getEmail(),
+                    usuarioLogueado.getOrganization(),
+                    usuarioLogueado.getResearchfields(),
+                    conference.getId()); // Suponiendo que `conference` es la conferencia a la que se postula el evaluador
+
+            // 6. Enviar el JSON al backend
             try (java.io.OutputStream os = conn.getOutputStream()) {
                 byte[] input = evaluatorJson.getBytes("utf-8");
                 os.write(input, 0, input.length);
             }
 
-            // 3. Manejar la respuesta del servidor
+            // 7. Manejar la respuesta del servidor
             int responseCode = conn.getResponseCode();
             if (responseCode == 200 || responseCode == 201) {
                 javax.swing.JOptionPane.showMessageDialog(this,
@@ -278,7 +312,7 @@ public class GUIconferenceInfo extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception e) {
-            // 4. Manejo de errores
+            // 8. Manejo de errores
             javax.swing.JOptionPane.showMessageDialog(this,
                     "Error de conexión: " + e.getMessage(),
                     "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
@@ -286,6 +320,11 @@ public class GUIconferenceInfo extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_lbPostulacionEvaluadorMouseClicked
 
+    private Usuario_Autorizado obtenerUsuarioLogueado() {
+        // Accedemos al ApplicationContext para obtener el usuario logueado
+        ApplicationContext context = ApplicationContext.getInstance();
+        return context.getUsuarioLogueado();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lbCiudad;
