@@ -20,7 +20,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
  */
 public class ConferenceClient implements IRestConference {
       private static final String USER_AGENT = "GUIConference";
-    private final String urlSaveConference = "http://localhost:7777/api";
+    private final String urlSaveConference = "http://localhost:7777/api/Conferencia";
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
@@ -29,7 +29,7 @@ public class ConferenceClient implements IRestConference {
         try {
             // Crear la solicitud HTTP GET
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(urlSaveConference.concat("/conferencias"))) 
+                    .uri(URI.create(urlSaveConference.concat("/ListarConferencias"))) 
                     .header("Content-Type", "application/json")
                     .header("User-Agent", USER_AGENT)
                     .GET()
@@ -62,7 +62,7 @@ public class ConferenceClient implements IRestConference {
 
             // Crear la solicitud HTTP
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(urlSaveConference.concat("/registrarConferencia"))) // Asume que tu endpoint es "/save"
+                    .uri(URI.create(urlSaveConference.concat("/CrearConferencia"))) // Asume que tu endpoint es "/save"
                     .header("Content-Type", "application/json")
                     .header("User-Agent", USER_AGENT)
                     .POST(HttpRequest.BodyPublishers.ofString(jsonInputString))
