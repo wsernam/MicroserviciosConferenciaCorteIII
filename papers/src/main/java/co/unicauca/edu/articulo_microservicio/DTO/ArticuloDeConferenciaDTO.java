@@ -1,5 +1,6 @@
 package co.unicauca.edu.articulo_microservicio.DTO;
 
+import co.unicauca.edu.articulo_microservicio.domain.services.EstadoRevision;
 import java.util.ArrayList;
 
 import lombok.AllArgsConstructor;
@@ -10,10 +11,11 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ArticuloDeConferenciaDTO {
     private Integer id;
-    private Long idConferencia;
+    private Integer Conferencia;
     private String nombre;
     private ArrayList<String> autores;
     private String palabrasClaves;
+    private EstadoRevision estadoActual;
     public ArticuloDeConferenciaDTO() {
     }
     

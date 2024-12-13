@@ -46,7 +46,6 @@ public class ArticuloControllerTest {
         articuloDTO.setId(1);
         articuloDTO.setNombre("Título del Artículo");
         articuloDTO.setAutores(new ArrayList<>(List.of("Autor 1", "Autor 2")));
-        articuloDTO.setResumen("Este es un resumen del artículo.");
         articuloDTO.setPalabrasClaves("clave1, clave2");
 
         // Comportamiento esperado del servicio mock

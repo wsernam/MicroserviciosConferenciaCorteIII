@@ -25,13 +25,11 @@ import jakarta.persistence.Enumerated;
 public class ArticuloDTO {
     private static final long serialVersionUID = 1L;
     private Integer id;
+    private Integer idConferencia;
     private String nombre;
     private ArrayList<String> autores;
-    private String resumen;
     private String palabrasClaves;
-    private List<Calificacion> calificaciones;
-    private Long idConferencia;
-    private EstadoRevision estadoActual;
+    private EstadoRevision estadoActual = EstadoRevision.PENDIENTE;
     
     public ArticuloDTO()
     {

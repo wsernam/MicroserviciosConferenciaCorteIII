@@ -9,9 +9,7 @@ import co.unicauca.edu.articulo_microservicio.DTO.CRUDArticulosDTO.ArticuloDTO;
 import reactor.core.publisher.Mono;
 
 public interface IConferenciaService {
-
-
-     public List<ConferenciaDTO> obtenerConferenciasDeArticulo(Integer idArticulo);
+    public List<ConferenciaDTO> obtenerConferenciasDeArticulo(Integer idArticulo);
        
     public void enviarArticuloAConferencia(ArticuloDTO articulo);
     
