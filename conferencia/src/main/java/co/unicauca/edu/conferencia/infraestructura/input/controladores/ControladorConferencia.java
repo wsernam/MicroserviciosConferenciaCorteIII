@@ -35,7 +35,7 @@ public class ControladorConferencia {
     @Autowired
     private PuertoGestionConferencia objGestionConferenciaDom;
     
-    @Autowired
+
     public ControladorConferencia(ConferenciaMapperInfrastructuraDominio objMapeador, 
                                    PuertoGestionConferencia objGestionConferenciaDom) {
         this.objMapeador = objMapeador;
@@ -64,10 +64,7 @@ public class ControladorConferencia {
         return objMapeador.mappearDeConferenciasARespuesta(this.objGestionConferenciaDom.listarConferencia());
     }
 
-    @GetMapping("/VerificarConferencia/{prmId}")
-    public boolean VerificarConferencia(@PathVariable int prmId) {
-        return this.objGestionConferenciaDom.existeConferencia(prmId);
-    }
+
 
     // Endpoint para recibir los datos del artículo y guardarlos en conferencia
     @PostMapping("/AddArticulos")

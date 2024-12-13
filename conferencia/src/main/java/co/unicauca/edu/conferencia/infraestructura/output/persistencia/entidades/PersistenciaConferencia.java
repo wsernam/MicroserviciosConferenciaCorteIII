@@ -51,32 +51,17 @@ public class PersistenciaConferencia {
     @JoinColumn(name = "conferencia_id") // Esto crea una clave foránea en la tabla Articulo
     public List<PersistenciaArticulo> articulosAceptados;
 
-    
-    public List<Integer> organizadores;
-    public List<Integer> autores;
+
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "idConferencia")
     public List<PersistenciaEvaluador> evaluadores;
 
     public PersistenciaConferencia() {
        
     }
 
-    public List<PersistenciaArticulo> getArticulosAceptados() {
-        return articulosAceptados;
-    }
-
-    public void setArticulosAceptados(List<PersistenciaArticulo> articulosAceptados) {
-        this.articulosAceptados = articulosAceptados;
-    }
-
-    public List<PersistenciaArticulo> getArticulosRecibidos() {
-        return articulosRecibidos;
-    }
-
-    public void setArticulosRecibidos(List<PersistenciaArticulo> articulosRecibidos) {
-        this.articulosRecibidos = articulosRecibidos;
-    }
+ 
 
     @Override
     public String toString() {
@@ -96,8 +81,7 @@ public class PersistenciaConferencia {
                 + ", numMaxRecepcion=" + numMaxRecepcion
                 + ", numMaxAceptacion=" + numMaxAceptacion
                 + ", calificacionMinAceptable=" + calificacionMinAceptable
-                + ", organizadores=" + organizadores
-                + ", autores=" + autores
+                + ", organizadores=" + organizador
                 + ", evaluadores=" + evaluadores
                 + '}';
     }

@@ -3,8 +3,10 @@ package co.unicauca.edu.conferencia.infraestructura.output.persistencia.entidade
 import java.util.ArrayList;
 
 import co.unicauca.edu.conferencia.dominio.modelos.Evaluador;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +22,8 @@ public class PersistenciaArticulo {
     private String nombre;
     private ArrayList<String> autores;
     private String palabrasClaves;
-    private Evaluador evaluadorAsignado;
+    @OneToOne(mappedBy = "articuloAsignado", cascade = CascadeType.ALL)
+    private PersistenciaEvaluador evaluadorAsignado;
     public PersistenciaArticulo() {
     }
 
