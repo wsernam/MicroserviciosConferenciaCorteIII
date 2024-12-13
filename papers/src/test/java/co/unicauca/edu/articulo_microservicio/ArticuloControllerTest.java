@@ -40,6 +40,7 @@ public class ArticuloControllerTest {
 
     @Test
     void testCrearArticulo() {
+        
         // Datos de entrada para el test
         ArticuloDTO articuloDTO = new ArticuloDTO();
         articuloDTO.setIdArticulo(1);

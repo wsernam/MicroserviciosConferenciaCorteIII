@@ -1,11 +1,13 @@
 package co.unicauca.edu.articulo_microservicio.api.controllers;
 
+import co.unicauca.edu.articulo_microservicio.DTO.CRUDArticulosDTO.AppUserDTO;
 import co.unicauca.edu.articulo_microservicio.domain.services.IArticuloService;
 import co.unicauca.edu.articulo_microservicio.domain.services.IConferenciaService;
 import co.unicauca.edu.articulo_microservicio.DTO.CRUDArticulosDTO.ArticuloDTO;
 import co.unicauca.edu.articulo_microservicio.domain.services.EstadoRevision;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -85,5 +87,21 @@ public class ArticuloController {
     public ResponseEntity<Void> actualizarEstado(@PathVariable Integer id, @RequestParam EstadoRevision nuevoEstado) {
         articuloService.actualizarEstadoArticulo(id, nuevoEstado);
         return ResponseEntity.ok().build();
+    }
+    
+    @GetMapping("/usuario/{idUsuario}")
+    public ResponseEntity<AppUserDTO> obtenerUsuarioPorId(@PathVariable Integer idUsuario) {
+        try {
+            // Llamar al servicio para obtener el usuario
+            AppUserDTO usuario = articuloService.obtenerUsuarioPorId(idUsuario);
+            if (usuario == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+            return ResponseEntity.ok(usuario);
+        } catch (Exception e) {
+            // Manejo de excepciones
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
     }
 }

@@ -2,6 +2,7 @@ package co.unicauca.edu.articulo_microservicio.domain.services;
 
 import co.unicauca.edu.articulo_microservicio.DTO.ArticulosConConferenciasDTO.ArticuloConConferenciasDTO;
 import co.unicauca.edu.articulo_microservicio.DTO.ArticulosConConferenciasDTO.ConferenciaDTO;
+import co.unicauca.edu.articulo_microservicio.DTO.CRUDArticulosDTO.AppUserDTO;
 import co.unicauca.edu.articulo_microservicio.DTO.CRUDArticulosDTO.ArticuloDTO;
 
 import java.util.List;
@@ -29,4 +30,6 @@ public interface IArticuloService {
     public ArticuloConConferenciasDTO listarDatosrticuloConSusConferencias(Integer idArticulo);
     
     public void actualizarEstadoArticulo(Integer id, EstadoRevision nuevoEstado);
+    
+    public AppUserDTO obtenerUsuarioPorId(Integer idUsuario);
 }

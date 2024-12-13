@@ -4,6 +4,7 @@ import co.unicauca.edu.articulo_microservicio.domain.models.Articulo;
 import co.unicauca.edu.articulo_microservicio.infrastructure.repositories.IArticuloRepository;
 import co.unicauca.edu.articulo_microservicio.DTO.ArticulosConConferenciasDTO.ArticuloConConferenciasDTO;
 import co.unicauca.edu.articulo_microservicio.DTO.ArticulosConConferenciasDTO.ConferenciaDTO;
+import co.unicauca.edu.articulo_microservicio.DTO.CRUDArticulosDTO.AppUserDTO;
 import co.unicauca.edu.articulo_microservicio.DTO.CRUDArticulosDTO.ArticuloDTO;
 import co.unicauca.edu.articulo_microservicio.domain.events.ArticuloCreadoEvent;
 import co.unicauca.edu.articulo_microservicio.domain.events.EstadoActualizadoEvent;
@@ -15,7 +16,10 @@ import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 /**
  *
@@ -25,7 +29,8 @@ import org.springframework.stereotype.Service;
 public class ArticuloServiceImpl implements IArticuloService {
 
     private static final Logger logger = LoggerFactory.getLogger(ArticuloServiceImpl.class);
-
+    @Autowired
+    private WebClient.Builder webClientBuilder;
     private final IArticuloRepository servicioAccesoBaseDatos;
     private final ConferenciaService servicioConsumirObtencionConferencias;
     private final ModelMapper modelMapper;
@@ -112,6 +117,22 @@ public class ArticuloServiceImpl implements IArticuloService {
         return new ArticuloConConferenciasDTO(articuloDTO, conferencias);
     }
     
+    public AppUserDTO obtenerUsuarioPorId(Integer idUsuario) {
+        String url = String.format("http://localhost:8081/api/user/%d", idUsuario);
+
+        try {
+            Mono<AppUserDTO> response = webClientBuilder.build()
+                    .get()
+                    .uri(url)
+                    .retrieve()
+                    .bodyToMono(AppUserDTO.class);
+
+            return response.block(); // Bloquea hasta obtener la respuesta
+        } catch (Exception e) {
+            throw new RuntimeException("Error al obtener el usuario con ID " + idUsuario, e);
+        }
+    }
+    
     @Override
     public void actualizarEstadoArticulo(Integer id, EstadoRevision nuevoEstado) {
         // Buscar el artículo por su ID
@@ -122,18 +143,24 @@ public class ArticuloServiceImpl implements IArticuloService {
             EstadoRevision estadoAnterior = articulo.getEstadoActual(); // Obtener el estado actual
             articulo.setEstadoActual(nuevoEstado); // Actualizar al nuevo estado
 
+            // Obtener información del autor desde el microservicio de usuarios
+            AppUserDTO autorDTO = obtenerUsuarioPorId(articulo.getIdAutor());
+            AppUserDTO evaluadorDTO = obtenerUsuarioPorId(articulo.getIdAutor());
             // Guardar los cambios en la base de datos
             servicioAccesoBaseDatos.save(articulo);
+
             // Crear y enviar el evento
             EstadoActualizadoEvent evento = new EstadoActualizadoEvent(
                 id, 
                 articulo.getNombre(), 
                 estadoAnterior.name(),  // Convertir el enum a String
                 nuevoEstado.name(),     // Convertir el enum a String
-                articulo.getEvaluadores(),
-                articulo.getAutor().getIdUsuario(),
-                articulo.getAutor().getNombreUsuario(),
-                articulo.getAutor().getCorreoUsuario()
+                evaluadorDTO.getIdUsuario(),
+                evaluadorDTO.getNombreUsuario(),
+                evaluadorDTO.getCorreoUsuario(),
+                autorDTO.getIdUsuario(), // ID del usuario
+                autorDTO.getNombreUsuario(), // Nombre del usuario
+                autorDTO.getCorreoUsuario() // Correo del usuario
             );
             rabbitTemplate.convertAndSend(ConfigRabbitMQ.ARTICULO_EXCHANGE,
                 ConfigRabbitMQ.ESTADO_ACTUALIZADO_ROUTING_KEY,

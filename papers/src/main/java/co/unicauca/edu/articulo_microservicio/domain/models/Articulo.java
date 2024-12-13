@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import co.unicauca.edu.articulo_microservicio.domain.services.EstadoRevision;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.OneToMany;
@@ -27,14 +28,14 @@ public class Articulo {
     private Integer id;
     private String nombre;
     private ArrayList<String> autores;//autores del articulo
-    private AppUser Autor; // el q subio el articulo y recivira notificacion del estado de su articulo
-    private String resumen;
+    private Integer idAutor; // el q subio el articulo y recivira notificacion del estado de su articulo
+    private String resumen; 
     private String palabrasClaves;
     @OneToMany(mappedBy = "articulo", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Calificacion> calificaciones;
     @Enumerated(EnumType.STRING)
     private EstadoRevision estadoActual;
-    private List<Evaluador> evaluadores;   // Lista de evaluadores asignados
+    private Integer idEvaluador;   // Lista de evaluadores asignados
         
     public void iniciarRevision() {
         estadoActual.iniciarRevision(this);
