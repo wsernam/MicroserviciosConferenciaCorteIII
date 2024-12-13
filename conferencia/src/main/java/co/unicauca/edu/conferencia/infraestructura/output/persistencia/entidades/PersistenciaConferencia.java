@@ -46,16 +46,13 @@ public class PersistenciaConferencia {
 
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "conferencia_id") // Esto crea una clave foránea en la tabla Articulo
+    @JoinColumn(name = "conferencia_recibida_id") // Nombre de la clave foránea para artículos recibidos
     public List<PersistenciaArticulo> articulosRecibidos;
-
-
+    
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "conferencia_id") // Esto crea una clave foránea en la tabla Articulo
+    @JoinColumn(name = "conferencia_aceptada_id") // Nombre de la clave foránea para artículos aceptados
     public List<PersistenciaArticulo> articulosAceptados;
-
-
-
+    
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "idConferencia")
     public List<PersistenciaEvaluador> evaluadores;
