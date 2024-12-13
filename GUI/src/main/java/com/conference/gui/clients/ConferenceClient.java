@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class ConferenceClient extends Subject implements IRestConference{
     private static final String USER_AGENT = "GUIConference";
-    private final String urlSaveConference = "http://localhost:8081/EasyConference";
+    private final String urlSaveConference = "http://localhost:8081/api/Conferencia";
     private final ObjectMapper objectMapper = new ObjectMapper();
     private Usuario_Autorizado usuario; 
     

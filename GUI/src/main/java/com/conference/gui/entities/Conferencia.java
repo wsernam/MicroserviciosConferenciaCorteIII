@@ -19,6 +19,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class Conferencia {
+    private Integer id;
     private String nombre;
     private String temas;
     private String entidadOrganizadora;

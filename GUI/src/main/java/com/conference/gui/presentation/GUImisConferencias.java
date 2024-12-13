@@ -5,7 +5,6 @@
 package com.conference.gui.presentation;
 
 import com.conference.gui.clients.IRestConference;
-import com.conference.gui.conference.UserConference;
 import com.conference.gui.entities.Conferencia;
 import com.conference.gui.presentation.infra.Observer;
 import java.util.List;

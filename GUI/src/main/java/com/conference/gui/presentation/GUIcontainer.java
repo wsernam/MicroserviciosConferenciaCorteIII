@@ -3,7 +3,6 @@ package com.conference.gui.presentation;
 
 import com.conference.gui.article.Article;
 import com.conference.gui.clients.UserClient;
-import com.conference.gui.conference.UserConference;
 import com.conference.gui.entities.Articulo;
 import com.conference.gui.entities.Conferencia;
 import com.conference.gui.entities.Usuario;
@@ -219,6 +218,11 @@ public class GUIcontainer extends javax.swing.JFrame {
         }
         return conferences;
    }
+   
+    private void jLabelAsignarMouseClicked(java.awt.event.MouseEvent evt) {
+         // Implementa aquí la funcionalidad que deseas ejecutar cuando se haga clic.
+         System.out.println("Label Asignar clickeado.");
+    }
    
    
     /**
