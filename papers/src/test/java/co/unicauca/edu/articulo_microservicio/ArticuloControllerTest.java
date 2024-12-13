@@ -43,7 +43,7 @@ public class ArticuloControllerTest {
         
         // Datos de entrada para el test
         ArticuloDTO articuloDTO = new ArticuloDTO();
-        articuloDTO.setIdArticulo(1);
+        articuloDTO.setId(1);
         articuloDTO.setNombre("Título del Artículo");
         articuloDTO.setAutores(new ArrayList<>(List.of("Autor 1", "Autor 2")));
         articuloDTO.setResumen("Este es un resumen del artículo.");
@@ -68,7 +68,7 @@ public class ArticuloControllerTest {
     void consultarArticulo() {
         Integer idArticulo = 1;
         ArticuloDTO articulo = new ArticuloDTO();
-        articulo.setIdArticulo(idArticulo);
+        articulo.setId(idArticulo);
         articulo.setNombre("Articulo Test");
 
         // Comportamiento esperado del servicio mock
@@ -78,7 +78,7 @@ public class ArticuloControllerTest {
         ArticuloDTO response = articuloController.consultarArticulo(idArticulo);
 
         // Verificaciones
-        assertEquals(idArticulo, response.getIdArticulo());
+        assertEquals(idArticulo, response.getId());
         assertEquals("Articulo Test", response.getNombre());
     }
 }

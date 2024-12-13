@@ -4,7 +4,7 @@ import co.unicauca.edu.articulo_microservicio.domain.models.Articulo;
 import co.unicauca.edu.articulo_microservicio.infrastructure.repositories.IArticuloRepository;
 import co.unicauca.edu.articulo_microservicio.DTO.ArticulosConConferenciasDTO.ArticuloConConferenciasDTO;
 import co.unicauca.edu.articulo_microservicio.DTO.ArticulosConConferenciasDTO.ConferenciaDTO;
-import co.unicauca.edu.articulo_microservicio.DTO.CRUDArticulosDTO.AppUserDTO;
+import co.unicauca.edu.articulo_microservicio.domain.models.AppUser;
 import co.unicauca.edu.articulo_microservicio.DTO.CRUDArticulosDTO.ArticuloDTO;
 import co.unicauca.edu.articulo_microservicio.domain.events.ArticuloCreadoEvent;
 import co.unicauca.edu.articulo_microservicio.domain.events.EstadoActualizadoEvent;
@@ -73,16 +73,35 @@ public class ArticuloServiceImpl implements IArticuloService {
     }
 
     @Override
-    public ArticuloDTO save(ArticuloDTO articulo) {
-        Articulo articuloEntity = this.modelMapper.map(articulo, Articulo.class);
-        Articulo savedArticulo = this.servicioAccesoBaseDatos.save(articuloEntity);
-        ArticuloDTO articuloDTO = modelMapper.map(savedArticulo, ArticuloDTO.class);
-        
-        ArticuloCreadoEvent evento = new ArticuloCreadoEvent(savedArticulo.getId(), savedArticulo.getNombre(), savedArticulo.getAutores(), savedArticulo.getResumen(), savedArticulo.getPalabrasClaves());
-        enviarEventoArticuloCreado(evento);
-        
-        return articuloDTO;
+
+public ArticuloDTO save(ArticuloDTO articulo) {
+    // Mapear el DTO al modelo de entidad
+    Articulo articuloEntity = this.modelMapper.map(articulo, Articulo.class);
+
+    // Asegurarse de que las calificaciones no se procesen en esta etapa
+    if (articuloEntity.getCalificaciones() != null) {
+        articuloEntity.setCalificaciones(null); // Ignorar las calificaciones al guardar el artículo inicialmente
     }
+
+    // Guardar el artículo
+    Articulo savedArticulo = this.servicioAccesoBaseDatos.save(articuloEntity);
+
+    // Mapear la entidad guardada de nuevo al DTO
+    ArticuloDTO articuloDTO = modelMapper.map(savedArticulo, ArticuloDTO.class);
+
+    // Crear y enviar un evento para notificar la creación del artículo
+    ArticuloCreadoEvent evento = new ArticuloCreadoEvent(
+        savedArticulo.getId(),
+        savedArticulo.getNombre(),
+        savedArticulo.getAutores(),
+        savedArticulo.getResumen(),
+        savedArticulo.getPalabrasClaves()
+    );
+    enviarEventoArticuloCreado(evento);
+
+    return articuloDTO;
+}
+
 
     @Override
     public ArticuloDTO update(Integer id, ArticuloDTO articulo) {
@@ -117,15 +136,15 @@ public class ArticuloServiceImpl implements IArticuloService {
         return new ArticuloConConferenciasDTO(articuloDTO, conferencias);
     }
     
-    public AppUserDTO obtenerUsuarioPorId(Integer idUsuario) {
+    public AppUser obtenerUsuarioPorId(Integer idUsuario) {
         String url = String.format("http://localhost:8081/api/user/%d", idUsuario);
 
         try {
-            Mono<AppUserDTO> response = webClientBuilder.build()
+            Mono<AppUser> response = webClientBuilder.build()
                     .get()
                     .uri(url)
                     .retrieve()
-                    .bodyToMono(AppUserDTO.class);
+                    .bodyToMono(AppUser.class);
 
             return response.block(); // Bloquea hasta obtener la respuesta
         } catch (Exception e) {
@@ -143,9 +162,6 @@ public class ArticuloServiceImpl implements IArticuloService {
             EstadoRevision estadoAnterior = articulo.getEstadoActual(); // Obtener el estado actual
             articulo.setEstadoActual(nuevoEstado); // Actualizar al nuevo estado
 
-            // Obtener información del autor desde el microservicio de usuarios
-            AppUserDTO autorDTO = obtenerUsuarioPorId(articulo.getIdAutor());
-            AppUserDTO evaluadorDTO = obtenerUsuarioPorId(articulo.getIdAutor());
             // Guardar los cambios en la base de datos
             servicioAccesoBaseDatos.save(articulo);
 
@@ -155,12 +171,12 @@ public class ArticuloServiceImpl implements IArticuloService {
                 articulo.getNombre(), 
                 estadoAnterior.name(),  // Convertir el enum a String
                 nuevoEstado.name(),     // Convertir el enum a String
-                evaluadorDTO.getIdUsuario(),
-                evaluadorDTO.getNombreUsuario(),
-                evaluadorDTO.getCorreoUsuario(),
-                autorDTO.getIdUsuario(), // ID del usuario
-                autorDTO.getNombreUsuario(), // Nombre del usuario
-                autorDTO.getCorreoUsuario() // Correo del usuario
+                articulo.getAutor().getIdUsuario(),
+                articulo.getAutor().getNombreUsuario(),
+                articulo.getAutor().getCorreoUsuario(),
+                articulo.getAutor().getIdUsuario(), // ID del usuario
+                articulo.getAutor().getNombreUsuario(), // Nombre del usuario
+                articulo.getAutor().getCorreoUsuario() // Correo del usuario
             );
             rabbitTemplate.convertAndSend(ConfigRabbitMQ.ARTICULO_EXCHANGE,
                 ConfigRabbitMQ.ESTADO_ACTUALIZADO_ROUTING_KEY,

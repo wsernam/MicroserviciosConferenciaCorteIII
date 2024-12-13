@@ -10,9 +10,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import co.unicauca.edu.articulo_microservicio.domain.services.EstadoRevision;
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import java.util.List;
 import lombok.NoArgsConstructor;
@@ -28,14 +28,16 @@ public class Articulo {
     private Integer id;
     private String nombre;
     private ArrayList<String> autores;//autores del articulo
-    private Integer idAutor; // el q subio el articulo y recivira notificacion del estado de su articulo
+    @ManyToOne
+    private AppUser autor; // el q subio el articulo y recivira notificacion del estado de su articulo
+    @ManyToOne
+    private AppUser evaluador;
     private String resumen; 
     private String palabrasClaves;
     @OneToMany(mappedBy = "articulo", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Calificacion> calificaciones;
     @Enumerated(EnumType.STRING)
     private EstadoRevision estadoActual;
-    private Integer idEvaluador;   // Lista de evaluadores asignados
         
     public void iniciarRevision() {
         estadoActual.iniciarRevision(this);
@@ -54,6 +56,7 @@ public class Articulo {
     }
     
     public void agregarCalificacion(Calificacion calificacion) {
+        calificacion.setArticulo(this); // Establece la relación bidireccional
         this.calificaciones.add(calificacion);
     }
 }

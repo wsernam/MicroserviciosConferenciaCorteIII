@@ -1,6 +1,6 @@
 package co.unicauca.edu.articulo_microservicio.api.controllers;
 
-import co.unicauca.edu.articulo_microservicio.DTO.CRUDArticulosDTO.AppUserDTO;
+import co.unicauca.edu.articulo_microservicio.domain.models.AppUser;
 import co.unicauca.edu.articulo_microservicio.domain.services.IArticuloService;
 import co.unicauca.edu.articulo_microservicio.domain.services.IConferenciaService;
 import co.unicauca.edu.articulo_microservicio.DTO.CRUDArticulosDTO.ArticuloDTO;
@@ -90,10 +90,10 @@ public class ArticuloController {
     }
     
     @GetMapping("/usuario/{idUsuario}")
-    public ResponseEntity<AppUserDTO> obtenerUsuarioPorId(@PathVariable Integer idUsuario) {
+    public ResponseEntity<AppUser> obtenerUsuarioPorId(@PathVariable Integer idUsuario) {
         try {
             // Llamar al servicio para obtener el usuario
-            AppUserDTO usuario = articuloService.obtenerUsuarioPorId(idUsuario);
+            AppUser usuario = articuloService.obtenerUsuarioPorId(idUsuario);
             if (usuario == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
