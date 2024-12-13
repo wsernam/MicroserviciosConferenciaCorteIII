@@ -12,6 +12,6 @@ public interface PuertoGestionConferenciaGateway {
     public Conferencia setConferencia(Conferencia prmConferencia);
     public boolean verifyById(int prmId);
     public Conferencia EncontrarPorId(Integer prmId);
-    public Conferencia addArticulo(Integer prmIdArticulo, Integer idConferencia);
     public String postularEvaluador(Evaluador evaluador);
+    public Conferencia addArticulo(Articulo articulo);
 }

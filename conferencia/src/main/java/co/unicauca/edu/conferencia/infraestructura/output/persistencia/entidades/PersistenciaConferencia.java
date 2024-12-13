@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -25,6 +27,7 @@ public class PersistenciaConferencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    public String organizador;
     public String nombre;
     public String temas;
     public String entidadOrganizadora;
@@ -39,42 +42,29 @@ public class PersistenciaConferencia {
     public int numMaxRecepcion;
     public int numMaxAceptacion;
     public float calificacionMinAceptable;
-    public List<Integer> articulosRecibidos;
-    public List<Integer> articulosAceptados;
+
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "conferencia_id") // Esto crea una clave foránea en la tabla Articulo
+    public List<PersistenciaArticulo> articulosRecibidos;
+
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "conferencia_id") // Esto crea una clave foránea en la tabla Articulo
+    public List<PersistenciaArticulo> articulosAceptados;
+
+    
     public List<Integer> organizadores;
     public List<Integer> autores;
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     public List<PersistenciaEvaluador> evaluadores;
 
     public PersistenciaConferencia() {
-        this.articulosAceptados = new ArrayList<>();
-        this.articulosRecibidos = new ArrayList<>();
-        this.evaluadores = new ArrayList<>();
+       
     }
 
-    public List<Integer> getArticulosRecibidos() {
-        return articulosRecibidos;
-    }
-
-    public void setArticulosRecibidos(List<Integer> articulosRecibidos) {
-        this.articulosRecibidos = articulosRecibidos;
-    }
-
-    public List<Integer> getArticulosAceptados() {
-        return articulosAceptados;
-    }
-
-    public void setArticulosAceptados(List<Integer> articulosAceptados) {
-        this.articulosAceptados = articulosAceptados;
-    }
-
-    public List<PersistenciaEvaluador> getEvaluadores() {
-        return evaluadores;
-    }
-
-    public void setEvaluadores(List<PersistenciaEvaluador> evaluadores) {
-        this.evaluadores = evaluadores;
-    }
+   
     
     
 

@@ -33,6 +33,7 @@ public class AdaptadorGestionConferencias implements PuertoGestionConferencia {
             return (Conferencia) this.mensaje.prepararRespuestaFallida(resultado);
 
         } else {
+          
             return this.servicioRepositorio.setConferencia(prmConferencia);
 
         }
@@ -48,12 +49,12 @@ public class AdaptadorGestionConferencias implements PuertoGestionConferencia {
         System.out.println("EL ARTICULO QUE LLEGA ES:" + prmArticulo);
         Integer idConferencia = prmArticulo.getConferencia();
         System.out.println("EL ID DE LA CONFERENCIA DEL ARTICULO ES:" + idConferencia);
+        if(!servicioRepositorio.verifyById(idConferencia)){
+            return (Conferencia) this.mensaje.prepararRespuestaFallida("la conferencia no existe");
 
-        if (!servicioRepositorio.verifyById(idConferencia)) {
-            System.out.println("NO EXISTE LA CONFERENCIA");
-            return (Conferencia) this.mensaje.prepararRespuestaFallida("No existe la conferencia");
         }
-        System.out.println("EXISTE LA CONFERENCIA");
+     
+       
         Conferencia conferencia = servicioRepositorio.EncontrarPorId(idConferencia);
         System.out.println("LA CONFERENCIA ES:" + conferencia);
         String resultado = conferencia.maxArticulosRecibidos();
@@ -62,7 +63,7 @@ public class AdaptadorGestionConferencias implements PuertoGestionConferencia {
             return (Conferencia) this.mensaje.prepararRespuestaFallida(resultado);
         }
 
-        Conferencia respuesta = this.servicioRepositorio.addArticulo(prmArticulo.getId(), conferencia.getId());
+        Conferencia respuesta = this.servicioRepositorio.addArticulo(prmArticulo);
 
         System.out.println("CONFERENCIA CON SUS ARTICULOS" + conferencia);
 
@@ -92,4 +93,7 @@ public class AdaptadorGestionConferencias implements PuertoGestionConferencia {
         servicioRepositorio.postularEvaluador(evaluador);
         System.out.println("Evaluador postulado correctamente.");
     }
+
+   
+   
 }

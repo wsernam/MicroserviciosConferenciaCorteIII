@@ -28,6 +28,11 @@ public class UserService implements IUserService {
     @Autowired
     IUserRepository userAccess; 
     
+    
+    public UserService(IUserRepository userAccess) {
+        this.userAccess = userAccess;
+    }
+
     @Override
     @Transactional
     public Usuario login(String us, String password) {
@@ -73,6 +78,10 @@ public class UserService implements IUserService {
     public Usuario findById(Long id) {
         Usuario us = userAccess.findById(id).orElse(null);
         return us;
+    }
+    @Override
+    public Usuario buscarPorCorreo(String correo) {
+        return userAccess.findByCorreo(correo).orElse(null);
     }
    
 }

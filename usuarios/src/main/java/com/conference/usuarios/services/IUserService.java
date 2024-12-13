@@ -17,4 +17,5 @@ public interface IUserService {
     public boolean isEmailRegistered(String email);
     public List<Usuario> findAll();
     public Usuario findById(Long id);
+    public Usuario buscarPorCorreo(String correo);
 }

@@ -13,6 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class DTORespuesta {
     private Integer id;
+    private String organizador;
     private String nombre;
     private String temas;
     private String entidadOrganizadora;
@@ -27,8 +28,8 @@ public class DTORespuesta {
     private int numMaxRecepcion;
     private int numMaxAceptacion;
     private float calificacionMinAceptable;
-    public List<Integer> articulosAceptados;
-    public List<Integer> articulosRecibidos;
+    public List<DTOArticulo> articulosAceptados;
+    public List<DTOArticulo> articulosRecibidos;
     public DTORespuesta() {
         this.articulosAceptados = new ArrayList<>();
         this.articulosRecibidos = new ArrayList<>();

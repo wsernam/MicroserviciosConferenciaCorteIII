@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,6 +33,11 @@ public class UserController {
     @Autowired
     IUserService userService;
     
+    
+    public UserController(IUserService userService) {
+        this.userService = userService;
+    }
+
     @RequestMapping(method = RequestMethod.GET, produces =
     "application/json")
      @ResponseBody
@@ -61,6 +67,13 @@ public class UserController {
             return ResponseEntity.ok(us);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
+
+
+      @GetMapping("/buscarPorCorreo")
+    public ResponseEntity<Usuario> buscarPorCorreo(@RequestParam String correo) {
+        Usuario usuario = userService.buscarPorCorreo(correo);
+        return usuario != null ? ResponseEntity.ok(usuario) : ResponseEntity.notFound().build();
     }
      
 }

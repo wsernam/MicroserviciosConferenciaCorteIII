@@ -8,6 +8,7 @@ import java.util.Objects;
 public class Conferencia {
 
     public Integer id;
+    public String organizador;
     public String nombre;
     public String temas;
     public String entidadOrganizadora;
@@ -23,14 +24,19 @@ public class Conferencia {
     public int numMaxRecepcion;
     public int numMaxAceptacion;
     public float calificacionMinAceptable;
-    public List<Integer> articulosAceptados;
-    public List<Integer> articulosRecibidos;
+    public List<Articulo> articulosAceptados;
+    public List<Articulo> articulosRecibidos;
     private List<Evaluador> evaluadores; // Lista con la información completa de los evaluadores
 
-    public Conferencia(Integer id, String nombre, String temas, String entidadOrganizadora, String pais, String estado,
-            String ciudad, String direccion, LocalDate fechaFin, LocalDate fechaInicio, LocalDate fechaFinRecepcion,
-            LocalDate fechaFinEvaluacion, int numMaxRecepcion, int numMaxAceptacion, float calificacionMinAceptable) {
+    
+
+    public Conferencia(Integer id, String organizador, String nombre, String temas, String entidadOrganizadora,
+            String pais, String estado, String ciudad, String direccion, LocalDate fechaFin, LocalDate fechaInicio,
+            LocalDate fechaFinRecepcion, LocalDate fechaFinEvaluacion, int numMaxEvaluadores, int numMaxRecepcion,
+            int numMaxAceptacion, float calificacionMinAceptable, List<Articulo> articulosAceptados,
+            List<Articulo> articulosRecibidos, List<Evaluador> evaluadores) {
         this.id = id;
+        this.organizador = organizador;
         this.nombre = nombre;
         this.temas = temas;
         this.entidadOrganizadora = entidadOrganizadora;
@@ -42,13 +48,13 @@ public class Conferencia {
         this.fechaInicio = fechaInicio;
         this.fechaFinRecepcion = fechaFinRecepcion;
         this.fechaFinEvaluacion = fechaFinEvaluacion;
-        this.numMaxEvaluadores = 8;
+        this.numMaxEvaluadores = numMaxEvaluadores;
         this.numMaxRecepcion = numMaxRecepcion;
         this.numMaxAceptacion = numMaxAceptacion;
         this.calificacionMinAceptable = calificacionMinAceptable;
-        this.articulosAceptados = new ArrayList<>();
-        this.articulosRecibidos = new ArrayList<>();
-        this.evaluadores = new ArrayList<>();
+        this.articulosAceptados = articulosAceptados;
+        this.articulosRecibidos = articulosRecibidos;
+        this.evaluadores = evaluadores;
     }
 
     public Conferencia() {
@@ -82,6 +88,7 @@ public class Conferencia {
         }
         return "ok";
     }
+    
 
     public String maxArticulosRecibidos() {
         if (articulosRecibidos.size() >= numMaxRecepcion) {
@@ -231,19 +238,19 @@ public class Conferencia {
         this.calificacionMinAceptable = calificacionMinAceptable;
     }
 
-    public List<Integer> getArticulosAceptados() {
+    public List<Articulo> getArticulosAceptados() {
         return articulosAceptados;
     }
 
-    public void setArticulosAceptados(List<Integer> articulosAceptados) {
+    public void setArticulosAceptados(List<Articulo> articulosAceptados) {
         this.articulosAceptados = articulosAceptados;
     }
 
-    public List<Integer> getArticulosRecibidos() {
+    public List<Articulo> getArticulosRecibidos() {
         return articulosRecibidos;
     }
 
-    public void setArticulosRecibidos(List<Integer> articulosRecibidos) {
+    public void setArticulosRecibidos(List<Articulo> articulosRecibidos) {
         this.articulosRecibidos = articulosRecibidos;
     }
 
@@ -283,6 +290,14 @@ public class Conferencia {
                 + ", articulosAceptados=" + articulosAceptados
                 + ", articulosRecibidos=" + articulosRecibidos
                 + '}';
+    }
+
+    public String getOrganizador() {
+        return organizador;
+    }
+
+    public void setOrganizador(String organizador) {
+        this.organizador = organizador;
     }
 
 }

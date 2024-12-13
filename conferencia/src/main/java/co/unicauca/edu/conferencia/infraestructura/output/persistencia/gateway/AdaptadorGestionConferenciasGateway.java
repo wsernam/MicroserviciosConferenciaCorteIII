@@ -9,10 +9,13 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
 import co.unicauca.edu.conferencia.aplicación.puertos.output.PuertoGestionConferenciaGateway;
+import co.unicauca.edu.conferencia.dominio.modelos.Articulo;
 import co.unicauca.edu.conferencia.dominio.modelos.Conferencia;
 import co.unicauca.edu.conferencia.dominio.modelos.Evaluador;
+import co.unicauca.edu.conferencia.infraestructura.input.DTOs.DTOArticulo;
+import co.unicauca.edu.conferencia.infraestructura.output.persistencia.entidades.PersistenciaArticulo;
 import co.unicauca.edu.conferencia.infraestructura.output.persistencia.entidades.PersistenciaConferencia;
-
+import co.unicauca.edu.conferencia.infraestructura.output.persistencia.repositorio.IArticuloRepositorio;
 import co.unicauca.edu.conferencia.infraestructura.output.persistencia.repositorio.IConferenciaRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,12 +23,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class AdaptadorGestionConferenciasGateway implements PuertoGestionConferenciaGateway {
 
     private IConferenciaRepositorio repositorio;
+    private IArticuloRepositorio repositorioA;
     private final ModelMapper modelMapper;
     private RabbitTemplate rabbitTemplate;
 
-    public AdaptadorGestionConferenciasGateway(IConferenciaRepositorio repositorio,
+  
+
+    public AdaptadorGestionConferenciasGateway(IConferenciaRepositorio repositorio, IArticuloRepositorio repositorioA,
             ModelMapper modelMapper, RabbitTemplate rabbitTemplate) {
         this.repositorio = repositorio;
+        this.repositorioA = repositorioA;
         this.modelMapper = modelMapper;
         this.rabbitTemplate = rabbitTemplate;
     }
@@ -61,15 +68,28 @@ public class AdaptadorGestionConferenciasGateway implements PuertoGestionConfere
     }
 
     @Override
-    public Conferencia addArticulo(Integer prmIdArticulo, Integer idConferencia) {
+    public Conferencia addArticulo(Articulo articulo) {
+  
+         Integer idConferencia=articulo.getConferencia();
+   
 
-        PersistenciaConferencia conferencia = this.repositorio.findById(idConferencia).orElse(null);
-        ArrayList<Integer> listaArticulos = new ArrayList<>();
-        listaArticulos = (ArrayList<Integer>) conferencia.getArticulosRecibidos();
-        listaArticulos.add(prmIdArticulo);
-        conferencia.setArticulosRecibidos(listaArticulos);
-        PersistenciaConferencia resultado = repositorio.save(conferencia);
-        return this.modelMapper.map(resultado, Conferencia.class);
+        // Obtener la conferencia asociada
+        Conferencia conferencia = EncontrarPorId(idConferencia);
+       
+       
+        // Guardar los cambios en la conferencia persistencia
+        Integer idArticulo=articulo.getId();
+        PersistenciaArticulo perArticulo= modelMapper.map(articulo, PersistenciaArticulo.class);
+        perArticulo.setId(idArticulo);
+        this.repositorioA.save(perArticulo);
+
+        PersistenciaConferencia persistenciaConferencia = modelMapper.map(conferencia, PersistenciaConferencia.class);
+        persistenciaConferencia.getArticulosRecibidos().add(perArticulo);
+        repositorio.save(persistenciaConferencia);
+
+        return modelMapper.map(persistenciaConferencia, Conferencia.class);
+
+        
     }
 
     @Override
@@ -97,4 +117,6 @@ public class AdaptadorGestionConferenciasGateway implements PuertoGestionConfere
 
         return "Evaluador postulado correctamente";
     }
+
+  
 }

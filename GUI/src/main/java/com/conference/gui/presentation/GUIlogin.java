@@ -8,6 +8,7 @@ import com.conference.gui.clients.UserClient;
 import com.conference.gui.entities.Login;
 import com.conference.gui.entities.Usuario;
 import com.conference.gui.entities.Usuario_Autorizado;
+import com.conference.gui.presentation.infra.ApplicationContext;
 import java.awt.Dimension;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -281,6 +282,7 @@ public class GUIlogin extends javax.swing.JFrame {
             Logger.getLogger(GUIlogin.class.getName()).log(Level.SEVERE, null, ex);
         }
        if (us != null) {
+            ApplicationContext.getInstance().setUsuarioLogueado(us);
             this.dispose();
             GUIcontainer container = new GUIcontainer(); 
             // Pasar Usuario, ConferenceService y ArticleService al constructor de GUIcontainer
