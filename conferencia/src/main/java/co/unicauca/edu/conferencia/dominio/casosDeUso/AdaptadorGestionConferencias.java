@@ -8,14 +8,22 @@ import co.unicauca.edu.conferencia.aplicación.puertos.input.PuertoGestionConfer
 import co.unicauca.edu.conferencia.aplicación.puertos.output.PuertoComunicacionResultado;
 import co.unicauca.edu.conferencia.aplicación.puertos.output.PuertoGestionConferenciaGateway;
 import co.unicauca.edu.conferencia.dominio.StrictAssignment;
+import co.unicauca.edu.conferencia.dominio.eventos.AsginarEvaluadoresEvent;
+import co.unicauca.edu.conferencia.dominio.eventos.ConferenciaCreadaEvent;
+import co.unicauca.edu.conferencia.dominio.eventos.EvaluadorPostuladoEvent;
 import co.unicauca.edu.conferencia.dominio.modelos.Articulo;
 import co.unicauca.edu.conferencia.dominio.modelos.Conferencia;
 import co.unicauca.edu.conferencia.dominio.modelos.Evaluador;
+import co.unicauca.edu.conferencia.infraestructura.configuracion.RabbitMQConfig;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class AdaptadorGestionConferencias implements PuertoGestionConferencia {
 
     PuertoGestionConferenciaGateway servicioRepositorio;
     PuertoComunicacionResultado mensaje;
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     public AdaptadorGestionConferencias(PuertoGestionConferenciaGateway servicioRepositorio,
             PuertoComunicacionResultado mensaje) {
@@ -31,16 +39,37 @@ public class AdaptadorGestionConferencias implements PuertoGestionConferencia {
     @Override
     public Conferencia crearConferencia(Conferencia prmConferencia) {
 
+        // Validar las fechas de la conferencia
         String resultado = prmConferencia.validarFechas();
         if (!resultado.equals("ok")) {
-            return (Conferencia) this.mensaje.prepararRespuestaFallida(resultado);
-
+            // Preparar respuesta fallida si la validación falla
+            this.mensaje.prepararRespuestaFallida(resultado);
+            return null;
         } else {
-          
-            return this.servicioRepositorio.setConferencia(prmConferencia);
+            // Guardar la conferencia en el repositorio
+            Conferencia conferenciaCreada = this.servicioRepositorio.setConferencia(prmConferencia);
 
+            // Crear el evento ConferenciaCreadaEvent
+            ConferenciaCreadaEvent evento = new ConferenciaCreadaEvent(
+                conferenciaCreada.getId(),
+                conferenciaCreada.getNombre(),
+                conferenciaCreada.getNumMaxAceptacion()
+            );
+
+            // Enviar el evento a RabbitMQ
+            rabbitTemplate.convertAndSend(
+                RabbitMQConfig.CONFERENCIA_EXCHANGE,
+                RabbitMQConfig.CONFERENCIA_CREADA_ROUTING_KEY,
+                evento
+            );
+
+            // Loguear el evento enviado
+            System.out.println("Evento enviado a RabbitMQ: " + evento);
+
+            return conferenciaCreada;
         }
     }
+
 
     @Override
     public boolean existeConferencia(int prmId) {
@@ -95,47 +124,86 @@ public class AdaptadorGestionConferencias implements PuertoGestionConferencia {
         // Si se logra postular correctamente, almacenar en el repositorio
         servicioRepositorio.postularEvaluador(evaluador);
         System.out.println("Evaluador postulado correctamente.");
+
+        // Crear el evento EvaluadorPostuladoEvent
+        EvaluadorPostuladoEvent evento = new EvaluadorPostuladoEvent(
+            evaluador.getId(),
+            evaluador.getName(),
+            evaluador.getEmail(),
+            evaluador.getConferenciaId(),
+            conferencia.getNombre()
+        );
+
+        // Enviar el evento a RabbitMQ
+        rabbitTemplate.convertAndSend(
+            RabbitMQConfig.CONFERENCIA_EXCHANGE,
+            RabbitMQConfig.POSTULAR_EVALUADOR_ROUTING_KEY,
+            evento
+        );
+
+        // Loguear el evento enviado
+        System.out.println("Evento enviado a RabbitMQ: " + evento);
     }
+
 
 
     @Override
     public List<Articulo> asignarEvaluadores(Conferencia conferencia) {
         // Crear instancia de StrictAssignment
         StrictAssignment strictAssignment = new StrictAssignment(1);
-    
+
         // Obtener el mapa de afinidad inicial
         Map<Articulo, List<Evaluador>> afinidadMap = strictAssignment.AffinityAssignment(
             conferencia.getArticulosRecibidos(),
             conferencia.getEvaluadores()
         );
-    
+
         List<Articulo> articulosAsignados = new ArrayList<>();
-    
+
         // Iterar sobre los artículos recibidos
         for (Articulo articulo : conferencia.getArticulosRecibidos()) {
             // Obtener evaluadores afines del mapa
             List<Evaluador> evaluadoresAfines = afinidadMap.getOrDefault(articulo, new ArrayList<>());
-    
+
             // Filtrar evaluadores válidos (sin conflicto)
             List<Evaluador> evaluadoresFiltrados = evaluadoresAfines.stream()
                 .filter(evaluador -> !evaluador.getEmail().equals(conferencia.getOrganizador())) // Excluir al organizador
                 .filter(evaluador -> evaluador.getArticuloAsignado() == null) // Evaluador no debe tener un artículo asignado
                 .toList();
-    
+
             // Asignar evaluador si hay alguno disponible
             if (!evaluadoresFiltrados.isEmpty()) {
                 Evaluador evaluadorAsignado = evaluadoresFiltrados.get(0); // Seleccionar el primero disponible
                 articulo.setEvaluadorAsignado(evaluadorAsignado);
                 evaluadorAsignado.setArticuloAsignado(articulo);
-                
+
                 articulosAsignados.add(articulo);
+
+                // Crear el evento AsignarEvaluadoresEvent
+                AsginarEvaluadoresEvent evento = new AsginarEvaluadoresEvent(
+                    evaluadorAsignado.getId(),
+                    evaluadorAsignado.getName(),
+                    evaluadorAsignado.getEmail(),
+                    articulo.getId(),
+                    articulo.getNombre(),
+                    evaluadoresAfines, // Lista completa de evaluadores afines
+                    conferencia.getId(),
+                    conferencia.getNombre()
+                );
+
+                // Enviar el evento a RabbitMQ
+                rabbitTemplate.convertAndSend(
+                    RabbitMQConfig.CONFERENCIA_EXCHANGE,
+                    RabbitMQConfig.ASIGNAR_EVALUADORES_ROUTING_KEY,
+                    evento
+                );
+
+                // Loguear el evento enviado
+                System.out.println("Evento enviado a RabbitMQ: " + evento);
             }
         }
-    
+
         return articulosAsignados;
     }
-    
-
-   
    
 }

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Evaluador {
 
-    private Long id;
+    private Integer id;
     private String name;
     private String lastName;
     private String country;
@@ -45,7 +45,7 @@ public class Evaluador {
 
 
 
-    public Evaluador(Long id, String name, String lastName, String country, String email, String organization,
+    public Evaluador(Integer id, String name, String lastName, String country, String email, String organization,
             Articulo articuloAsignado, List<String> researchfields, Integer idConferencia) {
         this.id = id;
         this.name = name;
@@ -60,11 +60,11 @@ public class Evaluador {
 
 
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
