@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Version;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,7 +36,8 @@ public class PersistenciaEvaluador {
     private String organization;
     private List<String> researchfields;
     private Integer idConferencia; // La conferencia a la que se postula
-
+    @Version
+    private int version;
      @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "articulo_id", referencedColumnName = "id")
     private PersistenciaArticulo articuloAsignado;

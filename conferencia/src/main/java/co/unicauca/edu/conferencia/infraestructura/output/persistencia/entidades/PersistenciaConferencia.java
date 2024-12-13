@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Version;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -40,6 +41,8 @@ public class PersistenciaConferencia {
     public int numMaxRecepcion;
     public int numMaxAceptacion;
     public float calificacionMinAceptable;
+    @Version
+    private int version;
 
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

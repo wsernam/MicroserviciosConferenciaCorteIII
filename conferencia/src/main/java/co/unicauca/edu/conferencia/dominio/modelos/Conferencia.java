@@ -20,7 +20,7 @@ public class Conferencia {
     public LocalDate fechaInicio;
     public LocalDate fechaFinRecepcion;
     public LocalDate fechaFinEvaluacion;
-    public int numMaxEvaluadores;
+
     public int numMaxRecepcion;
     public int numMaxAceptacion;
     public float calificacionMinAceptable;
@@ -48,7 +48,7 @@ public class Conferencia {
         this.fechaInicio = fechaInicio;
         this.fechaFinRecepcion = fechaFinRecepcion;
         this.fechaFinEvaluacion = fechaFinEvaluacion;
-        this.numMaxEvaluadores = numMaxEvaluadores;
+        
         this.numMaxRecepcion = numMaxRecepcion;
         this.numMaxAceptacion = numMaxAceptacion;
         this.calificacionMinAceptable = calificacionMinAceptable;
@@ -97,22 +97,14 @@ public class Conferencia {
         return "ok";
     }
 
-    public boolean puedeAceptarEvaluador() {
-        // Verificar si ya se ha alcanzado el límite de evaluadores
-        return evaluadores.size() < numMaxEvaluadores;
-    }
-
+   
     public String postularEvaluador(Evaluador evaluador) {
         // Verificar si el evaluador ya está registrado en la conferencia
         if (evaluadores.contains(evaluador)) {
             return "El evaluador ya está registrado en esta conferencia.";
         }
 
-        // Verificar si la conferencia puede aceptar más evaluadores
-        if (!puedeAceptarEvaluador()) {
-            return "No es posible agregar más evaluadores, el límite ha sido alcanzado.";
-        }
-
+      
         // Agregar el evaluador a la lista de la conferencia
         evaluadores.add(evaluador);
         return "Evaluador postulado exitosamente.";
@@ -262,13 +254,7 @@ public class Conferencia {
         this.evaluadores = evaluadores;
     }
 
-    public int getNumMaxEvaluadores() {
-        return numMaxEvaluadores;
-    }
-
-    public void setNumMaxEvaluadores(int numMaxEvaluadores) {
-        this.numMaxEvaluadores = numMaxEvaluadores;
-    }
+   
 
     @Override
     public String toString() {

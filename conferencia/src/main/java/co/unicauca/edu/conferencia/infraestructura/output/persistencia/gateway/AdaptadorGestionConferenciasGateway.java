@@ -15,8 +15,11 @@ import co.unicauca.edu.conferencia.dominio.modelos.Evaluador;
 import co.unicauca.edu.conferencia.infraestructura.input.DTOs.DTOArticulo;
 import co.unicauca.edu.conferencia.infraestructura.output.persistencia.entidades.PersistenciaArticulo;
 import co.unicauca.edu.conferencia.infraestructura.output.persistencia.entidades.PersistenciaConferencia;
+import co.unicauca.edu.conferencia.infraestructura.output.persistencia.entidades.PersistenciaEvaluador;
 import co.unicauca.edu.conferencia.infraestructura.output.persistencia.repositorio.IArticuloRepositorio;
 import co.unicauca.edu.conferencia.infraestructura.output.persistencia.repositorio.IConferenciaRepositorio;
+import co.unicauca.edu.conferencia.infraestructura.output.persistencia.repositorio.IEvaluadorRepositorio;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
@@ -24,15 +27,19 @@ public class AdaptadorGestionConferenciasGateway implements PuertoGestionConfere
 
     private IConferenciaRepositorio repositorio;
     private IArticuloRepositorio repositorioA;
+    private IEvaluadorRepositorio repositorioE;
     private final ModelMapper modelMapper;
     private RabbitTemplate rabbitTemplate;
 
   
 
+  
+
     public AdaptadorGestionConferenciasGateway(IConferenciaRepositorio repositorio, IArticuloRepositorio repositorioA,
-            ModelMapper modelMapper, RabbitTemplate rabbitTemplate) {
+            IEvaluadorRepositorio repositorioE, ModelMapper modelMapper, RabbitTemplate rabbitTemplate) {
         this.repositorio = repositorio;
         this.repositorioA = repositorioA;
+        this.repositorioE = repositorioE;
         this.modelMapper = modelMapper;
         this.rabbitTemplate = rabbitTemplate;
     }
@@ -103,16 +110,17 @@ public class AdaptadorGestionConferenciasGateway implements PuertoGestionConfere
         // Obtener la conferencia asociada
         Conferencia conferencia = EncontrarPorId(evaluador.getConferenciaId());
 
-        // Verificar si la conferencia ya tiene el evaluador o si se alcanzó el límite
-        if (!conferencia.puedeAceptarEvaluador()) {
-            return "Límite de evaluadores alcanzado o evaluador ya registrado.";
-        }
 
-        // Agregar el evaluador a la conferencia
-        conferencia.getEvaluadores().add(evaluador); // Asumiendo que tienes un método getEvaluadores que te da la lista de evaluadores
 
+
+       
         // Guardar los cambios en la conferencia
         PersistenciaConferencia persistenciaConferencia = modelMapper.map(conferencia, PersistenciaConferencia.class);
+        PersistenciaEvaluador persisEvaluador=modelMapper.map(evaluador,PersistenciaEvaluador.class);
+         // Agregar el evaluador a la conferencia
+         this.repositorioE.save(persisEvaluador);
+         persistenciaConferencia.getEvaluadores().add(persisEvaluador); // Asumiendo que tienes un método getEvaluadores que te da la lista de evaluadores
+
         repositorio.save(persistenciaConferencia);
 
         return "Evaluador postulado correctamente";
