@@ -27,7 +27,6 @@ import co.unicauca.edu.conferencia.dominio.modelos.Articulo;
 @Entity
 public class PersistenciaEvaluador {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String lastName;

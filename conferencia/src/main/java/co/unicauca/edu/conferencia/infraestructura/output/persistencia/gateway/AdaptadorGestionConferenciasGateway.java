@@ -19,6 +19,7 @@ import co.unicauca.edu.conferencia.infraestructura.output.persistencia.entidades
 import co.unicauca.edu.conferencia.infraestructura.output.persistencia.repositorio.IArticuloRepositorio;
 import co.unicauca.edu.conferencia.infraestructura.output.persistencia.repositorio.IConferenciaRepositorio;
 import co.unicauca.edu.conferencia.infraestructura.output.persistencia.repositorio.IEvaluadorRepositorio;
+import jakarta.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -73,7 +74,7 @@ public class AdaptadorGestionConferenciasGateway implements PuertoGestionConfere
         PersistenciaConferencia conferenciaEncontrada = this.repositorio.findById(prmId).orElse(null);
         return this.modelMapper.map(conferenciaEncontrada, Conferencia.class);
     }
-
+    @Transactional
     @Override
     public Conferencia addArticulo(Articulo articulo) {
   
@@ -98,34 +99,31 @@ public class AdaptadorGestionConferenciasGateway implements PuertoGestionConfere
 
         
     }
-
+    @Transactional
     @Override
     public String postularEvaluador(Evaluador evaluador) {
-        
         // Verificar si la conferencia existe
         if (!verifyById(evaluador.getConferenciaId())) {
             System.out.println("Conferencia no encontrada para el evaluador.");
             return "Conferencia no encontrada";
         }
-
-        // Obtener la conferencia asociada
-        Conferencia conferencia = EncontrarPorId(evaluador.getConferenciaId());
-
-
-
-
-       
-        // Guardar los cambios en la conferencia
-        PersistenciaConferencia persistenciaConferencia = modelMapper.map(conferencia, PersistenciaConferencia.class);
-        PersistenciaEvaluador persisEvaluador=modelMapper.map(evaluador,PersistenciaEvaluador.class);
-         // Agregar el evaluador a la conferencia
-         this.repositorioE.save(persisEvaluador);
-         persistenciaConferencia.getEvaluadores().add(persisEvaluador); // Asumiendo que tienes un método getEvaluadores que te da la lista de evaluadores
-
+    
+        // Obtener la conferencia desde la base de datos
+        PersistenciaConferencia persistenciaConferencia = repositorio.findById(evaluador.getConferenciaId())
+                .orElseThrow(() -> new RuntimeException("Conferencia no encontrada"));
+    
+        // Mapear el evaluador
+        PersistenciaEvaluador persisEvaluador = modelMapper.map(evaluador, PersistenciaEvaluador.class);
+    
+        // Agregar el evaluador a la conferencia
+        persistenciaConferencia.getEvaluadores().add(persisEvaluador);
+    
+        // Guardar los cambios
         repositorio.save(persistenciaConferencia);
-
+    
         return "Evaluador postulado correctamente";
     }
+    
 
   
 }
