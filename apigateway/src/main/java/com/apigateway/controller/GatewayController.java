@@ -4,12 +4,14 @@
  */
 package com.apigateway.controller;
 
+import com.apigateway.DTOs.DTOPeticion;
 import com.apigateway.authentication.services.IAuthentication;
 import com.apigateway.entities.Articulo;
 import com.apigateway.entities.Conferencia;
 import com.apigateway.entities.Login;
 import com.apigateway.entities.Usuario;
 import com.apigateway.entities.Usuario_Autorizado;
+import com.apigateway.mapper.DTOConferenciaMapper;
 import com.apigateway.restClients.IRestArticle;
 import com.apigateway.restClients.IRestConference;
 import java.util.List;
@@ -32,8 +34,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class GatewayController {
     @Autowired
     IAuthentication authentication;
+    @Autowired
     IRestArticle articleClient;
-    
+    @Autowired
     IRestConference conferenceClient; 
     
     @PostMapping(value="/register", consumes = "application/json", produces = "application/json")
@@ -56,8 +59,9 @@ public class GatewayController {
     
     
     @PostMapping(value="/Conference", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Conferencia> createConference(@RequestBody Conferencia con){
-       Conferencia conferencia =  conferenceClient.setConferencia(con); 
+    public ResponseEntity<Conferencia> createConference(@RequestBody DTOPeticion con){
+        
+       Conferencia conferencia =  conferenceClient.setConferencia(DTOConferenciaMapper.mappearDTOPeticion(con)); 
        if(conferencia!=null){
             return ResponseEntity.ok(conferencia);
         }

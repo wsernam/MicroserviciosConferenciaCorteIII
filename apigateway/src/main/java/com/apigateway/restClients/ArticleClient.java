@@ -11,12 +11,13 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.core.type.TypeReference;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author sonhuila
  */
-
+@Service
 public class ArticleClient  implements IRestArticle {
 
     private static final String USER_AGENT = "GUIArticles";
