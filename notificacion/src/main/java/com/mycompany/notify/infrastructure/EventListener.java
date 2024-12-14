@@ -51,10 +51,9 @@ public class EventListener {
         String destinatario = "wsernamunoz@gmail.com"; // Notificar al autor del artículo
         String asunto = "Nuevo artículo creado: " + evento.getNombre();
         String cuerpo = String.format(
-            "Hola, se ha creado un nuevo artículo titulado '%s' (ID: %d). Resumen: %s",
+            "Hola, se ha creado un nuevo artículo titulado '%s' (ID: %d)",
             evento.getNombre(),
-            evento.getIdArticulo(),
-            evento.getResumen()
+            evento.getIdArticulo()
         );
 
         System.out.println("Artículo creado: " + evento.getNombre());

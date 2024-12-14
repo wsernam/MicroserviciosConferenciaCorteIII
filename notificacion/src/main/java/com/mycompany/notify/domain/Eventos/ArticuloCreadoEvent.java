@@ -24,5 +24,4 @@ public class ArticuloCreadoEvent {
     //private int idConferencia
     private int idArticulo;   // ID del artículo
     private String nombre;    // Nombre del artículo
-    private String resumen;   // Resumen del artículo
 }
