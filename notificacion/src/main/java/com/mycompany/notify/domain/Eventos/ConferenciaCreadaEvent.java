@@ -22,6 +22,7 @@ import lombok.Setter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ConferenciaCreadaEvent {
     private int idConferencia;                     // ID de la conferencia
+    private String correo;                         // creador
     private String nombreConferencia;              // Nombre de la conferencia
     private int cantidadMaxArticulos;   // Máxima cantidad de artículos permitidos
 }
