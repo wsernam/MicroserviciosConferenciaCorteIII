@@ -57,6 +57,14 @@ public class DTORespuesta {
 
                 '}';
     }
+
+    public List<Evaluador> getEvaluadores() {
+        return evaluadores;
+    }
+
+    public void setEvaluadores(List<Evaluador> evaluadores) {
+        this.evaluadores = evaluadores;
+    }
     
     
 }
