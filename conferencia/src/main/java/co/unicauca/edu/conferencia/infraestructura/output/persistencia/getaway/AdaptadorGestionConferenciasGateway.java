@@ -19,8 +19,10 @@ import co.unicauca.edu.conferencia.infraestructura.output.persistencia.entidades
 import co.unicauca.edu.conferencia.infraestructura.output.persistencia.repositorio.IArticuloRepositorio;
 import co.unicauca.edu.conferencia.infraestructura.output.persistencia.repositorio.IConferenciaRepositorio;
 import co.unicauca.edu.conferencia.infraestructura.output.persistencia.repositorio.IEvaluadorRepositorio;
+import jakarta.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 
 @Service
 public class AdaptadorGestionConferenciasGateway implements PuertoGestionConferenciaGateway {
@@ -74,29 +76,34 @@ public class AdaptadorGestionConferenciasGateway implements PuertoGestionConfere
         return this.modelMapper.map(conferenciaEncontrada, Conferencia.class);
     }
 
+    @Transactional
     @Override
     public Conferencia addArticulo(Articulo articulo) {
-  
-         Integer idConferencia=articulo.getConferencia();
-   
+        // Obtener ID de conferencia desde el artículo
+        Integer idConferencia = articulo.getConferencia();
 
-        // Obtener la conferencia asociada
-        Conferencia conferencia = EncontrarPorId(idConferencia);
-       
-       
-        // Guardar los cambios en la conferencia persistencia
-        Integer idArticulo=articulo.getId();
-        PersistenciaArticulo perArticulo= modelMapper.map(articulo, PersistenciaArticulo.class);
+        // Cargar la conferencia desde la base de datos
+        PersistenciaConferencia persistenciaConferencia = repositorio.findById(idConferencia)
+            .orElseThrow(() -> new RuntimeException("Conferencia no encontrada"));
+
+        // Mapear y guardar el artículo
+        Integer idArticulo = articulo.getId();
+        PersistenciaArticulo perArticulo = modelMapper.map(articulo, PersistenciaArticulo.class);
         perArticulo.setId(idArticulo);
-        this.repositorioA.save(perArticulo);
+        repositorioA.save(perArticulo);
 
-        PersistenciaConferencia persistenciaConferencia = modelMapper.map(conferencia, PersistenciaConferencia.class);
+        // Asociar el artículo a la conferencia
         persistenciaConferencia.getArticulosRecibidos().add(perArticulo);
-        repositorio.save(persistenciaConferencia);
 
+        // Guardar la conferencia actualizada
+        try {
+            repositorio.save(persistenciaConferencia);
+        } catch (ObjectOptimisticLockingFailureException e) {
+            throw new RuntimeException("Conflicto de concurrencia al actualizar la conferencia: " + e.getMessage());
+        }
+
+        // Mapear y devolver la conferencia actualizada
         return modelMapper.map(persistenciaConferencia, Conferencia.class);
-
-        
     }
 
     @Override
