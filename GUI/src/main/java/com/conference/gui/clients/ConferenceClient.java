@@ -8,7 +8,6 @@ import com.conference.gui.DTOs.DTORespuesta;
 import com.conference.gui.entities.Conferencia;
 import com.conference.gui.entities.Usuario;
 import com.conference.gui.mapper.DTOConferenciaMapper;
-import static com.conference.gui.mapper.DTOConferenciaMapper.mappearDTORespuesta;
 import com.conference.gui.presentation.infra.Subject;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,12 +26,14 @@ import java.util.List;
 public class ConferenceClient extends Subject implements IRestConference{
     private static final String USER_AGENT = "GUIConference";
     private final String urlSaveConference = "http://localhost:7777/api/Conferencia";
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper;
     private Usuario usuario; 
     
     
     public ConferenceClient(Usuario us){
         this.usuario = us;
+        objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
     }
     @Override
     public List<Conferencia> getConferences() {
@@ -53,7 +54,10 @@ public class ConferenceClient extends Subject implements IRestConference{
             // Verificar y procesar la respuesta
             if (response.statusCode() == 200) {
                 // Convertir la respuesta JSON en una lista de objetos Conference
-                conferenceList = objectMapper.readValue(response.body(), new TypeReference<List<Conferencia>>() {});
+                List<DTORespuesta> conferenciaDTO = objectMapper.readValue(response.body(), new TypeReference<List<DTORespuesta>>() {});
+                for(DTORespuesta c:conferenciaDTO){
+                    conferenceList.add(DTOConferenciaMapper.mappearDTORespuesta(c));
+                }
             } else {
                 System.out.println("Error al listar las Conferencias: " + response.statusCode());
             }
@@ -81,8 +85,13 @@ public class ConferenceClient extends Subject implements IRestConference{
 
             // Verificar y procesar la respuesta
             if (response.statusCode() == 200) {
+                
                 // Convertir la respuesta JSON en una lista de objetos Conference
-                conferenceList = objectMapper.readValue(response.body(), new TypeReference<List<Conferencia>>() {});
+                List<DTORespuesta> conferenciaDTO = objectMapper.readValue(response.body(), new TypeReference<List<DTORespuesta>>() {});
+                for(DTORespuesta c:conferenciaDTO){
+                    conferenceList.add(DTOConferenciaMapper.mappearDTORespuesta(c));
+                }
+                
             } else {
                 System.out.println("Error al listar las Conferencias: " + response.statusCode());
             }
@@ -113,7 +122,6 @@ public class ConferenceClient extends Subject implements IRestConference{
             // Verificar y procesar la respuesta
             if (response.statusCode() == 200) {
                 System.out.println(response.body());
-                objectMapper.registerModule(new JavaTimeModule());
                 DTORespuesta conferencia = objectMapper.readValue(response.body(), DTORespuesta.class);
                 savedConference = DTOConferenciaMapper.mappearDTORespuesta(conferencia); 
             } else {

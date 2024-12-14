@@ -1,8 +1,6 @@
-
 package com.conference.gui.presentation;
 
 //import com.easyconference.access.Article.ArticleArrayListRepository;
-
 import com.conference.gui.clients.IUserRestClient;
 import com.conference.gui.clients.UserClient;
 import com.conference.gui.entities.Login;
@@ -31,33 +29,30 @@ import org.springframework.messaging.handler.annotation.Payload;
 
 /**
  * Interfaz Login
- * 
- * @author 
+ *
+ * @author
  * @version 1.0
  * @since 2024
  */
-
 public class GUIlogin extends javax.swing.JFrame {
-    
-    private IUserRestClient userclient; 
-    
-    
+
+    private IUserRestClient userclient;
+
     /**
      * Creates new form login
+     *
      * @param userclient
      */
-    
     public GUIlogin(IUserRestClient userclient) {
         initComponents();
         this.userclient = userclient;
-        
+
     }
-    
 
-    /**public GUIlogin() {
-        initComponents();
-    }*/
-
+    /**
+     * public GUIlogin() { initComponents();
+    }
+     */
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -265,56 +260,57 @@ public class GUIlogin extends javax.swing.JFrame {
     }//GEN-LAST:event_lbNotienesCuentaMouseExited
 
     private void lbNotienesCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNotienesCuentaMouseClicked
-       
+        GUIregister registro = new GUIregister(userclient);
+        registro.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_lbNotienesCuentaMouseClicked
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        Usuario us = null; 
-         GUIcontainer container = new GUIcontainer(); 
+        Usuario us = null;
+
+        if (txtfCorreo.getText().isBlank() || String.valueOf(pswfContrasenia.getPassword()).isBlank()) {
+            lbCamposVacios.setVisible(true);
+            return;
+        }
+
+        try {
+            us = userclient.login(txtfCorreo.getText(), new String(pswfContrasenia.getPassword()));
+        } catch (Exception ex) {
+            Logger.getLogger(GUIlogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (us != null) {
+            ApplicationContext.getInstance().setUsuarioLogueado(us);
+            GUIcontainer container = new GUIcontainer();
             // Pasar Usuario, ConferenceService y ArticleService al constructor de GUIcontainer
             container.setUsuario(us);
             container.setVisible(true);
             cleanFields();
-        if(txtfCorreo.getText().isBlank() || String.valueOf(pswfContrasenia.getPassword()).isBlank()){
-            lbCamposVacios.setVisible(true);
-            return;
-       }
-      
-        try {
-             us = userclient.login(txtfCorreo.getText(),new String(pswfContrasenia.getPassword()));
-        } catch (Exception ex) {
-            Logger.getLogger(GUIlogin.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       if (us != null) {
-             this.dispose();
-        GUIregister registro = new GUIregister(userclient);
-        registro.setVisible(true);
             this.dispose();
-           
+
         } else {
             JOptionPane.showMessageDialog(null, "Contraseña y/o usuario incorrecto", "Información", JOptionPane.INFORMATION_MESSAGE);
         }
-        
+
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void txtfCorreoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtfCorreoMousePressed
         lbCamposVacios.setVisible(false);
-        if(txtfCorreo.getText().equals("Ingrese su correo"))
+        if (txtfCorreo.getText().equals("Ingrese su correo"))
             txtfCorreo.setText("");
     }//GEN-LAST:event_txtfCorreoMousePressed
 
     private void pswfContraseniaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pswfContraseniaMousePressed
         lbCamposVacios.setVisible(false);
-        if(String.valueOf(pswfContrasenia.getPassword()).equals("......."))
+        if (String.valueOf(pswfContrasenia.getPassword()).equals("......."))
             pswfContrasenia.setText("");
     }//GEN-LAST:event_pswfContraseniaMousePressed
-    
-    public void cleanFields(){
+
+    public void cleanFields() {
         pswfContrasenia.setText("");
-         txtfCorreo.setText("");
+        txtfCorreo.setText("");
     }
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIngresar;
     private javax.swing.JLabel lbCamposVacios;
