@@ -34,8 +34,19 @@ public class ArticuloController {
     /*Recibe articulo a registrar y retorna el articulo registrado*/
     @PostMapping("/articulos")
     public ResponseEntity<ArticuloDTO> crearArticulo(@RequestBody ArticuloDTO articulo) {
+        // Verificar si la conferencia existe
+        boolean existeConferencia = conferenciaService.verificarConferencia(articulo.getIdConferencia());
+    
+        if (!existeConferencia) {
+            throw new RuntimeException("La conferencia con ID " + articulo.getIdConferencia() + " no existe.");
+        }
+    
+        // Si la conferencia existe, guarda el artículo
         ArticuloDTO objArticulo = articuloService.save(articulo);
+    
+        // Asociar el artículo con la conferencia
         conferenciaService.enviarArticuloAConferencia(objArticulo);
+    
         return ResponseEntity.ok(objArticulo);
     }
 

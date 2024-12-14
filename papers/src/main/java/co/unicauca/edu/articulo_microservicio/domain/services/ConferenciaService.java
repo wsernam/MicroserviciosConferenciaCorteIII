@@ -64,6 +64,20 @@ public class ConferenciaService implements IConferenciaService{
                 .toBodilessEntity()
                 .block(); // Ejecuta la llamada de manera sincrónica
     }
+    
+    @Override
+    public boolean verificarConferencia(Integer idConferencia) {
+        String url = "http://localhost:7777/api/Conferencia/VerificarConferencia/" + idConferencia;
 
+        // Llamada al endpoint del servicio de conferencias
+        Mono<Boolean> response = webClientBuilder.build()
+                .get()
+                .uri(url)
+                .retrieve()
+                .bodyToMono(Boolean.class);
+
+        // Bloqueo para obtener la respuesta directamente (puedes usar programadores reactivos si prefieres)
+        return response.block();
+    }
 }
 
