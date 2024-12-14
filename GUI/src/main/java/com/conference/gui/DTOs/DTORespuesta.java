@@ -1,5 +1,6 @@
 package com.conference.gui.DTOs;
 
+import com.conference.gui.entities.Evaluador;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class DTORespuesta {
     private int numMaxRecepcion;
     private int numMaxAceptacion;
     private float calificacionMinAceptable;
+    public List<Evaluador> evaluadores;
     public List<Integer> articulosAceptados;
     public List<Integer> articulosRecibidos;
     public DTORespuesta() {

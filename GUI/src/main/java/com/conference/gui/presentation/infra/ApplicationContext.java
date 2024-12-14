@@ -12,7 +12,7 @@ import com.conference.gui.entities.Usuario;
  */
 public class ApplicationContext {
     private static ApplicationContext instance;
-    private Usuario usuarioLogueado;
+    private  Usuario usuarioLogueado;
 
     private ApplicationContext() {}
 
@@ -27,8 +27,8 @@ public class ApplicationContext {
         return usuarioLogueado;
     }
 
-    public void setUsuarioLogueado(Usuario usuarioLogueado) {
-        this.usuarioLogueado = usuarioLogueado;
+    public void setUsuarioLogueado(Usuario usLogueado) {
+        usuarioLogueado = usLogueado;
     }
 }
 
