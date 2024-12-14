@@ -1,39 +1,49 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package com.conference.gui.presentation;
 
 import com.conference.gui.entities.Conferencia;
+import java.awt.Dimension;
 import java.util.List;
+import javax.swing.BoxLayout;
 
 /**
  *
- * @author Ashlee Campaz
+ * @author wsern
  */
-public class GUIconferenceSearch extends javax.swing.JInternalFrame {
+public class GUIconferenceSearch extends javax.swing.JPanel {
 
     /**
-     * Creates new form GUIconferenceResearch
+     * Creates new form NewJPanel
+     * @param conferences
      */
-    
-    private List<Conferencia> searchResults;
-    private List<pnlConferenceInfo> searchResultsPanels; 
-    public GUIconferenceSearch(List<Conferencia> searchResults) {
-        this.searchResults = searchResults;
-        initComponents();
+ public GUIconferenceSearch(List<Conferencia> conferences) {
+    initComponents(); // Carga la interfaz gráfica diseñada en NetBeans
+
+    // Limpia cualquier contenido previo en el panel `pnlResultados`
+    pnlResultados.removeAll();
+    pnlResultados.setLayout(new BoxLayout(pnlResultados, BoxLayout.Y_AXIS)); // Diseño vertical para resultados dinámicos
+
+    // Itera sobre las conferencias y agrega un `pnlConferenceInfo` por cada una
+    for (Conferencia conference : conferences) {
+        pnlConferenceInfo conferenceInfoPanel = new pnlConferenceInfo(conference);
+
+        // Ajusta el tamaño del panel aquí (solo altura fija, el ancho lo manejará automáticamente)
+        conferenceInfoPanel.setPreferredSize(new Dimension(pnlResultados.getWidth()-100, 60)); // Ancho dinámico, altura fija
+        conferenceInfoPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 60)); // Permite ajuste dinámico de ancho, fija altura
+        conferenceInfoPanel.setMinimumSize(new Dimension(0, 60)); // Altura fija con ancho mínimo 0 para evitar problemas
+
+        pnlResultados.add(conferenceInfoPanel); // Agrega al panel
     }
 
-    public void buildResultPanels(){
-        
-        for(Conferencia c: searchResults){
-            pnlConferenceInfo infoConference = new pnlConferenceInfo(c); 
-            searchResultsPanels.add(infoConference);
-            pnlResultados.add(infoConference);
-        }
-        pnlResultados.revalidate();
-        pnlResultados.repaint();
-    }
+    // Revalida y redibuja el panel para mostrar los cambios
+    pnlResultados.revalidate();
+    pnlResultados.repaint();
+}
+ 
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,6 +53,7 @@ public class GUIconferenceSearch extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         pnlCamposConferencia = new javax.swing.JPanel();
         lbNombre = new javax.swing.JLabel();
         lbPais = new javax.swing.JLabel();
@@ -51,8 +62,7 @@ public class GUIconferenceSearch extends javax.swing.JInternalFrame {
         scpConBusqueda = new javax.swing.JScrollPane();
         pnlResultados = new javax.swing.JPanel();
 
-        setBorder(null);
-        setFrameIcon(null);
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         pnlCamposConferencia.setBackground(new java.awt.Color(0, 204, 204));
 
@@ -79,13 +89,13 @@ public class GUIconferenceSearch extends javax.swing.JInternalFrame {
             .addGroup(pnlCamposConferenciaLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(lbNombre)
-                .addGap(147, 147, 147)
+                .addGap(127, 127, 127)
                 .addComponent(lbPais)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(134, 134, 134)
                 .addComponent(lbCiudad)
-                .addGap(149, 149, 149)
+                .addGap(121, 121, 121)
                 .addComponent(lbTemas)
-                .addGap(62, 62, 62))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlCamposConferenciaLayout.setVerticalGroup(
             pnlCamposConferenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,26 +115,37 @@ public class GUIconferenceSearch extends javax.swing.JInternalFrame {
         pnlResultados.setLayout(new javax.swing.BoxLayout(pnlResultados, javax.swing.BoxLayout.LINE_AXIS));
         scpConBusqueda.setViewportView(pnlResultados);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(scpConBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE)
+            .addComponent(pnlCamposConferencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(pnlCamposConferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scpConBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlCamposConferencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(scpConBusqueda)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(pnlCamposConferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scpConBusqueda))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbCiudad;
     private javax.swing.JLabel lbNombre;
     private javax.swing.JLabel lbPais;

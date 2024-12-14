@@ -16,6 +16,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import java.beans.PropertyVetoException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -208,16 +209,19 @@ public class GUIcontainer extends javax.swing.JFrame {
     pnlListadoAr.repaint();
 }
 */
-   public List<Conferencia> searchConferences(String searchText){
+    public List<Conferencia> searchConferences(String searchText) {
+    // Obtener la lista de conferencias del cliente REST
         List<Conferencia> conferences = RestClientManager.getConferenceClient().getConferences();
-        // Filtramos la lista de conferencias si se proporciona un texto de búsqueda
+
+        // Filtrar la lista de conferencias si se proporciona un texto de búsqueda
         if (searchText != null && !searchText.isEmpty()) {
             conferences = conferences.stream()
                 .filter(conference -> conference.getNombre().toLowerCase().contains(searchText.toLowerCase()))
                 .collect(Collectors.toList());
         }
+
         return conferences;
-   }
+    }
    
     private void jLabelAsignarMouseClicked(java.awt.event.MouseEvent evt) {
          // Implementa aquí la funcionalidad que deseas ejecutar cuando se haga clic.
@@ -486,23 +490,27 @@ public class GUIcontainer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lbBtnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbBtnBuscarMouseClicked
-                                          
-        String searchText = txtfBusqueda.getText().trim();  // Obtener texto de búsqueda sin modificar el caso
-        //listConferences(searchText);  // Llamar a la función para listar conferencias con el texto de búsqueda
-        List<Conferencia> conferences = searchConferences(searchText); 
-        
-        if(conferences.isEmpty()){
-            pnlNoConferences panelNoConferencias = new pnlNoConferences(); 
-            dskpaneSubContenedorPrincipal.add(panelNoConferencias, java.awt.BorderLayout.CENTER);
-            panelNoConferencias.setVisible(true);
-        }
-        else{
-            GUIconferenceSearch searchResults = new GUIconferenceSearch(conferences); 
-            dskpaneSubContenedorPrincipal.add(searchResults,java.awt.BorderLayout.CENTER);
-            searchResults.setVisible(true);
-        }
+    String searchText = txtfBusqueda.getText().trim();  
+    List<Conferencia> conferences = searchConferences(searchText);
 
+    // Limpia el contenedor principal
+    dskpaneSubContenedorPrincipal.removeAll();
+    dskpaneSubContenedorPrincipal.repaint();
+    dskpaneSubContenedorPrincipal.revalidate();
 
+    if (conferences.isEmpty()) {
+        pnlNoConferences panelNoConferencias = new pnlNoConferences(); 
+        dskpaneSubContenedorPrincipal.add(panelNoConferencias, java.awt.BorderLayout.CENTER);
+        panelNoConferencias.setVisible(true);
+    } else {
+        GUIconferenceSearch searchResults = new GUIconferenceSearch(conferences); 
+        dskpaneSubContenedorPrincipal.add(searchResults, java.awt.BorderLayout.CENTER);
+        searchResults.setVisible(true);
+    }
+
+    // Revalida el contenedor principal
+    dskpaneSubContenedorPrincipal.revalidate();
+    dskpaneSubContenedorPrincipal.repaint();
     }//GEN-LAST:event_lbBtnBuscarMouseClicked
 
     private void lbCerrarSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarSesionMouseEntered

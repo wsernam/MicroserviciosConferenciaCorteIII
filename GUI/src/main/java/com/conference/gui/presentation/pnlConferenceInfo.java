@@ -5,9 +5,12 @@
 package com.conference.gui.presentation;
 
 import com.conference.gui.entities.Conferencia;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dimension;
+import javax.swing.BorderFactory;
 import javax.swing.JDesktopPane;
 
 /**
@@ -20,11 +23,19 @@ public class pnlConferenceInfo extends javax.swing.JPanel {
      * Creates new form pnlConferenceInfo
      */
     private Conferencia conference;
-    public pnlConferenceInfo(Conferencia c) {
-        this.conference = c;
-        initComponents();
-        lbInfoConferencia.setText(conference.toStringBasic());
+    public pnlConferenceInfo(Conferencia conference) {
+       initComponents();
+
+       // Ajusta el texto dinámico en varias líneas
+       lbInfoConferencia.setText(
+                                 conference.getNombre() + "          "
+                                 + conference.getPais() + "          "
+                                 + conference.getCiudad() + "              "
+                                 + conference.getTemas()
+                                 );
+
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,7 +80,7 @@ public class pnlConferenceInfo extends javax.swing.JPanel {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 84;
         gridBagConstraints.ipady = 20;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 6, 0, 0);
         add(pnlBtnVerMas, gridBagConstraints);
 
@@ -77,7 +88,9 @@ public class pnlConferenceInfo extends javax.swing.JPanel {
 
         lbInfoConferencia.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         lbInfoConferencia.setText("INFO CONFERENCIA");
-        pnlInfoConferencia.add(lbInfoConferencia, java.awt.BorderLayout.CENTER);
+        lbInfoConferencia.setMaximumSize(new java.awt.Dimension(90, 16));
+        lbInfoConferencia.setMinimumSize(new java.awt.Dimension(90, 16));
+        pnlInfoConferencia.add(lbInfoConferencia, java.awt.BorderLayout.WEST);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
